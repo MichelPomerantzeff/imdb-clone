@@ -1,0 +1,8 @@
+footer {
+    padding: 20px;
+    color: lightgray;
+    font-weight: 300;
+    text-align: center;
+    font-size: .8rem;
+    border-top: solid 1px gray;
+}
