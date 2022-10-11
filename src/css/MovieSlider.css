@@ -23,6 +23,7 @@
 
 .left_slider,
 .right_slider {
+    background: #12121273;
     border: solid 1px #fff;
     position: absolute;
     display: flex;

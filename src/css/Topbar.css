@@ -9,7 +9,7 @@ nav{
     padding: 6px;
     width: 1250px;
     margin: auto;
-    gap: 50px;
+    gap: 25px;
 }
 
 .topbar_left_section{
@@ -136,7 +136,7 @@ nav{
 
 .topbar_right_section{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     flex: 1;
     font-weight: 600;
@@ -146,25 +146,37 @@ nav{
 .lists{
     display: flex;
     color: #fff;
-    
 }
 
-.watchlist, .watched, .login, .language {
+.watchlist, .watched {
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 8px 12px;
     border-radius: 5px;
 }
-.watchlist:hover, .watched:hover, .login:hover, .language:hover {
+
+.watchlist:hover, .watched:hover, .login:hover, .loggedin:hover, .language:hover {
     background-color: #222;
 }
 
-.login{
-    color: #fff;
+.login, .loggedin{
     display: flex;
     align-items: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: #fff;
     gap: 5px;
+    cursor: pointer;
 }
 
 .language{
+    display: flex;
+    align-items: center;
     color: #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.language img {
+    width: 19px;
 }

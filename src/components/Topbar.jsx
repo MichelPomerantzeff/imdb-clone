@@ -5,9 +5,17 @@ import axios from 'axios';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import StarIcon from '@mui/icons-material/Star';
 import SearchIcon from '@mui/icons-material/Search';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import { useNavigate } from 'react-router-dom';
+
+// import brazil from "../icons/brazil.png"
+import uk from "../icons/uk.png"
+
+import { auth } from "../config/firebase"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { signOut } from "firebase/auth"
 
 
 
@@ -16,6 +24,8 @@ function Topbar(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/"
     const api = "api_key=454d6b5c326671cf654bb9a838b5f24f"
+
+    const [user] = useAuthState(auth)
 
     const navigate = useNavigate()
 
@@ -28,6 +38,12 @@ function Topbar(props) {
             .then(response => setData(response.data.results))
             .catch(err => console.log(err))
     }, [search])
+
+    function logout() {
+        signOut(auth)
+    }
+
+    console.log(user)
 
 
     return (
@@ -83,16 +99,25 @@ function Topbar(props) {
                 <div className="topbar_right_section">
                     <div className="lists">
                         <span onClick={() => navigate("/watchlist")} className='watchlist'>Watchlist</span>
-                        <span className='watched'>Watched</span>
+                        <span onClick={() => navigate("/watched")} className='watched'>Watched</span>
                     </div>
 
-                    <div className="login">
-                        <AccountCircleIcon />
-                        <span>Sign in</span>
-                    </div>
+                    {
+                        user ?
+                            <div className="loggedin">
+                                <AccountCircleIcon />
+                                <button onClick={logout}>Logout</button>
+                            </div>
+                            :
+                            <div onClick={() => navigate("/login")} className="login">
+                                <span>Sign in</span>
+                            </div>
+                    }
 
                     <div className="language">
-                        <span>EN</span>
+                        {/* <img src={brazil} alt=""  /> */}
+                        <img src={uk} alt="" />
+                        <ArrowDropDownRoundedIcon />
                     </div>
                 </div>
 

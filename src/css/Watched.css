@@ -1,0 +1,10 @@
+.watched_container{
+    background-color: var(--background-color);
+    min-height: 100vh;
+}
+
+.watched_wrapper{
+    display: flex;
+    color: white;
+    justify-content: center;
+}

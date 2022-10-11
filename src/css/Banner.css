@@ -16,7 +16,7 @@
 }
 
 .banner {
-    min-width: 800px;
+    min-width: 850px;
     display: flex;
 }
 
@@ -85,12 +85,12 @@
 
 .right {
     right: 0;
-
+    background: #12121273;
 }
 
 .left{
     left: 0;
-
+    background: #12121273;
 }
 
 .left,
