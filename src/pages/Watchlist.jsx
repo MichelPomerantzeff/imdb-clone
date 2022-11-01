@@ -15,6 +15,8 @@ import useDisableScroll from '../hooks/useDisableScroll';
 
 function WatchList(props) {
 
+    // const language = 'en-US'
+    const language = useSelector((state) => state.languageToggle.value.language);
     const display = useSelector((state) => state.movieInfo.value.display);
 
     // Costum hooks (fetch data from database)
@@ -52,7 +54,11 @@ function WatchList(props) {
                 <MovieInfoCard />
             }
 
-            <h1 className='header'>WATCHLIST</h1>
+            <h1 className='header'>
+                {
+                    language === "en-US" ? 'WATCHLIST' : 'LISTA PARA ASSISTIR'
+                }
+            </h1>
 
             <div className='watchlist_wrapper'>
                 {

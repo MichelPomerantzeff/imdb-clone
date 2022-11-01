@@ -25,6 +25,7 @@ import { doc, setDoc } from 'firebase/firestore';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { displayMovieInfo } from '../features/movieInfo';
+import { setLanguage } from '../features/languageToggle';
 
 
 import useGetData from '../hooks/useGetData';
@@ -34,11 +35,9 @@ function Topbar(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/";
     const api = "454d6b5c326671cf654bb9a838b5f24f";
-    const language = "en-US";
 
     const [data, setData] = useState([]);;
     const [search, setSearch] = useState('');
-    const [flag, setFlag] = useState('english');
     const [isUserAccount, setIsUserAccount] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
@@ -47,6 +46,8 @@ function Topbar(props) {
     const display = useSelector((state) => state.movieInfo.value.display);
     const watchlistLength = useSelector((state) => state.watchlistLength.value.length);
     const watchedLength = useSelector((state) => state.watchedLength.value.length);
+    
+    const language = useSelector((state) => state.languageToggle.value.language);
 
     const navigate = useNavigate();
 
@@ -65,7 +66,7 @@ function Topbar(props) {
         axios.get(`${baseUrl}search/multi?api_key=${api}&language=${language}&page=1&query=${search}`)
             .then(response => setData(response.data.results))
             .catch(err => console.log(err))
-    }, [search])
+    }, [search, language])
 
     //Log user out
     function logout() {
@@ -118,7 +119,8 @@ function Topbar(props) {
                             }}
                             onFocus={() => setIsSearchBarOpen(true)}
                             onBlur={() => setTimeout(() => setIsSearchBarOpen(false), 200)}
-                            type="text" placeholder='Search'
+                            type="text"
+                            placeholder={language === "en-US" ? 'Search' : 'Buscar'}
                             className='search_bar_input_desktop'
                         />
                         <button className='search_button_off'><SearchIcon /></button>
@@ -129,7 +131,8 @@ function Topbar(props) {
                             }}
                             onFocus={() => setIsSearchBarOpen(true)}
                             onBlur={() => setTimeout(() => setIsSearchBarOpen(false), 200)}
-                            type="text" placeholder='Search'
+                            type="text"
+                            placeholder={language === "en-US" ? 'Search' : 'Buscar'}
                             className='search_bar_input_mobile'
                             style={{ display: `${!searchMode ? 'none' : 'flex'}` }}
                         />
@@ -198,7 +201,11 @@ function Topbar(props) {
                                                                 margin: '0 10px 10px 10px'
                                                             }}
                                                         >
-                                                            <div><AddRoundedIcon /> Watchlist</div>
+                                                            <div><AddRoundedIcon />
+                                                                {
+                                                                    language === "en-US" ? 'Watchlist' : 'Assistir'
+                                                                }
+                                                            </div>
                                                         </button>
                                                     </div>
 
@@ -216,14 +223,19 @@ function Topbar(props) {
                 <div style={{ display: `${searchMode ? 'none' : 'flex'}` }} className="topbar_right_section">
                     <div className="lists">
                         <div onClick={() => navigate("/watchlist")} className='watchlist'>
-                            Watchlist
+
+                            {
+                                language === "en-US" ? 'Watchlist' : 'Assistir'
+                            }
                             {
                                 watchlistLength > 0 &&
                                 <sup className='whatchlist_quantity'>{watchlistLength}</sup>
                             }
                         </div>
                         <div onClick={() => navigate("/watched")} className='watched'>
-                            Watched
+                            {
+                                language === "en-US" ? 'Watched' : 'Assistidos'
+                            }
                             {
                                 watchedLength > 0 &&
                                 <sup className='whatchlist_quantity'>{watchedLength}</sup>
@@ -243,14 +255,18 @@ function Topbar(props) {
 
                                     <div className="loggedin_dropdown_box">
                                         <div onClick={() => navigate("/watchlist")}>
-                                            Watchlist
+                                            {
+                                                language === "en-US" ? 'Watchlist' : 'Assistir'
+                                            }
                                             {
                                                 watchlistLength > 0 &&
                                                 <sup className='whatchlist_quantity'>{watchlistLength}</sup>
                                             }
                                         </div>
                                         <div onClick={() => navigate("/watched")}>
-                                            Watched
+                                            {
+                                                language === "en-US" ? 'Watched' : 'Assistidos'
+                                            }
                                             {
                                                 watchedLength > 0 &&
                                                 <sup className='whatchlist_quantity'>{watchedLength}</sup>
@@ -261,33 +277,54 @@ function Topbar(props) {
                                                 logout()
                                                 navigate("/login")
                                             }}
-                                        >Sign out</div>
+                                        >
+                                            {
+                                                language === "en-US" ? 'Sign out' : 'Sair'
+                                            }
+                                        </div>
                                         <div >
-                                            <button style={{ color: "red" }}>Delete Account</button>
+                                            <button style={{ color: "red" }}>
+                                                {
+                                                    language === "en-US" ? 'Delete Account' : 'Excluir conta'
+                                                }
+                                            </button>
                                         </div>
                                     </div>
                                 }
                             </div>
                             :
                             <div onClick={() => navigate("/login")} className="login">
-                                <span>Sign in</span>
+                                <span>
+                                    {
+                                        language === "en-US" ? 'Sign in' : 'Entrar'
+                                    }
+
+                                </span>
                             </div>
                     }
 
                     <div onClick={() => setIsLanguageOpen(prev => !prev)} ref={languageRef} className="language">
-                        {flag === "portuguese" && <img src={brazil} alt="" />}
-                        {flag === "english" && <img src={uk} alt="" />}
+                        {language === "pt-BR" && <img src={brazil} alt="" />}
+                        {language === "en-US" && <img src={uk} alt="" />}
                         <ArrowDropDownRoundedIcon />
 
                         {
                             isLanguageOpen &&
 
                             <div className="language_dropdown_box">
-                                <div onClick={() => setFlag('english')}>
+                                <div
+                                    onClick={() => {
+                                        dispatch(setLanguage({ language: "en-US" }));
+                                    }}
+                                >
                                     English (United Kingdom)
                                 </div>
 
-                                <div onClick={() => setFlag('portuguese')}>
+                                <div
+                                    onClick={() => {
+                                        dispatch(setLanguage({ language: "pt-BR" }));
+                                    }}
+                                >
                                     Português (Brasil)
                                 </div>
 

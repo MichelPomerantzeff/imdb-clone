@@ -10,9 +10,14 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 import useGetData from "../hooks/useGetData";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 
 function MovieSlider(props) {
+
+    const baseUrl = "https://api.themoviedb.org/3/"
+    const api = "454d6b5c326671cf654bb9a838b5f24f"
 
     const [data, setData] = useState([])
 
@@ -24,10 +29,15 @@ function MovieSlider(props) {
     let maxSliderIndexRestOfDivision = maxSliderIndex % sliderIndex
     let disabled = false
 
-    //Set Data coming from parent
-    useEffect(() => {
-        setData(props.data)
-    }, [props.data])
+    const language = useSelector((state) => state.languageToggle.value.language);
+
+
+
+    useEffect(() => { //SLIDERS
+        axios.get(`${baseUrl}${props.type}/${props.query}?api_key=${api}&language=${language}&page=1`)
+            .then(response => setData(response.data.results,))
+            .catch(err => console.log(err))
+    }, [language])
 
     function slide(direction) {
 
@@ -103,7 +113,11 @@ function MovieSlider(props) {
 
                                         }}
                                     >
-                                        <div><AddRoundedIcon /> Watchlist</div>
+                                        <div><AddRoundedIcon />
+                                            {
+                                                language === "en-US" ? 'Watchlist' : 'Assistir'
+                                            }
+                                        </div>
                                     </button>
                                 </div>
 

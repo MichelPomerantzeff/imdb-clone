@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 export const watchlistLengthSlice = createSlice({
     name: 'watchlistLength',
     initialState: { value: { length: 0, } },

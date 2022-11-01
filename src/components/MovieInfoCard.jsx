@@ -14,11 +14,11 @@ function MovieInfoCard(props) {
 
     const baseUrl = 'https://api.themoviedb.org/3/'
     const api = '454d6b5c326671cf654bb9a838b5f24f'
-    const language = 'en-US'
     const imagePrefix = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 
     const [fetchedInfo, setFetchedInfo] = useState()
 
+    const language = useSelector((state) => state.languageToggle.value.language);
     const movieInfo = useSelector((state) => state.movieInfo.value);
 
     const display = useSelector((state) => state.movieInfo.value.display);

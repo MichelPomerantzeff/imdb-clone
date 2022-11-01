@@ -8,14 +8,14 @@ import { Provider } from 'react-redux';
 import movieInfoReducer from './features/movieInfo'
 import watchlistLengthReducer from './features/watchlistLength'
 import watchedLengthReducer from './features/watchedLength'
-import languageReducer from './features/language'
+import languageToggleReducer from './features/languageToggle'
 
 const store = configureStore({
   reducer: {
+    languageToggle: languageToggleReducer,
     movieInfo: movieInfoReducer,
     watchlistLength: watchlistLengthReducer,
     watchedLength: watchedLengthReducer,
-    language: languageReducer,
   }
 })
 

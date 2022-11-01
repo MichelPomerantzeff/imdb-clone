@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import { useSelector } from 'react-redux';
 
 function Banner(props) {
 
@@ -11,6 +12,8 @@ function Banner(props) {
 
     const [currBanner, setCurrBanner] = useState(1)
     const [freezeBannerSlide, setFreezeBannerSlide] = useState(false)
+
+    const language = useSelector((state) => state.languageToggle.value.language);
 
     // Manage banner sliding
     useEffect(() => {
@@ -72,7 +75,11 @@ function Banner(props) {
 
             <div className="up_next">
 
-                <span className='up_next_title'>Up next</span>
+                <span className='up_next_title'>
+                    {
+                        language === "en-US" ? 'Up next' : 'A seguir'
+                    }
+                </span>
 
                 <div className="up_next_content">
 

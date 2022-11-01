@@ -6,11 +6,14 @@ import '../css/Login.css'
 import { auth } from "../config/firebase"
 
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useSelector } from 'react-redux';
 
 function Login(props) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    const language = useSelector((state) => state.languageToggle.value.language);
 
     const navigate = useNavigate()
 
@@ -21,7 +24,7 @@ function Login(props) {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                
+
                 user && navigate('/')
             })
             .catch((error) => {
@@ -41,18 +44,39 @@ function Login(props) {
 
 
                 <form className='login_box'>
-                    <h2>Sign in</h2>
+                    <h2>
+                        {
+                            language === "en-US" ? 'Sign in' : 'Entrar'
+                        }
+                    </h2>
                     <div className='login_input_container'>
                         <label>Email</label>
                         <input onChange={e => setEmail(e.target.value)} className='email' type="email" placeholder='Email' />
                     </div>
                     <div className='login_input_container'>
                         <label>Password</label>
-                        <input onChange={e => setPassword(e.target.value)} className='password' type="password" placeholder='Password' />
+                        <input
+                            onChange={e => setPassword(e.target.value)}
+                            className='password'
+                            type="password"
+                            placeholder={language === "en-US" ? 'Password' : 'Senha'}
+                        />
                     </div>
-                    <button onClick={signIn} className='signIn_button'>Sign in</button>
-                    <button onClick={() => navigate("/register")} className='to_signUp_button'>Create an account</button>
-                    <p className='forgot_password'>Forgot password</p>
+                    <button onClick={signIn} className='signIn_button'>
+                        {
+                            language === "en-US" ? 'Sign in' : 'Entrar'
+                        }
+                    </button>
+                    <button onClick={() => navigate("/register")} className='to_signUp_button'>
+                        {
+                            language === "en-US" ? 'Create an account' : 'Criar conta'
+                        }
+                    </button>
+                    <p className='forgot_password'>
+                        {
+                            language === "en-US" ? 'Forgot password' : 'Esqueci a senha'
+                        }
+                    </p>
                 </form>
             </div>
 
