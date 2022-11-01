@@ -1,33 +1,51 @@
-.movie_card{
+.movie_card {
     width: 185px;
-    color:#fff; 
+    color: var(--main-text-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.movie_card_image img{
+.movie_card_image {
     width: 100%;
-    cursor: pointer;
+    height: 280px;
+    overflow: hidden;
 }
 
-.movie_card_top_elements{
+.movie_card_image img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.movie_card_image img:hover {
+    transform: scale(1.2);
+    filter: blur(1.2px);
+    transition: .3s ease;
+}
+
+.movie_card_top_elements {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.movie_card_rating{
+.movie_card_rating {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     flex: 1;
+
 }
 
-.movie_card_star{
+.movie_card_star {
     transform: scale(.8);
     color: var(--standout-color);
 }
 
-.movie_card_vote{
-    color: lightgray;
+.movie_card_vote {
+    color: var(--secondary-text-color);
 }
 
 
@@ -40,7 +58,7 @@
     border-radius: 50%;
 }
 
-.movie_info_button{
+.movie_info_button {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -49,18 +67,78 @@
 
 
 .movie_info_background:hover {
-    background-color: #FFFFFF14;
+    background-color: var(--background-hover);
 }
 
-.movie_title{
+.movie_title {
     padding-left: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     text-align: center;
     cursor: pointer;
+    height: 25px;
 }
 
-.movie_title:hover{
+.movie_title:hover {
     text-decoration: underline;
+}
+
+.buttons{
+    /* background: #fff; */
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    width: calc(100% - 16px);
+}
+.buttons button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.add_to_watchlist,
+.add_to_watched {
+    border: none;
+    outline: none;
+    background-color: var(--third-background-color);
+    color: #5799ef;
+    border-radius: 3px;
+    font-size: .9rem;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: var(--standout-color);
+    color: #000;
+    transition: .2s ease;
+    padding: 4px 20px;
+}
+
+.add_to_watchlist:hover,
+.add_to_watched:hover {
+    background-color: var(--background-hover);
+    background-color: #000;
+    color: var(--standout-color);
+    transition: .2s ease;
+}
+
+.add_to_watchlist div,
+.add_to_watched div {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1280px) {
+    .movie_card {
+        width: 148px;
+        gap: 5px;
+    }
+
+    .movie_card_image {
+        height: 220px;
+    }
 }

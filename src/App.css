@@ -8,8 +8,39 @@
 
 
 :root{
-    --standout-color: #F5C518;
-    --background-color: black;
-    --elements-backgroung-color: #121212;
-}
 
+    /* LIGHT MODE */
+    /* --standout-color: #F5C518;
+
+    --background-color: #ffffff;
+    --secondary-background-color: #e6e6e6;
+    --third-background-color: #d9d9d9;
+    
+    --background-hover: #cccccc;
+    --secondary-background-hover: #bfbfbf;
+    --third-background-hover: #b2b2b2;
+
+    --arrow-background: #ececec38;
+    
+    --main-text-color: #000000;
+    --secondary-text-color: #262626;
+    --third-text-color: #0d0d0d; */
+    
+    
+    /* DARK MODE */
+    --standout-color: #F5C518;
+    
+    --background-color: #000000;
+    --secondary-background-color: #121212;
+    --third-background-color: #262626;
+    
+    --background-hover: #333333;    
+    --secondary-background-hover: #4d4d4d;
+    --third-background-hover: #595959;
+    
+    --arrow-background: #12121273;
+    
+    --main-text-color: #fff;
+    --secondary-text-color: lightgray;
+    --third-text-color: gray;
+}

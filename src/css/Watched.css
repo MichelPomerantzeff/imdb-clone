@@ -1,10 +1,55 @@
 .watched_container{
     background-color: var(--background-color);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.header{
+    color: #ffffff;
+    text-align: center;
 }
 
 .watched_wrapper{
     display: flex;
-    color: white;
+    color: var(--main-text-color);
     justify-content: center;
+    gap: 20px;
+    max-width: 1250px;
+    flex-wrap: wrap;
+}
+
+.watched_wrapper{
+    margin: auto;
+    display: flex;
+    color: var(--main-text-color);
+    justify-content: center;
+}
+
+.delete_from_watched {
+    border: none;
+    outline: none;
+    background-color: #ff00008f;
+    color: #ffffffd3;
+    border-radius: 3px;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .2s ease;
+    padding: 4px;
+}
+
+.delete_from_watched:hover {
+    background-color: #ff00004b;
+    color: #ffffff;
+    transition: .2s ease;
+}
+
+.delete_from_watched span{
+    display: flex;
+    align-items: center;
 }

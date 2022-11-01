@@ -1,12 +1,20 @@
 .home_container {
     background-color: var(--background-color);
+    min-height: 100vh;
 }
 
-.home_wrapper{
+.home_wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    width: 1250px;
+    max-width: 1250px;
     margin: auto;
+}
+
+@media (max-width: 1280px) {
+    .home_wrapper {
+        padding: 10px;
+        max-width: 980px;
+    }
 }

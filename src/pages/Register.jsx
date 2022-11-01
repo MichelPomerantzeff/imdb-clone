@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import '../css/Login.css'
 
-import { auth } from "../config/firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth} from "../config/firebase"
 
 function Register(props) {
 
@@ -12,10 +12,13 @@ function Register(props) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    // const [firstName, setFirstName] = useState("")
+    // const [lastName, setLastName] = useState("")
 
-    async function signUp(e) {
+    function signUp(e) {
         e.preventDefault()
 
+        // Create User
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
@@ -23,8 +26,7 @@ function Register(props) {
                 user && navigate('/')
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                alert(error)
             });
     }
 
@@ -44,7 +46,7 @@ function Register(props) {
                     <h2>Create account</h2>
                     <div className='login_input_container'>
                         <label>Your name</label>
-                        <input className='name' type="text" placeholder='First and last name' />
+                        <input /* onChange={e => setFirstName(e.target.value)} */ className='name' type="text" placeholder='First and last name' />
                     </div>
 
                     <div className='login_input_container'>

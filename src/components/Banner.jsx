@@ -10,16 +10,18 @@ function Banner(props) {
     const image = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 
     const [currBanner, setCurrBanner] = useState(1)
+    const [freezeBannerSlide, setFreezeBannerSlide] = useState(false)
 
-
+    // Manage banner sliding
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrBanner(prev => prev === 20 - 1 ? 0 : prev + 1)
+            freezeBannerSlide && clearInterval(interval)
+            !freezeBannerSlide && setCurrBanner(prev => prev === 20 - 1 ? 0 : prev + 1)
         }, 5000);
 
         return () => clearInterval(interval)
 
-    }, [])
+    }, [freezeBannerSlide])
 
     function slideBanner(direction) {
         if (direction === "left") {
@@ -27,6 +29,7 @@ function Banner(props) {
         } else if (direction === "right") {
             setCurrBanner(prev => prev === props.data?.length - 1 ? 0 : prev + 1)
         }
+        setFreezeBannerSlide(true)
     }
 
 
@@ -62,7 +65,7 @@ function Banner(props) {
                     </div>
 
                     <div onClick={() => slideBanner("left")} className="left">
-                        <ArrowBackIosRoundedIcon className="left_arrow"/>
+                        <ArrowBackIosRoundedIcon className="left_arrow" />
                     </div>
                 </div>
             </div>
@@ -73,7 +76,7 @@ function Banner(props) {
 
                 <div className="up_next_content">
 
-                    <div className='up_next_card'>
+                    <div className='up_next_card border'>
 
                         <div className="up_next_poster">
                             <img src={`${image}${props.data[currBanner === 19 ? 0 : currBanner + 1]?.poster_path}`} alt='' />
@@ -85,9 +88,7 @@ function Banner(props) {
                         </div>
                     </div>
 
-                    <hr />
-
-                    <div className='up_next_card'>
+                    <div className='up_next_card border'>
 
                         <div className="up_next_poster">
                             <img src={`${image}${props.data[currBanner === 18 ? 0 : currBanner === 19 ? 1 : currBanner + 2]?.poster_path}`} alt='' />
@@ -98,8 +99,6 @@ function Banner(props) {
                             <div className="up_next_card_date">{props.data[currBanner === 18 ? 0 : currBanner === 19 ? 1 : currBanner + 2]?.release_date}</div>
                         </div>
                     </div>
-
-                    <hr />
 
                     <div className='up_next_card'>
 

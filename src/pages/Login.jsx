@@ -5,7 +5,7 @@ import '../css/Login.css'
 
 import { auth } from "../config/firebase"
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Login(props) {
 
@@ -21,14 +21,12 @@ function Login(props) {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-
+                
                 user && navigate('/')
-
             })
             .catch((error) => {
                 alert(error.message)
             });
-
     }
 
     return (

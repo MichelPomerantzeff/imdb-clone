@@ -24,7 +24,7 @@
 .left_slider,
 .right_slider {
     background: #12121273;
-    border: solid 1px #fff;
+    border: solid 1px var(--main-text-color);
     position: absolute;
     display: flex;
     border-radius: 5px;
@@ -49,11 +49,11 @@
 }
 
 .arrow_buttons_slider {
-    color: white;
+    color: var(--main-text-color);
 }
 
 .movie_card_container{
-    background-color: var(--elements-backgroung-color);    
+    background-color: var(--secondary-background-color);    
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     display: flex;
@@ -62,23 +62,25 @@
     transition: 1s;
 }
 
-.add_to_watchlist{
-    border: none;
-    outline: none;
-    background-color: #FFFFFF14;
-    color: #5799ef;
-    border-radius: 3px;
-    width: 90%;
-    margin: 10px;
-    font-size: .9rem;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    cursor: pointer;
+@media (max-width: 1280px) {
+    .movie_slider_container {
+        width: 980px;
+    }
 }
 
-.add_to_watchlist:hover {
-    background-color: #FFFFFF20;
+@media (max-width: 1024px) {
+    .movie_slider_container {
+        width: 95vw;
+    }
+
+    .arrow_buttons_slider {
+        display: none;
+    }
+
+    .movie_slider_wrapper {
+        padding-bottom: 20px;
+        overflow: auto;
+        gap: 10px;
+    }
+    
 }
