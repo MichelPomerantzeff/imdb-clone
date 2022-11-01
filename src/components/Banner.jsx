@@ -1,6 +1,5 @@
 import '../css/Banner.css'
 import { useEffect, useState } from 'react';
-
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import { useSelector } from 'react-redux';

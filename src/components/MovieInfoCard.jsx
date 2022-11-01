@@ -1,11 +1,8 @@
 import movieCover from '../images/movieCover.jpg'
 import '../css/MovieInfoCard.css'
-
 import axios from 'axios';
-
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import StarIcon from '@mui/icons-material/Star';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { closeMovieInfo } from '../features/movieInfo'
 import { useEffect, useState } from 'react';

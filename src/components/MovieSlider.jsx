@@ -1,18 +1,14 @@
 import MovieCard from "./MovieCard";
 import '../css/MovieSlider.css'
-import { useEffect, useState } from "react";
-
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-
+import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
-
 import useGetData from "../hooks/useGetData";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
 
 function MovieSlider(props) {
 

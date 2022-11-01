@@ -1,3 +1,9 @@
+import MovieInfoCard from './MovieInfoCard';
+import '../css/Topbar.css';
+import axios from 'axios';
+import uk from "../icons/uk.png";
+import brazil from "../icons/brazil.png";
+import movieCover from '../images/movieCover.jpg';
 import StarIcon from '@mui/icons-material/Star';
 import SearchIcon from '@mui/icons-material/Search';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
@@ -5,29 +11,14 @@ import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
-
-import '../css/Topbar.css';
-
-import movieCover from '../images/movieCover.jpg';
-import brazil from "../icons/brazil.png";
-import uk from "../icons/uk.png";
-
-import MovieInfoCard from './MovieInfoCard';
-
-import axios from 'axios';
-
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { signOut } from "firebase/auth";
 import { auth, db } from "../config/firebase"
 import { doc, setDoc } from 'firebase/firestore';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { displayMovieInfo } from '../features/movieInfo';
 import { setLanguage } from '../features/languageToggle';
-
-
 import useGetData from '../hooks/useGetData';
 
 

@@ -1,14 +1,9 @@
-import React from 'react';
+import movieCover from "../images/movieCover.jpg"
 import '../css/MovieCard.css'
-
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import StarIcon from '@mui/icons-material/Star';
-
-import movieCover from "../images/movieCover.jpg"
-
 import { useDispatch } from 'react-redux';
 import { displayMovieInfo } from '../features/movieInfo'
-
 
 function MovieCard(props) {
 

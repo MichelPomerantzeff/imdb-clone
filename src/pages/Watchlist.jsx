@@ -5,9 +5,7 @@ import MovieCard from '../components/MovieCard';
 import '../css/Watchlist.css';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
-
 import { db } from '../config/firebase';
-
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';

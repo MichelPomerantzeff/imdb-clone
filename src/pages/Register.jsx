@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import '../css/Login.css'
-
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
+import { useNavigate } from 'react-router-dom';
 import { auth } from "../config/firebase"
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useSelector } from 'react-redux';
 
 function Register(props) {
