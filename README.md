@@ -30,7 +30,7 @@ npm install
 npm start
 ```
 
-##### To see a live demo of this project, click [here](https://michelpomerantzeff.github.io/movie-app)
+##### To see a live demo of this project, click [here](https://tmdb-movieapp.netlify.app/)
 
 ### Author
 - Michel Pomerantzeff
