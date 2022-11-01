@@ -1,5 +1,7 @@
 # Movie App
 
+![movie-app](https://user-images.githubusercontent.com/96065240/199316657-f5b81fc4-4b9e-4139-845c-181b2386a495.png)
+
 ## 💻 Project
 
 Search for any movie, consult information about it (e.g: rating, cast, and plot), select the movie you want and add it to a watchlist or a list of watched movies.
