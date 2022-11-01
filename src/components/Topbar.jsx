@@ -180,25 +180,27 @@ function Topbar(props) {
                                                         </div>
                                                     </div>
 
-                                                    <button
-                                                        onClick={(() => {
-                                                            if (user) {
-                                                                addToWatchlist(movie, movie.media_type)
-                                                            } else {
-                                                                alert("Sign in and start creating your wathlist")
-                                                            }
-                                                        })}
-                                                        className="add_movie"
-                                                        disabled={disabled}
-                                                        style={{
-                                                            background: `${disabled && '#cccccc1d'}`,
-                                                            color: `${disabled && '#cccccc1d'}`,
-                                                            pointerEvents: `${disabled && 'none'}`,
-                                                            margin: '0 10px 10px 10px'
-                                                        }}
-                                                    >
-                                                        <div><AddRoundedIcon /> Watchlist</div>
-                                                    </button>
+                                                    <div className="buttons">
+                                                        <button
+                                                            onClick={(() => {
+                                                                if (user) {
+                                                                    addToWatchlist(movie, movie.media_type)
+                                                                } else {
+                                                                    alert("Sign in and start creating your wathlist")
+                                                                }
+                                                            })}
+                                                            className="add_movie"
+                                                            disabled={disabled}
+                                                            style={{
+                                                                background: `${disabled && '#cccccc1d'}`,
+                                                                color: `${disabled && '#cccccc1d'}`,
+                                                                pointerEvents: `${disabled && 'none'}`,
+                                                                margin: '0 10px 10px 10px'
+                                                            }}
+                                                        >
+                                                            <div><AddRoundedIcon /> Watchlist</div>
+                                                        </button>
+                                                    </div>
 
                                                 </div>
                                             )
