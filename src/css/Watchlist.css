@@ -21,32 +21,6 @@
     margin: auto;
 }
 
-.delete_from_watchlist {
-    border: none;
-    outline: none;
-    background-color: #ff00008f;
-    color: #ffffffd3;
-    border-radius: 3px;
-    font-size: .9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    cursor: pointer;
-    transition: .2s ease;
-    padding: 4px;
-}
-
-.delete_from_watchlist:hover {
-    background-color: #ff00004b;
-    color: #ffffff;
-    transition: .2s ease;
-}
-
-.delete_from_watchlist span{
-    display: flex;
-    align-items: center;
-}
 
 @media (max-width: 1024px) {
     .watchlist_wrapper {

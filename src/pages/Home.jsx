@@ -10,13 +10,25 @@ import MovieInfoCard from '../components/MovieInfoCard';
 import { useSelector } from 'react-redux';
 import useDisableScroll from '../hooks/useDisableScroll';
 
-import movieSliders from '../data/movieSliderData'
+// Not returning data when site is deployed
+// But it work normal on local machine
+// import movieSliders from '../data/movieSliderData'
+
 
 function Home(props) {
-
+    
     const baseUrl = "https://api.themoviedb.org/3/"
     const api = "454d6b5c326671cf654bb9a838b5f24f"
     const language = "en-US"
+    
+    // MovieSliders is being duplicated on local machine when importing this folder
+    // But it work normal when site is deployed
+    const movieSliders = [
+        { title: "Popular Movies", type: "movie", query: "popular" },
+        { title: "Popular TV Shows", type: "tv", query: "popular" },
+        { title: "Top Rated TV Shows", type: "tv", query: "top_rated" },
+        { title: "Top Rated Movies", type: "movie", query: "top_rated" },
+    ]
 
     const [upcoming, setUpcoming] = useState([])
 
@@ -26,15 +38,12 @@ function Home(props) {
 
     // API fetching
     useEffect(() => { //BANNER
-        return () => {
             axios.get(`${baseUrl}movie/upcoming?api_key=${api}&language=${language}&page=1`)
                 .then(response => setUpcoming(response.data.results))
                 .catch(err => console.log(err))
-        }
     }, [])
 
     useEffect(() => { //SLIDERS
-        return () => {
             movieSliders.forEach((slider) => {
                 axios.get(`${baseUrl}${slider.type}/${slider.query}?api_key=${api}&language=${language}&page=1`)
                     .then(response => setMovieData(prev => [...prev, {
@@ -44,7 +53,6 @@ function Home(props) {
                     }]))
                     .catch(err => console.log(err))
             })
-        }
     }, [])
 
     useDisableScroll()

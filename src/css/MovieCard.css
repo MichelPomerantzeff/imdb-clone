@@ -96,38 +96,52 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
-.add_to_watchlist,
-.add_to_watched {
-    border: none;
-    outline: none;
-    background-color: var(--third-background-color);
-    color: #5799ef;
-    border-radius: 3px;
-    font-size: .9rem;    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    cursor: pointer;
+.buttons .add_movie {
+    flex: 1;
     background-color: var(--standout-color);
     color: #000;
+    border: none;
+    outline: none;
+    padding: 4px;
+    font-weight: 500;
+    cursor: pointer;
     transition: .2s ease;
-    padding: 4px 20px;
+    border-radius: 3px;
 }
 
-.add_to_watchlist:hover,
-.add_to_watched:hover {
+.buttons .add_movie:hover {
     background-color: var(--background-hover);
     background-color: #000;
     color: var(--standout-color);
     transition: .2s ease;
 }
 
-.add_to_watchlist div,
-.add_to_watched div {
+.buttons .add_movie div {
+    display: flex;
+    align-items: center;
+}
+
+
+.buttons .delete_movie {
+    border: none;
+    outline: none;
+    background-color: #ff00008f;
+    color: #ffffffd3;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: .2s ease;
+    padding: 4px;
+}
+
+.buttons .delete_movie:hover {
+    background-color: #ff00004b;
+    color: #ffffff;
+    transition: .2s ease;
+}
+
+.buttons .delete_movie span{
     display: flex;
     align-items: center;
 }

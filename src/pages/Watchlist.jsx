@@ -61,10 +61,10 @@ function WatchList(props) {
                             <div key={movie.movieId} className='movie_card_container'>
                                 <MovieCard data={movie} />
                                 <div className='buttons'>
-                                    <button onClick={(() => addToWatched(movie))} className="add_to_watched">
+                                    <button onClick={(() => addToWatched(movie))} className="add_movie">
                                         <div><RedoRoundedIcon /> Watched</div>
                                     </button>
-                                    <button onClick={(() => deleteMovie(movie))} className="delete_from_watchlist">
+                                    <button onClick={(() => deleteMovie(movie))} className="delete_movie">
                                         <span><DeleteRoundedIcon /></span>
                                     </button>
                                 </div>

@@ -78,7 +78,7 @@ function MovieSlider(props) {
                         return (
                             <div
                                 // Slide images
-                                style={{ transform: `translateX( calc(  (  (-100% * 6) - (18px * ${itemsPerScreen})  ) * ${sliderIndex}  )  ) ` }}
+                                style={{ transform: `translateX( calc(  (  (-100% * 6) - (18px * ${itemsPerScreen})  ) * ${sliderIndex}  )  )`, transition: "1s ease" }}
 
                                 key={movieCardData.id}
                                 className="movie_card_container">
@@ -94,7 +94,7 @@ function MovieSlider(props) {
                                                 alert("Sign in and start creating your wathlist")
                                             }
                                         })}
-                                        className="add_to_watchlist"
+                                        className="add_movie"
                                         disabled={disabled}
                                         style={{
                                             background: `${disabled && '#cccccc1d'}`,

@@ -188,7 +188,7 @@ function Topbar(props) {
                                                                 alert("Sign in and start creating your wathlist")
                                                             }
                                                         })}
-                                                        className="add_to_watchlist"
+                                                        className="add_movie"
                                                         disabled={disabled}
                                                         style={{
                                                             background: `${disabled && '#cccccc1d'}`,

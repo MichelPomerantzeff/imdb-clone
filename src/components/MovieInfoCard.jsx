@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react';
 
 function MovieInfoCard(props) {
 
-
     const baseUrl = 'https://api.themoviedb.org/3/'
     const api = '454d6b5c326671cf654bb9a838b5f24f'
     const language = 'en-US'
@@ -22,14 +21,14 @@ function MovieInfoCard(props) {
 
     const movieInfo = useSelector((state) => state.movieInfo.value);
 
+    const display = useSelector((state) => state.movieInfo.value.display);
+
 
     useEffect(() => {
-        return () => {
-            axios.get(`${baseUrl}${movieInfo.type}/${movieInfo.data.movieId || movieInfo.data.id}?api_key=${api}&language=${language}`)
-                .then(response => setFetchedInfo(response.data))
-                .catch(err => console.log(err))
-        }
-    }, [])
+        axios.get(`${baseUrl}${movieInfo.type}/${movieInfo.data.movieId || movieInfo.data.id}?api_key=${api}&language=${language}`)
+            .then(response => setFetchedInfo(response.data))
+            .catch(err => console.log(err))
+    }, [display])
 
     const dispatch = useDispatch()
 
