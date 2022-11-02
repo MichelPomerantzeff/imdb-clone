@@ -105,9 +105,7 @@ function MovieSlider(props) {
                                         }}
                                     >
                                         <div><AddRoundedIcon />
-                                            {
-                                                language === "en-US" ? 'Watchlist' : 'Assistir'
-                                            }
+                                            {language === "en-US" ? 'Watchlist' : 'Assistir'}
                                         </div>
                                     </button>
                                 </div>
