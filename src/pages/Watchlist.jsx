@@ -47,15 +47,10 @@ function WatchList(props) {
         <div className='watchlist_container'>
             <Topbar />
 
-            {
-                display &&
-                <MovieInfoCard />
-            }
+            {display && <MovieInfoCard />}
 
             <h1 className='header'>
-                {
-                    language === "en-US" ? 'WATCHLIST' : 'LISTA PARA ASSISTIR'
-                }
+                {language === "en-US" ? 'WATCHLIST' : 'LISTA PARA ASSISTIR'}
             </h1>
 
             <div className='watchlist_wrapper'>
@@ -66,7 +61,7 @@ function WatchList(props) {
                                 <MovieCard data={movie} />
                                 <div className='buttons'>
                                     <button onClick={(() => addToWatched(movie))} className="add_movie">
-                                        <div><RedoRoundedIcon /> Watched</div>
+                                        <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistidos'}</div>
                                     </button>
                                     <button onClick={(() => deleteMovie(movie))} className="delete_movie">
                                         <span><DeleteRoundedIcon /></span>
