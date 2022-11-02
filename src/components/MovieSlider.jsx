@@ -14,20 +14,15 @@ function MovieSlider(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/"
     const api = "454d6b5c326671cf654bb9a838b5f24f"
-
     const [data, setData] = useState([])
-
     const [sliderIndex, setSliderIndex] = useState(0)
+    const language = useSelector((state) => state.languageToggle.value.language);
 
     let itemsPerScreen = 6
     let totalOfItems = data?.length
     let maxSliderIndex = totalOfItems / itemsPerScreen
     let maxSliderIndexRestOfDivision = maxSliderIndex % sliderIndex
     let disabled = false
-
-    const language = useSelector((state) => state.languageToggle.value.language);
-
-
 
     useEffect(() => { //SLIDERS
         axios.get(`${baseUrl}${props.type}/${props.query}?api_key=${api}&language=${language}&page=1`)

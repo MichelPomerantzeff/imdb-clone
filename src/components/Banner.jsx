@@ -8,10 +8,8 @@ function Banner(props) {
 
     const poster = 'https://image.tmdb.org/t/p/w500/'
     const image = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
-
     const [currBanner, setCurrBanner] = useState(1)
     const [freezeBannerSlide, setFreezeBannerSlide] = useState(false)
-
     const language = useSelector((state) => state.languageToggle.value.language);
 
     // Manage banner sliding
@@ -37,9 +35,7 @@ function Banner(props) {
 
     return (
         <div className="banner_container">
-
             <div className="banner_wrapper">
-
                 <div className="banner">
 
                     <div className="banner_image">
