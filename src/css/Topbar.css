@@ -36,69 +36,6 @@ nav {
     flex: 1;
 }
 
-.search_bar {
-    background: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 5px;
-    flex: 1;
-    position: relative;
-}
-
-.search_bar_input_desktop {
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 1rem;
-    font-weight: 300;
-    width: 100%;
-    padding: 7px 10px;
-    display: flex;
-}
-
-.search_bar_input_mobile {
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    font-weight: 300;
-    width: 100%;
-    padding: 7px 10px;
-    background-color: var(--secondary-background-color);
-    color: #ffffff;
-}
-
-.search_bar_input_desktop:focus {
-    border: solid 2px var(--standout-color);
-    padding: 5px 8px;
-}
-
-.search_button_on {
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 1rem;
-    position: absolute;
-    right: 0;
-    color: var(--secondary-text-color);
-    cursor: pointer;
-    display: none;
-}
-
-.search_button_off {
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 1rem;
-    position: absolute;
-    right: 0;
-    color: var(--secondary-text-color);
-    cursor: pointer;
-    display: flex;
-}
-
-
 .topbar_right_section {
     display: flex;
     align-items: center;
@@ -176,7 +113,6 @@ nav {
     width: 19px;
 }
 
-.search_bar_dropdown_box,
 .loggedin_dropdown_box,
 .language_dropdown_box {
     background: var(--third-background-color);
@@ -188,71 +124,11 @@ nav {
     overflow: hidden;
 }
 
-.searched_movie:hover,
 .loggedin_dropdown_box div:hover,
 .language_dropdown_box div:hover {
     background-color: var(--background-hover);
     cursor: pointer;
     transition: .1s ease;
-}
-
-.search_bar_dropdown_box {
-    border-radius: 5px;
-    left: 0;
-    width: 100%;
-    max-height: 90vh;
-    overflow: auto;
-}
-
-.searched_movie {
-    color: var(--main-text-color);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-bottom: 1px solid var(--third-text-color);
-    transition: .2s ease;
-    height: 100%;
-}
-
-.searched_movie_wrapper {
-    display: flex;
-    padding: 10px 0 0 10px;
-    gap: 10px;
-    align-items: center;
-}
-
-
-.searched_movie img {
-    height: 100px;
-}
-
-.searched_movie_elements {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
-}
-
-.searched_movie_title {
-    font-weight: 500;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.searched_movie_date,
-.searched_movie_rating {
-    color: var(--third-text-color);
-    font-size: .9rem;
-}
-
-.searched_movie_rating {
-    display: flex;
-    align-items: center;
-}
-
-.star_icon {
-    transform: scale(.8) translateY(-2px);
-    color: var(--standout-color);
 }
 
 .loggedin_dropdown_box {
@@ -293,23 +169,11 @@ nav {
 
 @media (max-width: 680px) {
 
-    .logo{
+    .logo {
         font-size: 1rem;
     }
 
     .logo .tv_icon {
-        display: none;
-    }
-
-    .search_bar_input_desktop {
-        display: none;
-    }
-
-    .search_button_on {
-        display: flex;
-    }
-
-    .search_button_off {
         display: none;
     }
 

@@ -9,10 +9,12 @@ import movieInfoReducer from './features/movieInfo'
 import watchlistLengthReducer from './features/watchlistLength'
 import watchedLengthReducer from './features/watchedLength'
 import languageToggleReducer from './features/languageToggle'
+import searchBarToggleReducer from './features/searchBarToggle'
 
 const store = configureStore({
   reducer: {
     languageToggle: languageToggleReducer,
+    searchBarToggle: searchBarToggleReducer,
     movieInfo: movieInfoReducer,
     watchlistLength: watchlistLengthReducer,
     watchedLength: watchedLengthReducer,
