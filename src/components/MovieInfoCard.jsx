@@ -12,36 +12,26 @@ function MovieInfoCard(props) {
     const baseUrl = 'https://api.themoviedb.org/3/'
     const api = '454d6b5c326671cf654bb9a838b5f24f'
     const imagePrefix = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
+    const dispatch = useDispatch()
     const [fetchedInfo, setFetchedInfo] = useState()
     const language = useSelector((state) => state.languageToggle.value.language);
     const movieInfo = useSelector((state) => state.movieInfo.value);
     const display = useSelector((state) => state.movieInfo.value.display);
+    const image = fetchedInfo ? `${imagePrefix}${fetchedInfo?.poster_path}` || `${imagePrefix}${movieInfo.data.poster_path}` : movieCover
+    const title = fetchedInfo?.name || fetchedInfo?.original_title || movieInfo.data.name
+    const releaseDate = fetchedInfo?.first_air_date?.slice(0, 4) || fetchedInfo?.release_date?.slice(0, 4)
+    const runtime = fetchedInfo?.runtime || fetchedInfo?.episode_run_time[0]
+    const genres = fetchedInfo?.genres
+    const rating = movieInfo.data.vote_average
+    const plot = fetchedInfo?.overview
+    const hour = Math.floor(runtime / 60) > 0 ? `${Math.floor(runtime / 60)}h` : ''
+    const min = Math.floor(runtime % 60) > 0 ? `${Math.floor(runtime % 60)}min` : ''
 
     useEffect(() => {
         axios.get(`${baseUrl}${movieInfo.type}/${movieInfo.data.movieId || movieInfo.data.id}?api_key=${api}&language=${language}`)
             .then(response => setFetchedInfo(response.data))
             .catch(err => console.log(err))
     }, [display])
-
-    const dispatch = useDispatch()
-
-    const image = fetchedInfo ? `${imagePrefix}${fetchedInfo?.poster_path}` || `${imagePrefix}${movieInfo.data.poster_path}` : movieCover
-    const title = fetchedInfo?.name || fetchedInfo?.original_title || movieInfo.data.name
-    const releaseDate = fetchedInfo?.first_air_date?.slice(0, 4) || fetchedInfo?.release_date?.slice(0, 4)
-    const runtime = fetchedInfo?.runtime || fetchedInfo?.episode_run_time[0]
-    const genres = fetchedInfo?.genres.map((genre, index) => (
-        <div>
-            <span key={genre.id} className=''>{genre.name}</span>
-            {
-                index < fetchedInfo?.genres.length - 1 &&
-                <span>|</span>
-            }
-        </div>
-    ))
-    const rating = movieInfo.data.vote_average
-    const plot = fetchedInfo?.overview
-    const hour = Math.floor(runtime / 60) > 0 ? `${Math.floor(runtime / 60)}h` : ''
-    const min = Math.floor(runtime % 60) > 0 ? `${Math.floor(runtime % 60)}min` : ''
 
 
     return (
@@ -65,7 +55,17 @@ function MovieInfoCard(props) {
                         </div>
 
                         <div>
-                            {genres}
+                            {
+                                genres?.map((genre, index) => (
+                                    <div key={genre.id}>
+                                        <span className=''>{genre.name}</span>
+                                        {
+                                            index < fetchedInfo?.genres.length - 1 &&
+                                            <span>|</span>
+                                        }
+                                    </div>
+                                ))
+                            }
                         </div>
 
                         <div className=''>
