@@ -29,7 +29,7 @@ function Banner(props) {
         } else if (direction === "right") {
             setCurrBanner(prev => prev === props.data?.length - 1 ? 0 : prev + 1)
         }
-        setFreezeBannerSlide(true)
+        setFreezeBannerSlide(prev => prev = true)
     }
 
 
