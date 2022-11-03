@@ -13,9 +13,7 @@ function Home(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/";
     const api = "454d6b5c326671cf654bb9a838b5f24f";
-
     const [upcoming, setUpcoming] = useState([]);
-    
     const language = useSelector((state) => state.languageToggle.value.language);
     const display = useSelector((state) => state.movieInfo.value.display);
 
