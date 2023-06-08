@@ -116,7 +116,7 @@ function SearchBar(props) {
                                                 <span className='searched_movie_date'>{movie.release_date?.slice(0, 4) || movie.first_air_date?.slice(0, 4) || 'N/A'}</span>
                                                 <div className='searched_movie_rating'>
                                                     <StarIcon className='star_icon' />
-                                                    {movie.vote_average || '--'}
+                                                    {movie.vote_average?.toFixed(1) || '--'}
                                                 </div>
                                             </div>
                                         </div>
