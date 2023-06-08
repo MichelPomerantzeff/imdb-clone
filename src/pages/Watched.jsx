@@ -56,21 +56,24 @@ function Watched(props) {
 
             <div className='watched_wrapper'>
                 {
-                    watchedData.map(movie => {
-                        return (
-                            <div key={movie.movieId} className='movie_card_container'>
-                                <MovieCard data={movie} />
-                                <div className='buttons'>
-                                    <button onClick={(() => addToWatchlist(movie))} className="add_movie">
-                                        <div><UndoRoundedIcon />{language === "en-US" ? 'Watchlist' : 'Assistir'}</div>
-                                    </button>
-                                    <button onClick={(() => deleteMovie(movie))} className="delete_movie">
-                                        <span><DeleteRoundedIcon /></span>
-                                    </button>
+                    watchedData.length > 0 ?
+                        watchedData.map(movie => {
+                            return (
+                                <div key={movie.movieId} className='movie_card_container'>
+                                    <MovieCard data={movie} />
+                                    <div className='buttons'>
+                                        <button onClick={(() => addToWatchlist(movie))} className="add_movie">
+                                            <div><UndoRoundedIcon />{language === "en-US" ? 'Watchlist' : 'Assistir'}</div>
+                                        </button>
+                                        <button onClick={(() => deleteMovie(movie))} className="delete_movie">
+                                            <span><DeleteRoundedIcon /></span>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
+                            )
+                        })
+                        :
+                        <div className='empty_list'>{language === "en-US" ? 'This list is empty' : 'Lista vazia'}</div>
                 }
             </div>
             <Footer />

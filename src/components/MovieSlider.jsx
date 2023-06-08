@@ -92,7 +92,7 @@ function MovieSlider(props) {
                                             if (user) {
                                                 addToWatchlist(movieCardData, props.type)
                                             } else {
-                                                alert("Sign in and start creating your wathlist")
+                                                alert("Sign in and start adding movies to your wathlist")
                                             }
                                         })}
                                         className="add_movie"
