@@ -48,14 +48,19 @@ function MovieSlider(props) {
 
     // Add Movie to Watchlist
     async function addToWatchlist(data, type) {
-        await setDoc(doc(db, "users", user.email, "watchlist", data.original_title || data.original_name), {
-            movieId: data.id,
-            name: data.original_title || data.original_name,
-            vote_average: data.vote_average,
-            poster_path: data.poster_path,
-            type: type,
-        });
+        try {
+            await setDoc(doc(db, "users", user.email, "watchlist", data.original_title || data.original_name), {
+                movieId: data.id,
+                name: data.original_title || data.original_name,
+                vote_average: data.vote_average,
+                poster_path: data.poster_path,
+                type: type,
+            });
+        } catch(error) {
+            console.log("Error adding document to watchlist:", error)
+        }
         getWatchlistData()
+
     }
 
     return (
