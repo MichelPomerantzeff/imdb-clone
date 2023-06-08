@@ -21,9 +21,25 @@
     margin: auto;
 }
 
+.empty_list {
+    border: solid 1px #b8b8b875;
+    color: #b8b8b875;
+    margin: auto;
+    padding: 50px;
+    font-size: 3rem;
+    border-radius: 10px;
+}
 
 @media (max-width: 1024px) {
     .watchlist_wrapper {
         gap: 10px;
+    }
+}
+
+@media (max-width: 680px) {
+    .empty_list {
+        padding: 20px;
+        font-size: 1.5rem;
+        border-radius: 5px;
     }
 }

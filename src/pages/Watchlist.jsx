@@ -50,26 +50,29 @@ function WatchList(props) {
             {display && <MovieInfoCard />}
 
             <h1 className='header'>
-                {language === "en-US" ? 'WATCHLIST' : 'LISTA PARA ASSISTIR'}
+                {language === "en-US" ? 'WATCHLIST' : 'LISTA DE FAVORITOS'}
             </h1>
 
             <div className='watchlist_wrapper'>
                 {
-                    watchlistData.map(movie => {
-                        return (
-                            <div key={movie.movieId} className='movie_card_container'>
-                                <MovieCard data={movie} />
-                                <div className='buttons'>
-                                    <button onClick={(() => addToWatched(movie))} className="add_movie">
-                                        <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistidos'}</div>
-                                    </button>
-                                    <button onClick={(() => deleteMovie(movie))} className="delete_movie">
-                                        <span><DeleteRoundedIcon /></span>
-                                    </button>
+                    watchlistData.length > 0 ?
+                        watchlistData.map(movie => {
+                            return (
+                                <div key={movie.movieId} className='movie_card_container'>
+                                    <MovieCard data={movie} />
+                                    <div className='buttons'>
+                                        <button onClick={(() => addToWatched(movie))} className="add_movie">
+                                            <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
+                                        </button>
+                                        <button onClick={(() => deleteMovie(movie))} className="delete_movie">
+                                            <span><DeleteRoundedIcon /></span>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
+                            )
+                        })
+                        :
+                        <div className='empty_list'>{language === "en-US" ? 'This list is empty' : 'Lista vazia'}</div>
                 }
             </div>
             <Footer />
