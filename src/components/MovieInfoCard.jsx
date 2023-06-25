@@ -70,7 +70,7 @@ function MovieInfoCard(props) {
 
                         <div className=''>
                             <StarIcon className='movie_info_card_star' />
-                            {rating}
+                            {rating.toFixed(1)}
                         </div>
 
                     </div>
