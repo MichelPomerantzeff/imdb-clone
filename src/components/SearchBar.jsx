@@ -16,7 +16,7 @@ import { toggleSearchMode } from '../features/searchBarToggle'
 function SearchBar(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/";
-    const api = "454d6b5c326671cf654bb9a838b5f24f";
+    const api = process.env.REACT_APP_TMDB_API_KEY;
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
