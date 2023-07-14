@@ -41,7 +41,7 @@ npm install
 
 ### In the project directory, run the next command:
 
-##### To install dependencies and node_modules
+##### To install dependencies and node_modules:
 ```bash
 npm install
 ```
