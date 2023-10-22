@@ -21,12 +21,23 @@ function MovieCard(props) {
                 className="movie_card_image">
                 <img src={image} alt='' />
             </div>
+            
+            <p
+                onClick={() => {
+                    dispatch(displayMovieInfo({ data: props.data, type: props.type || props.data.type, display: true }));
+                }}
+                title={title} className='movie_title'>
+                {title}
+            </p>
 
-            <div className='movie_card_top_elements'>
+            <div className='movie_card_details'>
 
                 <div className='movie_card_rating'>
                     <StarIcon className='movie_card_star' />
-                    <span className='movie_card_vote'>{rating}</span>
+                    <span 
+                        className={rating > 7.9 ? "high_vote" : rating < 6 ? "low_vote" : ""}>
+                        {rating}
+                    </span>
                 </div>
 
                 <div title='info' className='movie_info_button'>
@@ -39,14 +50,6 @@ function MovieCard(props) {
                     </div>
                 </div>
             </div>
-
-            <p
-                onClick={() => {
-                    dispatch(displayMovieInfo({ data: props.data, type: props.type || props.data.type, display: true }));
-                }}
-                title={title} className='movie_title'>
-                {title}
-            </p>
         </div>
 
 
