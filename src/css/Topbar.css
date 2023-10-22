@@ -149,7 +149,7 @@ nav {
 .loggedin_dropdown_box div,
 .language_dropdown_box div {
     padding: 15px;
-    font-size: 1.1rem;
+    font-size: .9rem;
     font-weight: 400;
     display: flex;
     justify-content: center;
