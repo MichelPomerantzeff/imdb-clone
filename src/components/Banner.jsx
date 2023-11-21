@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 function Banner(props) {
 
-    const poster = 'https://image.tmdb.org/t/p/w500/'
+    const poster = 'https://image.tmdb.org/t/p/w1280/'
     const image = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
     const [currBanner, setCurrBanner] = useState(1)
     const [freezeBannerSlide, setFreezeBannerSlide] = useState(false)
