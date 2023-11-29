@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 function MovieInfoCard(props) {
 
     const baseUrl = 'https://api.themoviedb.org/3/'
-    const api = process.env.REACT_APP_TMDB_API_KEY
+    const api = import.meta.env.VITE_TMDB_API_KEY
     const imagePrefix = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
     const dispatch = useDispatch()
     const [fetchedInfo, setFetchedInfo] = useState()

@@ -12,7 +12,7 @@ import useDisableScroll from '../hooks/useDisableScroll';
 function Home(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/";
-    const api = process.env.REACT_APP_TMDB_API_KEY;
+    const api = import.meta.env.VITE_TMDB_API_KEY;
     const [upcoming, setUpcoming] = useState([]);
     const language = useSelector((state) => state.languageToggle.value.language);
     const display = useSelector((state) => state.movieInfo.value.display);

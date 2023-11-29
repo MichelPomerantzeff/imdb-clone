@@ -13,7 +13,7 @@ import axios from "axios";
 function MovieSlider(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/"
-    const api = process.env.REACT_APP_TMDB_API_KEY
+    const api = import.meta.env.VITE_TMDB_API_KEY
     const [data, setData] = useState([])
     const [sliderIndex, setSliderIndex] = useState(0)
     const language = useSelector((state) => state.languageToggle.value.language);
