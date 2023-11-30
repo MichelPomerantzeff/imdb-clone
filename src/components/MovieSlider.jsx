@@ -1,7 +1,5 @@
 import MovieCard from "./MovieCard";
 import '../css/MovieSlider.css'
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
@@ -9,19 +7,25 @@ import { db } from "../config/firebase";
 import useGetData from "../hooks/useGetData";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import PropTypes from "prop-types";
+
+// Import Swiper
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 function MovieSlider(props) {
 
     const baseUrl = "https://api.themoviedb.org/3/"
     const api = import.meta.env.VITE_TMDB_API_KEY
     const [data, setData] = useState([])
-    const [sliderIndex, setSliderIndex] = useState(0)
     const language = useSelector((state) => state.languageToggle.value.language);
 
-    let itemsPerScreen = 6
-    let totalOfItems = data?.length
-    let maxSliderIndex = totalOfItems / itemsPerScreen
-    let maxSliderIndexRestOfDivision = maxSliderIndex % sliderIndex
     let disabled = false
 
     useEffect(() => { //SLIDERS
@@ -29,19 +33,6 @@ function MovieSlider(props) {
             .then(response => setData(response.data.results,))
             .catch(err => console.log(err))
     }, [language])
-
-    function slide(direction) {
-
-        if (direction === "right") {
-            if (sliderIndex === Math.floor(maxSliderIndex - 1)) {
-                setSliderIndex(prev => (prev - 1) + maxSliderIndexRestOfDivision)
-            } else {
-                setSliderIndex(prev => prev + 1)
-            }
-        } else if (direction === "left") {
-            setSliderIndex(prev => prev > 0 ? Math.floor(prev) - 1 : 0)
-        }
-    }
 
     // Costum hooks (fetch data from database)
     const { user, watchlistData, getWatchlistData, watchedData } = useGetData()
@@ -56,7 +47,7 @@ function MovieSlider(props) {
                 poster_path: data.poster_path,
                 type: type,
             });
-        } catch(error) {
+        } catch (error) {
             console.log("Error adding document to watchlist:", error)
         }
         getWatchlistData()
@@ -67,83 +58,78 @@ function MovieSlider(props) {
         <div className="movie_slider_container">
             <h1 className="movie_slider_category">{props.title}</h1>
             <div className="movie_slider_wrapper">
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    navigation
+                    spaceBetween={10}
+                    breakpoints={{
+                        1280: { slidesPerView: 6, slidesPerGroup: 6, },
+                        980: { slidesPerView: 5, slidesPerGroup: 5, },
+                        680: { slidesPerView: 4, slidesPerGroup: 4, },
+                        480: { slidesPerView: 3, slidesPerGroup: 3, },
+                        200: { slidesPerView: 2, slidesPerGroup: 2, },
+                    }}
+                >
+                    {
+                        data?.map((movieCardData, index) => {
+                            let movieId = movieCardData.id
 
-                {
-                    data?.map(movieCardData => {
-                        let movieId = movieCardData.id
+                            // Check if movie is on watchlist/watched
+                            const isOnWatchlist = watchlistData.find(movie => {
+                                return movieId === movie.movieId
+                            })
+                            const isOnWatched = watchedData.find(movie => {
+                                return movieId === movie.movieId
+                            })
+                            isOnWatchlist || isOnWatched ? disabled = true : disabled = false
 
-                        // Check if movie is on watchlist/watched
-                        const isOnWatchlist = watchlistData.find(movie => {
-                            return movieId === movie.movieId
+                            return (
+                                <SwiperSlide
+                                    key={index}
+                                    className='slider_movie'
+                                >
+
+                                    <MovieCard type={props.type} data={movieCardData} />
+
+                                    <div className='buttons'>
+                                        <button
+                                            onClick={(() => {
+                                                if (user) {
+                                                    addToWatchlist(movieCardData, props.type)
+                                                } else {
+                                                    alert("Sign in and start adding movies to your wathlist")
+                                                }
+                                            })}
+                                            className="add_movie"
+                                            disabled={disabled}
+                                            style={{
+                                                background: `${disabled && '#cccccc1d'}`,
+                                                color: `${disabled && '#cccccc1d'}`,
+                                                pointerEvents: `${disabled && 'none'}`,
+
+                                            }}
+                                        >
+                                            <div><AddRoundedIcon />
+                                                {language === "en-US" ? 'Watchlist' : 'Assistir'}
+                                            </div>
+                                        </button>
+                                    </div>
+                                </SwiperSlide>
+                            )
                         })
-                        const isOnWatched = watchedData.find(movie => {
-                            return movieId === movie.movieId
-                        })
-                        isOnWatchlist || isOnWatched ? disabled = true : disabled = false
-
-                        return (
-                            <div
-                                // Slide images
-                                style={{ transform: `translateX( calc(  (  (-100% * 6) - (18px * ${itemsPerScreen})  ) * ${sliderIndex}  )  )`, transition: "1s ease" }}
-
-                                key={movieCardData.id}
-                                className="movie_card_container">
-
-                                <MovieCard type={props.type} data={movieCardData} />
-
-                                <div className='buttons'>
-                                    <button
-                                        onClick={(() => {
-                                            if (user) {
-                                                addToWatchlist(movieCardData, props.type)
-                                            } else {
-                                                alert("Sign in and start adding movies to your wathlist")
-                                            }
-                                        })}
-                                        className="add_movie"
-                                        disabled={disabled}
-                                        style={{
-                                            background: `${disabled && '#cccccc1d'}`,
-                                            color: `${disabled && '#cccccc1d'}`,
-                                            pointerEvents: `${disabled && 'none'}`,
-
-                                        }}
-                                    >
-                                        <div><AddRoundedIcon />
-                                            {language === "en-US" ? 'Watchlist' : 'Assistir'}
-                                        </div>
-                                    </button>
-                                </div>
-
-
-
-                            </div>
-                        )
-                    })
-                }
+                    }
+                </Swiper>
 
             </div>
 
-            <div className="arrow_buttons_slider">
-
-                {
-                    sliderIndex <= Math.floor(maxSliderIndex - 1) &&
-                    <div onClick={() => slide("right")} className="right_slider">
-                        <ArrowForwardIosRoundedIcon className="right_arrow" />
-                    </div>
-                }
-
-                {
-                    sliderIndex > 0 &&
-                    <div onClick={() => slide("left")} className="left_slider">
-                        <ArrowBackIosRoundedIcon className="left_arrow" />
-                    </div>
-                }
-
-            </div>
-
-        </div>
+        </div >
     );
 }
 
 export default MovieSlider;
+
+MovieSlider.propTypes = {
+    type: PropTypes.string,
+    query: PropTypes.string,
+    title: PropTypes.string
+}

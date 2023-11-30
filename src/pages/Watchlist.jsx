@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';
 import useDisableScroll from '../hooks/useDisableScroll';
 
-function WatchList(props) {
+function WatchList() {
 
     // const language = 'en-US'
     const language = useSelector((state) => state.languageToggle.value.language);

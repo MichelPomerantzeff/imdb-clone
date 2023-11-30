@@ -4,6 +4,8 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import StarIcon from '@mui/icons-material/Star';
 import { useDispatch } from 'react-redux';
 import { displayMovieInfo } from '../features/movieInfo'
+import PropTypes from "prop-types";
+
 
 function MovieCard(props) {
 
@@ -57,3 +59,8 @@ function MovieCard(props) {
 }
 
 export default MovieCard;
+
+MovieCard.propTypes = {
+    type: PropTypes.string,
+    data: PropTypes.object
+}

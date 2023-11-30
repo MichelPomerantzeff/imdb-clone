@@ -1,5 +1,5 @@
 .movie_card {
-    width: 185px;
+    width: 100%;
     color: var(--main-text-color);
     display: flex;
     flex-direction: column;
@@ -7,14 +7,15 @@
 }
 
 .movie_card_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 280px;
     overflow: hidden;
 }
 
 .movie_card_image img {
     width: 100%;
-    height: 100%;
     cursor: pointer;
     transition: .2s ease;
 }
@@ -22,15 +23,16 @@
 .movie_card_image img:hover {
     transform: scale(1.2);
     filter: blur(1.2px);
-    transition: .3s ease;
+    transition: .3s ease ;
 }
 
 .movie_title {
-    padding-left: 10px;
+    margin-left: 8px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     cursor: pointer;
+    line-height: 20px;
 }
 
 .movie_card_details {
@@ -149,15 +151,4 @@
 .buttons .delete_movie span{
     display: flex;
     align-items: center;
-}
-
-@media (max-width: 1280px) {
-    .movie_card {
-        width: 148px;
-        gap: 5px;
-    }
-
-    .movie_card_image {
-        height: 220px;
-    }
 }
