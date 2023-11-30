@@ -14,9 +14,8 @@
 .watched_wrapper{
     display: flex;
     color: var(--main-text-color);
-    justify-content: center;
     gap: 20px;
-    max-width: 1250px;
+    width: 1280px;
     flex-wrap: wrap;
     margin: auto;
 }

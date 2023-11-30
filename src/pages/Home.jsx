@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import useDisableScroll from '../hooks/useDisableScroll';
 
-function Home(props) {
+function Home() {
 
     const baseUrl = "https://api.themoviedb.org/3/";
     const api = import.meta.env.VITE_TMDB_API_KEY;

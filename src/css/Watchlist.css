@@ -14,11 +14,19 @@
 .watchlist_wrapper {
     display: flex;
     color: var(--main-text-color);
-    justify-content: center;
     gap: 20px;
-    max-width: 1250px;
+    width: 1280px;
     flex-wrap: wrap;
     margin: auto;
+}
+
+.movie_card_container{
+    background-color: var(--secondary-background-color);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
 }
 
 .empty_list {

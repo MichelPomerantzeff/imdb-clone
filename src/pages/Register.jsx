@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../css/Login.css'
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { auth } from "../config/firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useSelector } from 'react-redux';
 
-function Register(props) {
+function Register() {
 
     const navigate = useNavigate()
 
