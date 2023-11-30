@@ -42,11 +42,10 @@
 
 div.swiper-button-prev,
 div.swiper-button-next {
-    padding: 35px 25px;
+    padding: 1rem;
     border: 1px solid #fff;
     color: #fff;
     background: var(--arrow-background);
-    transform: translateY(-60px);
     border-radius: 5px;
 }
 
