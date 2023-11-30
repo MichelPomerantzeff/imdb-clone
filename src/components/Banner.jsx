@@ -1,125 +1,111 @@
-import '../css/Banner.css'
-import { useEffect, useState } from 'react';
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import '../css/Banner.css';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-function Banner(props) {
+// Import Swiper
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-    const poster = 'https://image.tmdb.org/t/p/w1280/'
-    const image = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
-    const [currBanner, setCurrBanner] = useState(1)
-    const [freezeBannerSlide, setFreezeBannerSlide] = useState(false)
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+import PropTypes from "prop-types";
+
+function Banner({ data }) {
+
+    const posterBaseUrl = 'https://image.tmdb.org/t/p/w1280/'
+    const upNextBaseUrl = 'https://www.themoviedb.org/t/p/w220_and_h330_face/'
     const language = useSelector((state) => state.languageToggle.value.language);
+    const [currPoster, setCurrPoster] = useState(0);
+    let upNextArray = [1, 2, 3];
 
-    // Manage banner sliding
-    useEffect(() => {
-        const interval = setInterval(() => {
-            freezeBannerSlide && clearInterval(interval)
-            !freezeBannerSlide && setCurrBanner(prev => prev === 20 - 1 ? 0 : prev + 1)
-        }, 5000);
+    const handleSlideChange = (swiper) => {
+        setCurrPoster(swiper.realIndex);
+    };
 
-        return () => clearInterval(interval)
-
-    }, [freezeBannerSlide])
-
-    function slideBanner(direction) {
-        if (direction === "left") {
-            setCurrBanner(prev => prev < 1 ? props.data?.length - 1 : prev - 1)
-        } else if (direction === "right") {
-            setCurrBanner(prev => prev === props.data?.length - 1 ? 0 : prev + 1)
-        }
-        setFreezeBannerSlide(prev => prev = true)
-    }
-
+    // TODO: Apply styling here
+    if (!data) return <h1>LOADING ....................</h1>
 
     return (
         <div className="banner_container">
             <div className="banner_wrapper">
-                <div className="banner">
-
-                    <div className="banner_image">
-                        <img alt="" src={`${poster + props.data[currBanner]?.backdrop_path}`} />
+                < div className="poster_carousel" >
+                    <Swiper
+                        slidesPerView={1}
+                        navigation
+                        autoplay={{
+                            delay: 5000,
+                            disableOnInteraction: true,
+                        }}
+                        speed={300}
+                        loop={true}
+                        modules={[Autoplay, Pagination, Navigation]}
+                        onSlideChange={handleSlideChange}
+                    >
+                        {
+                            data.map((movie, index) => {
+                                return (
+                                    <SwiperSlide
+                                        key={index}
+                                        className='poster_slide'
+                                    >
+                                        <div className="big_image">
+                                            <img src={posterBaseUrl + movie.backdrop_path} alt="IMAGE" />
+                                        </div>
+                                        <div className="poster_details">
+                                            <div className="poster_deitals_shadow"></div>
+                                            <div className="small_image">
+                                                <img src={posterBaseUrl + movie.poster_path} alt="IMAGE" />
+                                            </div>
+                                            <div className="poster_movie_description">
+                                                <h1>MOVIE NAME</h1>
+                                                <span>Movie narrative</span>
+                                            </div>
+                                        </div>
+                                        <div className="gradient_bg"></div>
+                                    </SwiperSlide>
+                                )
+                            })
+                        }
+                    </Swiper>
+                </ div>
+                <div className="up_next">
+                    <span className='up_next_title'>
+                        {
+                            language === "en-US" ? 'Up next' : 'A seguir'
+                        }
+                    </span>
+                    <div className="up_next_content">
+                        {upNextArray.map((index) => {
+                            let card = currPoster + index;
+                            card == data.length ? card = 0 : card == data.length + 1 ? card = 1 : card == data.length + 2 ? card = 2 : card;
+                            return (
+                                <div className="up_next_card border" key={index}>
+                                    <div className="up_next_poster">
+                                        {
+                                            data.length > 0 &&
+                                            <img src={`${upNextBaseUrl}${data[card]?.poster_path}`} alt="" />
+                                        }
+                                    </div>
+                                    <div className="up_next_card_details">
+                                        <div className="up_next_card_title">{data[card]?.title}</div>
+                                        <div className="up_next_card_date">{data[card]?.release_date}</div>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
-
-                    <div className="gradient">
-                        <div className="banner_content">
-
-                            <div className="small_poster">
-                                <img alt="" src={`${poster + props.data[currBanner]?.poster_path}`} />
-                            </div>
-
-                            <div className='banner_details'>
-                                <h1 className='banner_title'>{props.data[currBanner]?.title}</h1>
-                                <p className='banner_overview'>{props.data[currBanner]?.overview}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="arrow_buttons">
-                    <div onClick={() => slideBanner("right")} className="right">
-                        <ArrowForwardIosRoundedIcon className="right_arrow" />
-                    </div>
-
-                    <div onClick={() => slideBanner("left")} className="left">
-                        <ArrowBackIosRoundedIcon className="left_arrow" />
-                    </div>
-                </div>
-            </div>
-
-            <div className="up_next">
-
-                <span className='up_next_title'>
-                    {
-                        language === "en-US" ? 'Up next' : 'A seguir'
-                    }
-                </span>
-
-                <div className="up_next_content">
-
-                    <div className='up_next_card border'>
-
-                        <div className="up_next_poster">
-                            <img src={`${image}${props.data[currBanner === 19 ? 0 : currBanner + 1]?.poster_path}`} alt='' />
-                        </div>
-
-                        <div className='up_next_card_details'>
-                            <div className="up_next_card_title">{props.data[currBanner === 19 ? 0 : currBanner + 1]?.title}</div>
-                            <div className="up_next_card_date">{props.data[currBanner === 19 ? 0 : currBanner + 1]?.release_date}</div>
-                        </div>
-                    </div>
-
-                    <div className='up_next_card border'>
-
-                        <div className="up_next_poster">
-                            <img src={`${image}${props.data[currBanner === 18 ? 0 : currBanner === 19 ? 1 : currBanner + 2]?.poster_path}`} alt='' />
-                        </div>
-
-                        <div className='up_next_card_details'>
-                            <div className="up_next_card_title">{props.data[currBanner === 18 ? 0 : currBanner === 19 ? 1 : currBanner + 2]?.title}</div>
-                            <div className="up_next_card_date">{props.data[currBanner === 18 ? 0 : currBanner === 19 ? 1 : currBanner + 2]?.release_date}</div>
-                        </div>
-                    </div>
-
-                    <div className='up_next_card'>
-
-                        <div className="up_next_poster">
-                            <img src={`${image}${props.data[currBanner === 17 ? 0 : currBanner === 18 ? 1 : currBanner === 19 ? 2 : currBanner + 3]?.poster_path}`} alt='' />
-                        </div>
-
-                        <div className='up_next_card_details'>
-                            <div className="up_next_card_title">{props.data[currBanner === 17 ? 0 : currBanner === 18 ? 1 : currBanner === 19 ? 2 : currBanner + 3]?.title}</div>
-                            <div className="up_next_card_date">{props.data[currBanner === 17 ? 0 : currBanner === 18 ? 1 : currBanner === 19 ? 2 : currBanner + 3]?.release_date}</div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-
-
-        </div>
+        </div >
     );
 }
 
 export default Banner;
+
+Banner.propTypes = {
+    data: PropTypes.array
+}

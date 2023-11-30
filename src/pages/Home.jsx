@@ -42,17 +42,17 @@ function Home(props) {
                     query={'popular'}
                 />
                 <MovieSlider
-                    title={language === "en-US" ? '"Popular TV Shows"' : 'Series Populares'}
+                    title={language === "en-US" ? "Popular TV Shows" : 'Series Populares'}
                     type={'tv'}
                     query={'popular'}
                 />
                 <MovieSlider
-                    title={language === "en-US" ? '"Top Rated TV Shows"' : 'Series Mais Bem Votadas'}
+                    title={language === "en-US" ? "Top Rated TV Shows" : 'Series Mais Bem Votadas'}
                     type={'tv'}
                     query={'top_rated'}
                 />
                 <MovieSlider
-                    title={language === "en-US" ? '"Top Rated Movies"' : 'Filmes Mais Bem Votadas'}
+                    title={language === "en-US" ? "Top Rated Movies" : 'Filmes Mais Bem Votadas'}
                     type={'movie'}
                     query={'top_rated'}
                 />
