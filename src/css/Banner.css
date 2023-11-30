@@ -42,7 +42,7 @@
 
 div.swiper-button-prev,
 div.swiper-button-next {
-    padding: 1rem;
+    padding: 1rem .6rem;
     border: 1px solid #fff;
     color: #fff;
     background: var(--arrow-background);
