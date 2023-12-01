@@ -61,13 +61,12 @@ function MovieSlider(props) {
                 <Swiper
                     modules={[Navigation, Pagination]}
                     navigation
-                    spaceBetween={10}
                     breakpoints={{
-                        1280: { slidesPerView: 6, slidesPerGroup: 6, },
-                        980: { slidesPerView: 5, slidesPerGroup: 5, },
-                        680: { slidesPerView: 4, slidesPerGroup: 4, },
-                        480: { slidesPerView: 3, slidesPerGroup: 3, },
-                        200: { slidesPerView: 2, slidesPerGroup: 2, },
+                        1280: { slidesPerView: 6, slidesPerGroup: 6, spaceBetween: 20 },
+                        980: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 20},
+                        680: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 15},
+                        480: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 10},
+                        200: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 10},
                     }}
                 >
                     {

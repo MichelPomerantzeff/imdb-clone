@@ -164,7 +164,7 @@ div.swiper-button-next:hover {
 @media (max-width: 1280px) {
 
     .banner_wrapper {
-        max-width: 97vw;
+        max-width: 90vw;
     }
 
     .small_image {
@@ -190,6 +190,11 @@ div.swiper-button-next:hover {
 }
 
 @media (max-width: 800px) {
+
+    .banner_wrapper {
+        max-width: 92vw;
+    }
+
     .small_image {
         width: 120px;
     }
