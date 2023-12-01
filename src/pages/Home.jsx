@@ -11,18 +11,51 @@ import useDisableScroll from '../hooks/useDisableScroll';
 
 function Home() {
 
-    const baseUrl = "https://api.themoviedb.org/3/";
-    const api = import.meta.env.VITE_TMDB_API_KEY;
+    const BASE_URL = "https://api.themoviedb.org/3/";
     const [upcoming, setUpcoming] = useState([]);
+    const [trailer, setTrailer] = useState({});
+
+
     const language = useSelector((state) => state.languageToggle.value.language);
     const display = useSelector((state) => state.movieInfo.value.display);
 
-    // API fetching
-    useEffect(() => { //BANNER
-        axios.get(`${baseUrl}movie/upcoming?api_key=${api}&language=${language}&page=1`)
-            .then(response => setUpcoming(response.data.results))
-            .catch(err => console.log(err))
+    useEffect(() => {
+        fetchMovies();
     }, [language])
+
+    // Fetch popular movies movie
+    const fetchMovies = async () => {
+        const { data } = await axios.get(`${BASE_URL}movie/upcoming`, {
+            params: {
+                api_key: import.meta.env.VITE_TMDB_API_KEY,
+                language: language,
+                page: 1
+            }
+        })
+        setUpcoming(data.results);
+    }
+
+    // Fetch single movie
+    const fetchMovie = async (id) => {
+        const { data } = await axios.get(`${BASE_URL}movie/${id}`, {
+            params: {
+                api_key: import.meta.env.VITE_TMDB_API_KEY,
+                append_to_response: "videos",
+                language: language,
+                page: 1
+            }
+        })
+
+        if (data.videos && Array.isArray(data.videos.results) && data.videos.results.length > 0) {
+            const trailer = data.videos.results.find(video => video.name.includes("Trailer"))
+            const teaser = data.videos.results.find(video => video.name.includes("Teaser"))
+            setTrailer(trailer || teaser);
+        }
+    }
+
+    const selectMovie = (data) => {
+        fetchMovie(data.id);
+    }
 
     useDisableScroll()
 
@@ -34,7 +67,7 @@ function Home() {
                 <MovieInfoCard />
             }
             <div className="home_wrapper">
-                <Banner data={upcoming} />
+                <Banner data={upcoming} trailer={trailer} selectMovie={selectMovie} />
 
                 <MovieSlider
                     title={language === "en-US" ? "Popular Movies" : 'Filmes Populares'}

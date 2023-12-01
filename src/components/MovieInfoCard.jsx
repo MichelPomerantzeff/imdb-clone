@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeMovieInfo } from '../features/movieInfo'
 import { useEffect, useState } from 'react';
 
-function MovieInfoCard(props) {
+function MovieInfoCard() {
 
     const baseUrl = 'https://api.themoviedb.org/3/'
     const api = import.meta.env.VITE_TMDB_API_KEY
@@ -81,7 +81,7 @@ function MovieInfoCard(props) {
                 </div>
 
                 <div
-                    className="movie_info_card_x_button"
+                    className="movie_info_close_button"
                     onClick={() => {
                         dispatch(closeMovieInfo({ data: '', display: false, scroll: true }));
                     }}

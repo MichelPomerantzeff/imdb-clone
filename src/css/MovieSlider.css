@@ -4,8 +4,11 @@
     margin: 30px 0;
 }
 
+.movie_slider_wrapper {
+}
+
 .movie_slider_category {
-    margin-bottom: 20px;
+    margin: 40px 0 30px 0;
     font-weight: 400;
 }
 

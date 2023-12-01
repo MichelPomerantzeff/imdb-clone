@@ -9,7 +9,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 2;
+    z-index: 4;
 }
 
 .movie_info_card_wrapper {
@@ -18,7 +18,7 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    color: var(--main-text-color);
+    color: var(--text-on-dark-bg);
     padding: 20px;
     gap: 20px;
     max-width: 500px;
@@ -64,7 +64,7 @@
 
 
 
-.movie_info_card_x_button{
+.movie_info_close_button{
     position: absolute;
     display: flex;
     top: -45px;
@@ -76,7 +76,6 @@
 }
 
 
-.movie_info_card_x_button:hover{
-    background-color: rgba(255, 254, 254, 0.075);
-    color: #fff;
+.movie_info_close_button:hover{
+    background-color: #fffefe13;
 }

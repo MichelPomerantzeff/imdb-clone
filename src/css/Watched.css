@@ -1,5 +1,5 @@
 .watched_container{
-    background-color: var(--background-color);
+    background-color: var(--bg-color);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
 
 .watched_wrapper{
     display: flex;
-    color: var(--main-text-color);
+    color: var(--text-on-dark-bg);
     gap: 20px;
     width: 1280px;
     flex-wrap: wrap;

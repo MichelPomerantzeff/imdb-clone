@@ -1,6 +1,6 @@
 .movie_card {
     width: 100%;
-    color: var(--main-text-color);
+    color: var(--text-on-dark-bg);
     display: flex;
     flex-direction: column;
     gap: 10px;

@@ -67,7 +67,7 @@
     flex-direction: column;
     position: absolute;
     top: 40px;
-    z-index: 2;
+    z-index: 4;
     overflow: hidden;
 }
 
@@ -86,7 +86,7 @@
 }
 
 .searched_movie {
-    color: var(--main-text-color);
+    color: var(--text-on-dark-bg);
     display: flex;
     flex-direction: column;
     gap: 10px;

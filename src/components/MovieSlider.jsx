@@ -19,7 +19,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-function MovieSlider(props) {
+function MovieSlider({type, query, title}) {
 
     const baseUrl = "https://api.themoviedb.org/3/"
     const api = import.meta.env.VITE_TMDB_API_KEY
@@ -29,7 +29,7 @@ function MovieSlider(props) {
     let disabled = false
 
     useEffect(() => { //SLIDERS
-        axios.get(`${baseUrl}${props.type}/${props.query}?api_key=${api}&language=${language}&page=1`)
+        axios.get(`${baseUrl}${type}/${query}?api_key=${api}&language=${language}&page=1`)
             .then(response => setData(response.data.results,))
             .catch(err => console.log(err))
     }, [language])
@@ -56,7 +56,7 @@ function MovieSlider(props) {
 
     return (
         <div className="movie_slider_container">
-            <h1 className="movie_slider_category">{props.title}</h1>
+            <h1 className="movie_slider_category">{title}</h1>
             <div className="movie_slider_wrapper">
                 <Swiper
                     modules={[Navigation, Pagination]}
@@ -88,13 +88,13 @@ function MovieSlider(props) {
                                     className='slider_movie'
                                 >
 
-                                    <MovieCard type={props.type} data={movieCardData} />
+                                    <MovieCard type={type} data={movieCardData} />
 
                                     <div className='buttons'>
                                         <button
                                             onClick={(() => {
                                                 if (user) {
-                                                    addToWatchlist(movieCardData, props.type)
+                                                    addToWatchlist(movieCardData, type)
                                                 } else {
                                                     alert("Sign in and start adding movies to your wathlist")
                                                 }

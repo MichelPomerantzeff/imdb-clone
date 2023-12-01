@@ -45,7 +45,7 @@ nav {
 
 .lists {
     display: flex;
-    color: var(--main-text-color);
+    color: var(--text-on-dark-bg);
 }
 
 .watchlist,
@@ -85,7 +85,7 @@ nav {
     align-items: center;
     padding: 7px;
     border-radius: 5px;
-    color: var(--main-text-color);
+    color: var(--text-on-dark-bg);
     cursor: pointer;
 }
 
@@ -103,7 +103,7 @@ nav {
     position: relative;
     display: flex;
     align-items: center;
-    color: var(--main-text-color);
+    color: var(--text-on-dark-bg);
     padding: 5px 0 5px 10px;
     border-radius: 5px;
     cursor: pointer;
