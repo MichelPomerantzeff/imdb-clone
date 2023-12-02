@@ -12,7 +12,7 @@ function MovieCard(props) {
     const dispatch = useDispatch()
     const image = props.data.poster_path ? `${'https://www.themoviedb.org/t/p/w220_and_h330_face'}${props.data.poster_path}` : movieCover
     const rating = props.data.vote_average?.toFixed(1)
-    const title = props.data.name || props.data.original_title
+    const title = props.data.name || props.data.title
 
     return (
         <div className="movie_card">

@@ -18,7 +18,7 @@ function MovieInfoCard() {
     const movieInfo = useSelector((state) => state.movieInfo.value);
     const display = useSelector((state) => state.movieInfo.value.display);
     const image = fetchedInfo ? `${imagePrefix}${fetchedInfo?.poster_path}` || `${imagePrefix}${movieInfo.data.poster_path}` : movieCover
-    const title = fetchedInfo?.name || fetchedInfo?.original_title || movieInfo.data.name
+    const title = fetchedInfo?.name || fetchedInfo?.title || movieInfo.data.name
     const releaseDate = fetchedInfo?.first_air_date?.slice(0, 4) || fetchedInfo?.release_date?.slice(0, 4)
     const runtime = fetchedInfo?.runtime || fetchedInfo?.episode_run_time[0]
     const genres = fetchedInfo?.genres
@@ -70,7 +70,7 @@ function MovieInfoCard() {
 
                         <div className=''>
                             <StarIcon className='movie_info_card_star' />
-                            {rating.toFixed(1)}
+                            {rating?.toFixed(1)}
                         </div>
 
                     </div>

@@ -13,7 +13,7 @@ import { db } from '../config/firebase';
 import useGetData from '../hooks/useGetData';
 import { toggleSearchMode } from '../features/searchBarToggle'
 
-function SearchBar(props) {
+function SearchBar() {
 
     const baseUrl = "https://api.themoviedb.org/3/";
     const api = import.meta.env.VITE_TMDB_API_KEY;
@@ -35,9 +35,9 @@ function SearchBar(props) {
     }, [search, language])
 
     async function addToWatchlist(data, type) {
-        await setDoc(doc(db, "users", user.email, "watchlist", data.original_title || data.original_name), {
+        await setDoc(doc(db, "users", user.email, "watchlist", data.title || data.name), {
             movieId: data.id,
-            name: data.original_title || data.original_name,
+            name: data.title || data.name,
             vote_average: data.vote_average,
             poster_path: data.poster_path,
             type: type,
