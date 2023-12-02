@@ -50,6 +50,10 @@ function Home() {
             const teaser = data.videos.results.find(video => video.name.includes("Teaser"))
             setTrailer(trailer || teaser);
         }
+        
+        if (data.videos.results.length < 1) {
+            setTrailer({});
+        }
     }
 
     const selectMovie = (data) => {
