@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const movieInfoSlice = createSlice({
     name: 'movieInfo',
-    initialState: { value: { data: '', type: '', display: false, scroll: true } },
+    initialState: { value: { data: {}, type: '', display: false, scroll: true } },
     reducers: {
         displayMovieInfo: (state, action) => {
             state.value = action.payload;

@@ -7,7 +7,6 @@ import '../css/Home.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import useDisableScroll from '../hooks/useDisableScroll';
 
 function Home() {
 
@@ -56,8 +55,6 @@ function Home() {
     const selectMovie = (data) => {
         fetchMovie(data.id);
     }
-
-    useDisableScroll()
 
     return (
         <div className='home_container'>

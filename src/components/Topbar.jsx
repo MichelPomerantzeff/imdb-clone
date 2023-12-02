@@ -15,7 +15,7 @@ import { setLanguage } from '../features/languageToggle';
 import useGetData from '../hooks/useGetData';
 
 
-function Topbar(props) {
+function Topbar() {
 
     const [isUserAccountOpen, setIsUserAccountOpen] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
@@ -45,7 +45,7 @@ function Topbar(props) {
         }
         document.addEventListener("click", isOutside)
         return () => document.removeEventListener("click", isOutside)
-    })
+    }, [])
 
     return (
         <nav>

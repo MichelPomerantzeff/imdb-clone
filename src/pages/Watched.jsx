@@ -9,7 +9,6 @@ import { db } from '../config/firebase';
 import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';
-import useDisableScroll from '../hooks/useDisableScroll';
 
 function Watched() {
 
@@ -41,8 +40,6 @@ function Watched() {
         });
         deleteMovie(movie)
     }
-
-    useDisableScroll()
 
     return (
         <div className='watched_container'>

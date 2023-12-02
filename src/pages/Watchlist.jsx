@@ -9,7 +9,6 @@ import { db } from '../config/firebase';
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';
-import useDisableScroll from '../hooks/useDisableScroll';
 
 function WatchList() {
 
@@ -40,8 +39,6 @@ function WatchList() {
         });
         deleteMovie(movie)
     }
-
-    useDisableScroll()
 
     return (
         <div className='watchlist_container'>

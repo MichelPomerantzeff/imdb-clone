@@ -1,5 +1,5 @@
 import '../css/Banner.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
@@ -39,7 +39,7 @@ function Banner({ data, trailer, selectMovie }) {
 
     const handleVideoEnd = () => {
         closeTimeout = setTimeout(() => {
-            setIsPlaying(false)
+            closeTrailer();
         }, 5000)
     }
 
@@ -50,6 +50,11 @@ function Banner({ data, trailer, selectMovie }) {
     const closeTrailer = () => {
         setIsPlaying(false)
     }
+
+    useEffect(() => {
+        document.addEventListener("keydown", closeTrailer)
+        return () => document.removeEventListener("keydown", closeTrailer);
+    }, [])
 
     // TODO: Apply styling here
     if (!data) return <h1 style={{ color: "white", fontSize: "5rem" }}>LOADING ....................</h1>
