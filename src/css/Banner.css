@@ -14,6 +14,7 @@
     width: 68%;
     display: flex;
     align-items: start;
+    cursor: pointer;
 }
 
 .trailer_container {
@@ -75,6 +76,12 @@
     display: flex;
     position: relative;
     padding-bottom: 55px;
+}
+
+
+.poster_slide:hover .banner_play_btn{
+    color: var(--standout-color);
+    border-color: var(--standout-color);
 }
 
 .poster_slide img {
@@ -212,12 +219,6 @@ div.swiper-button-next:hover {
 .up_next_play_btn {
     border: 2px solid #fff;
     padding: 5px;
-}
-
-.up_next_play_btn:hover,
-.banner_play_btn:hover {
-    border-color: var(--standout-color);
-    color: var(--standout-color);
 }
 
 .up_next_btn_disabled {

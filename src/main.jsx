@@ -10,6 +10,10 @@ import watchlistLengthReducer from './features/watchlistLength'
 import watchedLengthReducer from './features/watchedLength'
 import languageToggleReducer from './features/languageToggle'
 import searchBarToggleReducer from './features/searchBarToggle'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+const queryClient = new QueryClient()
 
 const store = configureStore({
   reducer: {
@@ -24,8 +28,11 @@ const store = configureStore({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <App />
+        <ReactQueryDevtools />
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

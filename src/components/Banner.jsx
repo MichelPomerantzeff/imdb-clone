@@ -51,9 +51,15 @@ function Banner({ data, trailer, selectMovie }) {
         setIsPlaying(false)
     }
 
+    const handleKeyEvent = e => {
+        if (e.key === "Escape") {
+            closeTrailer()
+        }
+    }
+
     useEffect(() => {
-        document.addEventListener("keydown", closeTrailer)
-        return () => document.removeEventListener("keydown", closeTrailer);
+        document.addEventListener("keydown", handleKeyEvent)
+        return () => document.removeEventListener("keydown", handleKeyEvent);
     }, [])
 
     // TODO: Apply styling here
@@ -104,6 +110,7 @@ function Banner({ data, trailer, selectMovie }) {
                                     <SwiperSlide
                                         key={index}
                                         className='poster_slide'
+                                        onClick={() => handlePlay(movie)}
                                     >
                                         <div className="big_image">
                                             <img src={POSTER_BASE_URL + movie.backdrop_path} alt="IMAGE" />
@@ -114,7 +121,7 @@ function Banner({ data, trailer, selectMovie }) {
                                                 <img src={POSTER_BASE_URL + movie.poster_path} alt="IMAGE" />
                                             </div>
                                             <div className="poster_movie_description_wrapper">
-                                                <div onClick={() => handlePlay(movie)} className="banner_play_btn">
+                                                <div className="banner_play_btn">
                                                     <PlayArrowRoundedIcon className='play_icon' />
                                                 </div>
                                                 <div className="poster_movie_description">
