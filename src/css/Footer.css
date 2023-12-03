@@ -6,3 +6,9 @@ footer {
     font-size: .8rem;
     border-top: solid 1px var(--secondary-text-color);
 }
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
