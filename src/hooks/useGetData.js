@@ -7,7 +7,7 @@ import { auth, db } from "../config/firebase";
 import { getWatchlistLength } from '../features/watchlistLength';
 import { getWatchedLength } from '../features/watchedLength';
 
-export default function useGetData(name) {
+export default function useGetData() {
 
     const [user] = useAuthState(auth)
     const dispatch = useDispatch()

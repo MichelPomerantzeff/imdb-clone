@@ -7,8 +7,8 @@ import Footer from '../components/Footer';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
-import { getMovies } from '../apis/movies/fetchMovies';
-import { getMovieDetails } from '../apis/movies/fetchMovieDetails';
+import { getData } from '../apis/fetchData';
+import { getDetails } from '../apis/fetchDetails';
 
 function Home() {
 
@@ -22,13 +22,13 @@ function Home() {
 
     const dataQuery = useQuery({
         queryKey: ["movies"],
-        queryFn: () => getMovies("upcoming", language, 1),
+        queryFn: () => getData("movie", "upcoming", language, 1),
     })
 
     const detailsQuery = useQuery({
         queryKey: ["movieDetails", movieId],
         enabled: movieId != null,
-        queryFn: () => getMovieDetails(movieId, language),
+        queryFn: () => getDetails("movie", movieId, language),
     })
 
     // Your logic for finding and setting the trailer
@@ -51,21 +51,25 @@ function Home() {
                     title={language === "en-US" ? "Popular Movies" : 'Filmes Populares'}
                     type={'movie'}
                     query={'popular'}
+                    queryKey={"popularMovies"}
                 />
                 <MovieSlider
                     title={language === "en-US" ? "Popular TV Shows" : 'Series Populares'}
                     type={'tv'}
                     query={'popular'}
+                    queryKey={"popularTvShows"}
                 />
                 <MovieSlider
                     title={language === "en-US" ? "Top Rated TV Shows" : 'Series Mais Bem Votadas'}
                     type={'tv'}
                     query={'top_rated'}
+                    queryKey={"topRatedTvShows"}
                 />
                 <MovieSlider
                     title={language === "en-US" ? "Top Rated Movies" : 'Filmes Mais Bem Votadas'}
                     type={'movie'}
                     query={'top_rated'}
+                    queryKey={"topRatedMovies"}
                 />
 
             </div>

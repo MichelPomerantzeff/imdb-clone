@@ -1,12 +1,10 @@
 import MovieCard from "./MovieCard";
 import '../css/MovieSlider.css'
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import useGetData from "../hooks/useGetData";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import PropTypes from "prop-types";
 
 // Import Swiper
@@ -18,21 +16,19 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { useQuery } from "@tanstack/react-query";
+import { getData } from "../apis/fetchData";
 
-function MovieSlider({type, query, title}) {
+function MovieSlider({ type, query, title, queryKey }) {
 
-    const baseUrl = "https://api.themoviedb.org/3/"
-    const api = import.meta.env.VITE_TMDB_API_KEY
-    const [data, setData] = useState([])
     const language = useSelector((state) => state.languageToggle.value.language);
 
     let disabled = false
 
-    useEffect(() => { //SLIDERS
-        axios.get(`${baseUrl}${type}/${query}?api_key=${api}&language=${language}&page=1`)
-            .then(response => setData(response.data.results,))
-            .catch(err => console.log(err))
-    }, [language])
+    const { data } = useQuery({
+        queryKey: [queryKey],
+        queryFn: () => getData(type, query, language, 1),
+    })
 
     // Costum hooks (fetch data from database)
     const { user, watchlistData, getWatchlistData, watchedData } = useGetData()
@@ -63,10 +59,10 @@ function MovieSlider({type, query, title}) {
                     navigation
                     breakpoints={{
                         1280: { slidesPerView: 6, slidesPerGroup: 6, spaceBetween: 20 },
-                        980: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 20},
-                        680: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 15},
-                        480: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 10},
-                        200: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 10},
+                        980: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 20 },
+                        680: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 15 },
+                        480: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 10 },
+                        200: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 10 },
                     }}
                 >
                     {
@@ -74,12 +70,9 @@ function MovieSlider({type, query, title}) {
                             let movieId = movieCardData.id
 
                             // Check if movie is on watchlist/watched
-                            const isOnWatchlist = watchlistData.find(movie => {
-                                return movieId === movie.movieId
-                            })
-                            const isOnWatched = watchedData.find(movie => {
-                                return movieId === movie.movieId
-                            })
+                            const isOnWatchlist = watchlistData.find(movie => movieId === movie.movieId)
+                            const isOnWatched = watchedData.find(movie => movieId === movie.movieId)
+
                             isOnWatchlist || isOnWatched ? disabled = true : disabled = false
 
                             return (
@@ -130,5 +123,6 @@ export default MovieSlider;
 MovieSlider.propTypes = {
     type: PropTypes.string,
     query: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+    queryKey: PropTypes.string
 }
