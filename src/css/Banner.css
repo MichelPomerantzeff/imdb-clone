@@ -3,11 +3,10 @@
 }
 
 .banner_wrapper {
-    max-width: 1280px;
-    margin: 0 auto;
+    max-width: 1200px;
+    margin: 8px auto;
     display: flex;
     gap: 10px;
-    padding: 10px 0;
 }
 
 .poster_carousel {
@@ -79,7 +78,7 @@
 }
 
 
-.poster_slide:hover .banner_play_btn{
+.poster_slide:hover .banner_play_btn {
     color: var(--standout-color);
     border-color: var(--standout-color);
 }
@@ -175,6 +174,7 @@ div.swiper-button-next:hover {
     display: flex;
     align-items: center;
     padding: 10px;
+    cursor: pointer;
 }
 
 .up_next_poster {
@@ -204,7 +204,6 @@ div.swiper-button-next:hover {
     align-items: center;
     padding: 5px;
     border-radius: 50%;
-    cursor: pointer;
 }
 
 .banner_play_btn {
@@ -221,7 +220,12 @@ div.swiper-button-next:hover {
     padding: 5px;
 }
 
-.up_next_btn_disabled {
+.up_next_card:hover .play_btn_active {
+    color: var(--standout-color);
+    border-color: var(--standout-color);
+}
+
+.play_btn_disabled {
     pointer-events: none;
     color: #474747;
     border-color: #474747;
@@ -238,14 +242,22 @@ div.swiper-button-next:hover {
     color: var(--secondary-text-color);
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1200px) {
 
     .banner_wrapper {
         max-width: 90vw;
     }
 
     .small_image {
-        width: 140px;
+        width: 130px;
+    }
+
+        .poster_movie_description_wrapper {
+        margin-left: 170px;
+    }
+
+    .poster_movie_description h1 {
+        font-size: 1.5rem;
     }
 }
 
@@ -257,39 +269,13 @@ div.swiper-button-next:hover {
     .poster_carousel {
         width: 100%;
     }
-
-    .small_image {
-        bottom: 15px;
-        left: 15px;
-        width: 150px;
-    }
-
 }
 
-@media (max-width: 800px) {
+@media (max-width: 680px) {
 
     .banner_wrapper {
-        max-width: 92vw;
+        max-width: 95vw;
     }
-
-    .small_image {
-        width: 120px;
-    }
-
-    .poster_movie_description_wrapper {
-        margin-left: 160px;
-    }
-
-    .poster_movie_description h1 {
-        font-size: 1.5rem;
-    }
-
-    .poster_movie_description span {
-        font-size: .8rem;
-    }
-}
-
-@media (max-width: 600px) {
 
     div.swiper-button-prev,
     div.swiper-button-next {

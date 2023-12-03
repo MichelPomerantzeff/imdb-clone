@@ -149,7 +149,7 @@ function Banner({ data, trailer, selectMovie }) {
                             card == data.length ? card = 0 : card == data.length + 1 ? card = 1 : card == data.length + 2 ? card = 2 : card;
                             return (
                                 <div key={index}>
-                                    <div className="up_next_card">
+                                    <div onClick={() => handlePlay(data[card])} className="up_next_card">
                                         <div className="up_next_poster">
                                             {
                                                 data.length > 0 &&
@@ -157,7 +157,7 @@ function Banner({ data, trailer, selectMovie }) {
                                             }
                                         </div>
                                         <div className="up_next_card_details">
-                                            <div onClick={() => handlePlay(data[card])} className={`up_next_play_btn ${isPlaying && "up_next_btn_disabled"}`}>
+                                            <div className={`up_next_play_btn ${isPlaying ? "play_btn_disabled" : "play_btn_active"}`}>
                                                 <PlayArrowRoundedIcon />
                                             </div>
                                             <h1 className="up_next_card_title">{data[card]?.title}</h1>

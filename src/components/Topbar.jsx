@@ -4,7 +4,6 @@ import '../css/Topbar.css';
 import uk from "../icons/uk.png";
 import brazil from "../icons/brazil.png";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -55,7 +54,6 @@ function Topbar() {
                     <div onClick={() => navigate("/")} className='topbar_left_section'>
                         <div className="logo">
                             <span>Movie App</span>
-                            <LiveTvRoundedIcon className='tv_icon' />
                         </div>
                     </div>
                 }

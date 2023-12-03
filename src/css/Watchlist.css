@@ -12,7 +12,7 @@
 }
 
 .watchlist_wrapper {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -35,7 +35,7 @@
     border-radius: 10px;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1200px) {
     .watchlist_wrapper {
         max-width: 980px;
     }
@@ -51,6 +51,7 @@
 
     .watchlist_wrapper {
         max-width: 95vw;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 
     .empty_list {
