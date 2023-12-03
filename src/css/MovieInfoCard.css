@@ -11,7 +11,7 @@
 
 .movie_info_card_wrapper {
     position: relative;
-    background-color: var(--third-background-color);
+    background-color: var(--third-bg-color);
     border-radius: 5px;
     display: flex;
     flex-direction: column;

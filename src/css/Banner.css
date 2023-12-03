@@ -168,7 +168,7 @@ div.swiper-button-next:hover {
 }
 
 .up_next_content {
-    background: linear-gradient(to top, var(--bg-color), var(--secondary-background-color));
+    background: linear-gradient(to top, var(--bg-color), var(--second-bg-color));
 }
 
 .up_next_card {

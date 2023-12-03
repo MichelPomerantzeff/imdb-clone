@@ -21,7 +21,7 @@
 }
 
 .movie_card_container{
-    background-color: var(--secondary-background-color);
+    background-color: var(--second-bg-color);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }

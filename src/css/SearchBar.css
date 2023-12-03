@@ -24,10 +24,10 @@
     border: none;
     outline: none;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 500;
     width: 100%;
-    padding: 7px 10px;
-    background-color: var(--secondary-background-color);
+    padding: 8px 5px;
+    background-color: var(--second-bg-color);
     color: #ffffff;
 }
 
@@ -43,7 +43,7 @@
     font-size: 1rem;
     position: absolute;
     right: 0;
-    color: var(--secondary-text-color);
+    color: var(--text-on-dark-bg);
     cursor: pointer;
     display: none;
 }
@@ -62,7 +62,7 @@
 
 
 .search_bar_dropdown_box{
-    background: var(--third-background-color);
+    background: var(--third-bg-color);
     display: flex;
     flex-direction: column;
     position: absolute;
