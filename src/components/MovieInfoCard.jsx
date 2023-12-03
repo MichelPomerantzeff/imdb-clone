@@ -20,7 +20,7 @@ function MovieInfoCard() {
     const movieId = Number.isInteger(movieInfo.data.id) ? movieInfo.data.id : movieInfo.data.movieId;
 
     const { data } = useQuery({
-        queryKey: ["movieDetails", movieId],
+        queryKey: ["movieDetails", movieId, language],
         enabled: movieId != null,
         queryFn: () => getDetails(movieInfo.type, movieId, language),
     })
@@ -28,7 +28,7 @@ function MovieInfoCard() {
     const image = `${IMAGE_BASE_URL}/${data?.poster_path}`;
     const title = data?.title || data?.name;
     const releaseDate = data?.first_air_date?.slice(0, 4) || data?.release_date?.slice(0, 4);
-    const runtime = data?.runtime || data?.episode_run_time[0];
+    const runtime = data?.runtime || (data?.episode_run_time ? data?.episode_run_time[0] : '');
     const genres = data?.genres;
     const rating = data?.vote_average.toFixed(1);
     const plot = data?.overview;

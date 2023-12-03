@@ -26,7 +26,7 @@ function MovieSlider({ type, query, title, queryKey }) {
     let disabled = false
 
     const { data } = useQuery({
-        queryKey: ["sliderData", queryKey],
+        queryKey: ["sliderData", queryKey, language],
         queryFn: () => getData(type, query, language, 1),
     })
 
