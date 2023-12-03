@@ -9,8 +9,9 @@ import PropTypes from "prop-types";
 
 function MovieCard({ type, data }) {
 
-    const dispatch = useDispatch()
-    const image = data.poster_path ? `${'https://www.themoviedb.org/t/p/w220_and_h330_face'}${data.poster_path}` : movieCover
+    const IMAGE_BASE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face';
+    const dispatch = useDispatch();
+    const image = `${IMAGE_BASE_URL}/${data.poster_path}`;
     const rating = data.vote_average?.toFixed(1)
     const title = data.name || data.title
 
@@ -21,7 +22,7 @@ function MovieCard({ type, data }) {
                     dispatch(displayMovieInfo({ data: data, type: type, display: true }));
                 }}
                 className="movie_card_image">
-                <img src={image} alt='' />
+                <img src={image || movieCover} alt='' />
             </div>
 
             <p
@@ -44,9 +45,6 @@ function MovieCard({ type, data }) {
 
                 <div title='info' className='movie_info_button'>
                     <div
-                        onClick={() => {
-                            dispatch(displayMovieInfo({ data: data, type: type || data.type, display: true }));
-                        }}
                         className='movie_info_background'>
                         <InfoOutlinedIcon />
                     </div>
