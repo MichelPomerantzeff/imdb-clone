@@ -4,7 +4,7 @@ import Banner from '../components/Banner';
 import MovieSlider from '../components/MovieSlider';
 import MovieInfoCard from '../components/MovieInfoCard';
 import Footer from '../components/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import { getData } from '../apis/fetchData';
@@ -30,6 +30,13 @@ function Home() {
         enabled: movieId != null,
         queryFn: () => getDetails("movie", movieId, language),
     })
+
+    useEffect(() => {
+        dataQuery.refetch()
+        if (movieId != null) {
+            detailsQuery.refetch()
+        }
+    }, [language])
 
     // Your logic for finding and setting the trailer
     const videos = detailsQuery.data?.videos.results || [];

@@ -14,8 +14,6 @@ function MovieCard({ type, data }) {
     const rating = data.vote_average?.toFixed(1)
     const title = data.name || data.title
 
-    // console.log(data)
-
     return (
         <div className="movie_card">
             <div

@@ -29,8 +29,6 @@ function Watched() {
         getWatchlistData()
     }
 
-    console.log(watchedData)
-
     async function addToWatchlist(movie) {
 
         await setDoc(doc(db, "users", user.email, "watchlist", movie.title || movie.name),
