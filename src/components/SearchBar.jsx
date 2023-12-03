@@ -4,20 +4,19 @@ import StarIcon from '@mui/icons-material/Star';
 import SearchIcon from '@mui/icons-material/Search';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
-import axios from 'axios';
 import { displayMovieInfo } from '../features/movieInfo';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import useGetData from '../hooks/useGetData';
 import { toggleSearchMode } from '../features/searchBarToggle'
+import { useQuery } from '@tanstack/react-query';
+import { getSearchData } from '../apis/fetchMulti';
+import useDebounce from '../hooks/useDebounce';
 
 function SearchBar() {
 
-    const baseUrl = "https://api.themoviedb.org/3/";
-    const api = import.meta.env.VITE_TMDB_API_KEY;
-    const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
     const language = useSelector((state) => state.languageToggle.value.language);
@@ -27,12 +26,14 @@ function SearchBar() {
 
     const dispatch = useDispatch();
 
-    // Fetch API on movie searching
-    useEffect(() => {
-        axios.get(`${baseUrl}search/multi?api_key=${api}&language=${language}&page=1&query=${search}`)
-            .then(response => setData(response.data.results))
-            .catch(err => console.log(err))
-    }, [search, language])
+    const debouncedSearch = useDebounce(search, 800);
+
+    const { data } = useQuery({
+        queryKey: ["searchedMovies", language, debouncedSearch],
+        enabled: search != '',
+        queryFn: () => getSearchData("search/multi", language, 1, search),
+    })
+
 
     async function addToWatchlist(data, type) {
         await setDoc(doc(db, "users", user.email, "watchlist", data.title || data.name), {
@@ -88,7 +89,7 @@ function SearchBar() {
                 search && isSearchBarOpen &&
                 <div className="search_bar_dropdown_box">
                     {
-                        data.map((movie, index) => {
+                        data?.map((movie, index) => {
 
                             let movieId = movie.id
 

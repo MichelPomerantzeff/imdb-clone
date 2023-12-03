@@ -6,13 +6,14 @@ import brazil from "../icons/brazil.png";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase"
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../features/languageToggle';
 import useGetData from '../hooks/useGetData';
+import useEventListener from '../hooks/useEventListener';
 
 
 function Topbar() {
@@ -38,14 +39,11 @@ function Topbar() {
     }
 
     // Hide element if user clicks outside
-    useEffect(() => {
-        const isOutside = e => {
-            !userAccountRef.current?.contains(e.target) && setIsUserAccountOpen(false)
-            !languageRef.current.contains(e.target) && setIsLanguageOpen(false)
-        }
-        document.addEventListener("click", isOutside)
-        return () => document.removeEventListener("click", isOutside)
-    }, [])
+    const isOutside = e => {
+        !userAccountRef.current?.contains(e.target) && setIsUserAccountOpen(false)
+        !languageRef.current.contains(e.target) && setIsLanguageOpen(false)
+    }
+    useEventListener("click", isOutside)
 
     return (
         <nav>

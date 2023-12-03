@@ -1,5 +1,5 @@
 import '../css/Banner.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import YouTube from 'react-youtube';
 import { Divider } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import useEventListener from '../hooks/useEventListener';
 
 function Banner({ data, trailer, selectMovie }) {
 
@@ -57,10 +58,7 @@ function Banner({ data, trailer, selectMovie }) {
         }
     }
 
-    useEffect(() => {
-        document.addEventListener("keydown", handleKeyEvent)
-        return () => document.removeEventListener("keydown", handleKeyEvent);
-    }, [])
+    useEventListener("keydown", handleKeyEvent)
 
     // TODO: Apply styling here
     if (!data) return <h1 style={{ color: "white", fontSize: "5rem" }}>LOADING ....................</h1>

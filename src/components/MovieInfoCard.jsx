@@ -4,10 +4,11 @@ import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeMovieInfo } from '../features/movieInfo'
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import useDisableScroll from '../hooks/useDisableScroll';
 import { useQuery } from '@tanstack/react-query';
 import { getDetails } from '../apis/fetchDetails';
+import useEventListener from '../hooks/useEventListener';
 
 function MovieInfoCard() {
 
@@ -35,26 +36,19 @@ function MovieInfoCard() {
     const hour = Math.floor(runtime / 60) > 0 ? `${Math.floor(runtime / 60)}h` : '';
     const min = Math.floor(runtime % 60) > 0 ? `${Math.floor(runtime % 60)}min` : '';
 
-    useEffect(() => {
-        const handleClickEvent = e => {
-            if (ref.current && e.target === ref.current) {
-                dispatch(closeMovieInfo({ display: false, scroll: true }));
-            }
+    const handleClickEvent = e => {
+        if (ref.current && e.target === ref.current) {
+            dispatch(closeMovieInfo({ display: false, scroll: true }));
         }
+    }
+    useEventListener("click", handleClickEvent)
 
-        const handleKeyEvent = e => {
-            if (e.key === "Escape") {
-                dispatch(closeMovieInfo({ display: false, scroll: true }));
-            }
+    const handleKeyEvent = e => {
+        if (e.key === "Escape") {
+            dispatch(closeMovieInfo({ display: false, scroll: true }));
         }
-
-        document.addEventListener("click", handleClickEvent)
-        document.addEventListener("keydown", handleKeyEvent)
-        return () => {
-            document.removeEventListener("click", handleClickEvent);
-            document.removeEventListener("keydown", handleKeyEvent);
-        };
-    }, [])
+    }
+    useEventListener("keydown", handleKeyEvent)
 
     useDisableScroll();
 
