@@ -20,7 +20,7 @@ function MovieInfoCard() {
     const movieId = Number.isInteger(movieInfo.data.id) ? movieInfo.data.id : movieInfo.data.movieId;
 
     const { data } = useQuery({
-        queryKey: ["movieInfo", movieId],
+        queryKey: ["movieDetails", movieId],
         enabled: movieId != null,
         queryFn: () => getDetails(movieInfo.type, movieId, language),
     })
