@@ -21,10 +21,9 @@ nav {
     display: flex;
     align-items: center;
     border-radius: 5px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 900;
-    padding: 6px 7px;
-    gap: 5px;
+    padding: 6px;
     cursor: pointer;
 }
 
@@ -35,8 +34,8 @@ nav {
 .topbar_right_section {
     display: flex;
     align-items: center;
-    font-weight: 600;
-    font-size: .9rem;
+    font-weight: 500;
+    font-size: .8rem;
 }
 
 .lists {
@@ -164,10 +163,6 @@ nav {
 }
 
 @media (max-width: 680px) {
-
-    .logo {
-        font-size: 1rem;
-    }
 
     .loggedin {
         padding: 5.7px 5px 5.7px 8px;

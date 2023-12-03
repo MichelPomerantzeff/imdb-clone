@@ -4,20 +4,19 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
-    flex: 1;
     position: relative;
 }
 
 .search_bar_input_desktop {
+    display: flex;
     border-radius: 5px;
     border: none;
     outline: none;
     background: none;
-    font-size: 1rem;
-    font-weight: 300;
+    font-size: .8rem;
+    font-weight: 400;
     width: 100%;
     padding: 7px 10px;
-    display: flex;
 }
 
 .search_bar_input_mobile {
