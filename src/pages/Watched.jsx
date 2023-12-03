@@ -1,8 +1,8 @@
-import Footer from '../components/Footer';
+import '../css/Watched.css';
 import Topbar from '../components/Topbar';
 import MovieInfoCard from '../components/MovieInfoCard';
 import MovieCard from '../components/MovieCard';
-import '../css/Watched.css';
+import Footer from '../components/Footer';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import UndoRoundedIcon from '@mui/icons-material/UndoRounded';
 import { db } from '../config/firebase';
@@ -29,15 +29,13 @@ function Watched() {
         getWatchlistData()
     }
 
+    console.log(watchedData)
+
     async function addToWatchlist(movie) {
 
-        await setDoc(doc(db, "users", user.email, "watchlist", movie.id), {
-            movieId: movie.movieId,
-            name: movie.name,
-            vote_average: movie.vote_average,
-            poster_path: movie.poster_path,
-            type: movie.type,
-        });
+        await setDoc(doc(db, "users", user.email, "watchlist", movie.title || movie.name),
+            { ...movie }
+        );
         deleteMovie(movie)
     }
 
@@ -45,7 +43,7 @@ function Watched() {
         <div className='watched_container'>
             <Topbar />
 
-            {display && <MovieInfoCard />}
+            {display ? <MovieInfoCard /> : null}
 
             <h1 className='header'>
                 {language === "en-US" ? 'WATCHED' : 'LISTA DE ASSISTIDOS'}
@@ -57,7 +55,7 @@ function Watched() {
                         watchedData.map(movie => {
                             return (
                                 <div key={movie.movieId} className='movie_card_container'>
-                                    <MovieCard data={movie} />
+                                    <MovieCard type={movie.type} data={movie} />
                                     <div className='buttons'>
                                         <button onClick={(() => addToWatchlist(movie))} className="add_movie">
                                             <div><UndoRoundedIcon />{language === "en-US" ? 'Watchlist' : 'Assistir'}</div>

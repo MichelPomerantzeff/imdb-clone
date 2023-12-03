@@ -36,18 +36,13 @@ function MovieSlider({ type, query, title, queryKey }) {
     // Add Movie to Watchlist
     async function addToWatchlist(data, type) {
         try {
-            await setDoc(doc(db, "users", user.email, "watchlist", data.title || data.name), {
-                movieId: data.id,
-                name: data.title || data.name,
-                vote_average: data.vote_average,
-                poster_path: data.poster_path,
-                type: type,
-            });
+            await setDoc(doc(db, "users", user.email, "watchlist", data.title || data.name),
+                { ...data, type, movieId: data.id }
+            );
         } catch (error) {
             console.log("Error adding document to watchlist:", error)
         }
         getWatchlistData()
-
     }
 
     return (

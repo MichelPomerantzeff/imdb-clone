@@ -12,21 +12,18 @@
 }
 
 .watchlist_wrapper {
-    display: flex;
-    color: var(--text-on-dark-bg);
-    gap: 20px;
     max-width: 1280px;
-    flex-wrap: wrap;
     margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 1rem;
+    color: var(--text-on-dark-bg);
 }
 
 .movie_card_container{
     background-color: var(--secondary-background-color);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    width: 200px;
 }
 
 .empty_list {
@@ -40,7 +37,6 @@
 
 @media (max-width: 1280px) {
     .watchlist_wrapper {
-        gap: 10px;
         max-width: 980px;
     }
 }
@@ -48,22 +44,18 @@
 @media (max-width: 980px) {
     .watchlist_wrapper {
         max-width: 90vw;
-        justify-content: center;
-    }
-
-    .movie_card_container{
-        width: 160px;
     }
 }
 
 @media (max-width: 680px) {
+
+    .watchlist_wrapper {
+        max-width: 95vw;
+    }
+
     .empty_list {
         padding: 20px;
         font-size: 1.5rem;
         border-radius: 5px;
-    }
-
-    .movie_card_container{
-        width: 140px;
     }
 }

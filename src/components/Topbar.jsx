@@ -49,10 +49,7 @@ function Topbar() {
 
     return (
         <nav>
-            {
-                display &&
-                <MovieInfoCard />
-            }
+            {display ? <MovieInfoCard /> : null}
             <div className='topbar_container'>
 
                 {

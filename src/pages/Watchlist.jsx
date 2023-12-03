@@ -1,8 +1,8 @@
-import Footer from '../components/Footer';
+import '../css/Watchlist.css';
 import Topbar from '../components/Topbar';
 import MovieInfoCard from '../components/MovieInfoCard';
 import MovieCard from '../components/MovieCard';
-import '../css/Watchlist.css';
+import Footer from '../components/Footer';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
 import { db } from '../config/firebase';
@@ -27,16 +27,14 @@ function WatchList() {
         getWatchedData()
     }
 
+    console.log(watchlistData)
+
 
     async function addToWatched(movie) {
 
-        await setDoc(doc(db, "users", user.email, "watched", movie.id), {
-            movieId: movie.movieId,
-            name: movie.name,
-            vote_average: movie.vote_average,
-            poster_path: movie.poster_path,
-            type: movie.type,
-        });
+        await setDoc(doc(db, "users", user.email, "watched", movie.title || movie.name),
+            { ...movie }
+        );
         deleteMovie(movie)
     }
 
@@ -44,7 +42,7 @@ function WatchList() {
         <div className='watchlist_container'>
             <Topbar />
 
-            {display && <MovieInfoCard />}
+            {display ? <MovieInfoCard /> : null}
 
             <h1 className='header'>
                 {language === "en-US" ? 'WATCHLIST' : 'LISTA DE FAVORITOS'}
@@ -56,7 +54,7 @@ function WatchList() {
                         watchlistData.map(movie => {
                             return (
                                 <div key={movie.movieId} className='movie_card_container'>
-                                    <MovieCard data={movie} />
+                                    <MovieCard type={movie.type} data={movie} />
                                     <div className='buttons'>
                                         <button onClick={(() => addToWatched(movie))} className="add_movie">
                                             <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
