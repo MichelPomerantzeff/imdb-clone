@@ -82,7 +82,7 @@ function Topbar() {
                             user ?
                                 <div onClick={() => setIsUserAccountOpen(prev => !prev)} ref={userAccountRef} className="loggedin">
                                     <AccountCircleIcon className='userIcon' />
-                                    <span>{user && user.email} <ArrowDropDownRoundedIcon /></span>
+                                    <span>{user && user.email} <ArrowDropDownRoundedIcon className={`${isUserAccountOpen ? "dd_open" : ""}`}/></span>
 
 
                                     {
@@ -125,7 +125,7 @@ function Topbar() {
                         <div onClick={() => setIsLanguageOpen(prev => !prev)} ref={languageRef} className="language">
                             {language === "pt-BR" && <img src={brazil} alt="" />}
                             {language === "en-US" && <img src={uk} alt="" />}
-                            <ArrowDropDownRoundedIcon />
+                            <ArrowDropDownRoundedIcon className={`${isLanguageOpen ? "dd_open" : ""}`}/>
 
                             {
                                 isLanguageOpen &&

@@ -94,6 +94,10 @@ nav {
     position: relative;
 }
 
+.dd_open {
+    transform: rotate(180deg);
+}
+
 .language {
     position: relative;
     display: flex;
