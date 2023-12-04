@@ -4,48 +4,72 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 import { auth, db } from "../config/firebase";
 
-import { getWatchlistLength } from '../features/watchlistLength';
-import { getWatchedLength } from '../features/watchedLength';
+import { getWatchlistLength } from "../features/watchlistLength";
+import { getWatchedLength } from "../features/watchedLength";
 
 export default function useGetData() {
+  const [user] = useAuthState(auth);
+  const dispatch = useDispatch();
 
-    const [user] = useAuthState(auth)
-    const dispatch = useDispatch()
+  // Watchlist Data
+  const [watchlistData, setWatchlistData] = useState([]);
+  const [watchlistDataLoading, setWatchlistDataLoading] = useState(false);
 
-    // Watchlist Data
-    const [watchlistData, setWatchlistData] = useState([])
-
-    const getWatchlistData = async () => {
-        if (user) {
-            const docRef = doc(db, "users", user.email);
-            const colRef = collection(docRef, 'watchlist')
-            const data = await getDocs(colRef);
-            setWatchlistData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-        }
+  const getWatchlistData = async () => {
+    try {
+      if (user) {
+        setWatchlistDataLoading(true);
+        const docRef = doc(db, "users", user.email);
+        const colRef = collection(docRef, "watchlist");
+        const data = await getDocs(colRef);
+        setWatchlistData(
+          data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setWatchlistDataLoading(false);
     }
+  };
 
-    // Watched Data
-    const [watchedData, setWatchedData] = useState([])
+  // Watched Data
+  const [watchedData, setWatchedData] = useState([]);
+  const [watchedDataLoading, setWatchedDataLoading] = useState(false);
 
-    const getWatchedData = async () => {
-        if (user) {
-            const docRef = doc(db, "users", user.email);
-            const colRef = collection(docRef, 'watched')
-            const data = await getDocs(colRef);
-            setWatchedData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-        }
+  const getWatchedData = async () => {
+    try {
+      if (user) {
+        setWatchedDataLoading(true);
+        const docRef = doc(db, "users", user.email);
+        const colRef = collection(docRef, "watched");
+        const data = await getDocs(colRef);
+        setWatchedData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setWatchedDataLoading(false);
     }
+  };
 
-    useEffect(() => {
-        dispatch(getWatchlistLength({ length: watchlistData.length }));
-        dispatch(getWatchedLength({ length: watchedData.length }));
-    }, [watchlistData, watchedData])
+  useEffect(() => {
+    dispatch(getWatchlistLength({ length: watchlistData.length }));
+    dispatch(getWatchedLength({ length: watchedData.length }));
+  }, [watchlistData, watchedData]);
 
-    useEffect(() => {
-        getWatchlistData()
-        getWatchedData()
-    }, [user])
+  useEffect(() => {
+    getWatchlistData();
+    getWatchedData();
+  }, [user]);
 
-
-    return { user, watchlistData, getWatchlistData, watchedData, getWatchedData }
+  return {
+    user,
+    watchlistData,
+    watchlistDataLoading,
+    getWatchlistData,
+    watchedData,
+    watchedDataLoading,
+    getWatchedData,
+  };
 }

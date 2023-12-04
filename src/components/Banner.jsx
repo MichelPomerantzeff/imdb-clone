@@ -18,6 +18,7 @@ import YouTube from 'react-youtube';
 import { Divider } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import useEventListener from '../hooks/useEventListener';
+import LoadingWheel from './LoadingWheel';
 
 function Banner({ data, trailer, selectMovie }) {
 
@@ -61,7 +62,7 @@ function Banner({ data, trailer, selectMovie }) {
     useEventListener("keydown", handleKeyEvent)
 
     // TODO: Apply styling here
-    if (!data) return <h1 style={{ color: "white", fontSize: "5rem" }}>LOADING ....................</h1>
+    if (!data) return <h1 style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></h1>
 
     return (
         <div className="banner_container">

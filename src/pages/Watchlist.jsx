@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';
 import FilterButtons from '../components/FilterButtons';
 import { useState } from 'react';
+import LoadingWheel from '../components/LoadingWheel';
 
 function WatchList() {
 
@@ -19,7 +20,7 @@ function WatchList() {
     const display = useSelector((state) => state.movieInfo.value.display);
 
     // Costum hooks (fetch data from database)
-    const { user, watchlistData, getWatchlistData, getWatchedData } = useGetData();
+    const { user, watchlistData, watchlistDataLoading, getWatchlistData, getWatchedData } = useGetData();
 
     const [filteredContent, setFilteredContent] = useState(null);
 
@@ -52,7 +53,6 @@ function WatchList() {
         watchlistData ? console.log(watchlistData) : ""
     }
 
-
     return (
         <div className='watchlist_container'>
             <Topbar />
@@ -66,28 +66,31 @@ function WatchList() {
             <FilterButtons getFilteredContent={getFilteredContent} />
 
             {
-                watchlistData.length > 0 ?
-                    <div className='watchlist_wrapper'>
-                        {
-                            (filteredContent.length > 0 ? filteredContent : watchlistData ?? []).map(movie => {
-                                return (
-                                    <div key={movie.movieId} className='movie_card_container'>
-                                        <MovieCard type={movie.type} data={movie} />
-                                        <div className='buttons'>
-                                            <button onClick={(() => addToWatched(movie))} className="add_movie">
-                                                <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
-                                            </button>
-                                            <button onClick={(() => deleteMovie(movie))} className="delete_movie">
-                                                <span><DeleteRoundedIcon /></span>
-                                            </button>
+
+                watchlistDataLoading ? <h1 style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></h1> :
+
+                    watchlistData.length > 0 ?
+                        <div className='watchlist_wrapper'>
+                            {
+                                (filteredContent.length > 0 ? filteredContent : watchlistData ?? []).map(movie => {
+                                    return (
+                                        <div key={movie.movieId} className='movie_card_container'>
+                                            <MovieCard type={movie.type} data={movie} />
+                                            <div className='buttons'>
+                                                <button onClick={(() => addToWatched(movie))} className="add_movie">
+                                                    <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
+                                                </button>
+                                                <button onClick={(() => deleteMovie(movie))} className="delete_movie">
+                                                    <span><DeleteRoundedIcon /></span>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    :
-                    <div className='empty_list'>{language === "en-US" ? 'This list is empty' : 'Lista vazia'}</div>
+                                    )
+                                })
+                            }
+                        </div>
+                        :
+                        <div className='empty_list'>{language === "en-US" ? 'This list is empty' : 'Lista vazia'}</div>
             }
             <Footer />
         </div>

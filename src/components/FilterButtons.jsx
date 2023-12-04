@@ -24,14 +24,14 @@ export default function FilterButtons({ getFilteredContent }) {
                 value="Movies"
                 onClick={handleFilterContent}
                 sx={{
-                    border: "solid 2px #fff",
+                    border: "solid 1px #fff",
                     py: 1.2, px: 2.5,
-                    background: selectedContent === "Movies" ? "#ffffff40" : "",
+                    background: selectedContent === "Movies" ? "#ffffff25" : "",
                     color: "#fff",
                     fontWeight: selectedContent === "Movies" ? "600" : "",
                     '&:hover': {
-                        border: "solid 2px #fff",
-                        background: selectedContent === "Movies" ? "#ffffff40" : "#ffffff25",
+                        border: "solid 1px #fff",
+                        background: selectedContent === "Movies" ? "#ffffff25" : "#ffffff25",
                     },
                 }}
             >
@@ -41,14 +41,14 @@ export default function FilterButtons({ getFilteredContent }) {
                 value="All"
                 onClick={handleFilterContent}
                 sx={{
-                    border: "solid 2px #fff",
+                    border: "solid 1px #fff",
                     py: 1.2, px: 2.5,
-                    background: selectedContent === "All" ? "#ffffff40" : "",
+                    background: selectedContent === "All" ? "#ffffff25" : "",
                     color: "#fff",
                     fontWeight: selectedContent === "All" ? "600" : "",
                     '&:hover': {
-                        border: "solid 2px #fff",
-                        background: selectedContent === "All" ? "#ffffff40" : "#ffffff25",
+                        border: "solid 1px #fff",
+                        background: selectedContent === "All" ? "#ffffff25" : "#ffffff25",
                     },
                 }}
             >
@@ -58,14 +58,14 @@ export default function FilterButtons({ getFilteredContent }) {
                 value="Tv Shows"
                 onClick={handleFilterContent}
                 sx={{
-                    border: "solid 2px #fff",
+                    border: "solid 1px #fff",
                     py: 1.2, px: 2.5,
-                    background: selectedContent === "Tv Shows" ? "#ffffff40" : "",
+                    background: selectedContent === "Tv Shows" ? "#ffffff25" : "",
                     color: "#fff",
                     fontWeight: selectedContent === "Tv Shows" ? "600" : "",
                     '&:hover': {
-                        border: "solid 2px #fff",
-                        background: selectedContent === "Tv Shows" ? "#ffffff40" : "#ffffff25",
+                        border: "solid 1px #fff",
+                        background: selectedContent === "Tv Shows" ? "#ffffff25" : "#ffffff25",
                     },
                 }}
             >
