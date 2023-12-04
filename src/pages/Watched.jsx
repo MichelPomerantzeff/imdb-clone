@@ -9,6 +9,8 @@ import { db } from '../config/firebase';
 import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';
+import FilterButtons from '../components/FilterButtons';
+import { useState } from 'react';
 
 function Watched() {
 
@@ -20,6 +22,7 @@ function Watched() {
     // Costum hooks (fetch data from database)
     const { user, getWatchlistData, watchedData, getWatchedData } = useGetData();
 
+    const [filteredContent, setFilteredContent] = useState(watchedData);
 
     // Delete movie from watched
     const deleteMovie = async (movie) => {
@@ -37,6 +40,18 @@ function Watched() {
         deleteMovie(movie)
     }
 
+    const getFilteredContent = (filter) => {
+        if (filter === "Movies") {
+            const filteredData = watchedData.filter(item => item.type === "movie")
+            setFilteredContent(filteredData)
+        } else if (filter === "Tv Shows") {
+            const filteredData = watchedData.filter(item => item.type === "tv")
+            setFilteredContent(filteredData)
+        } else if (filter === "All") {
+            setFilteredContent(watchedData)
+        }
+    }
+
     return (
         <div className='watched_container'>
             <Topbar />
@@ -47,11 +62,13 @@ function Watched() {
                 {language === "en-US" ? 'WATCHED' : 'LISTA DE ASSISTIDOS'}
             </h1>
 
+            <FilterButtons getFilteredContent={getFilteredContent} />
+
             {
                 watchedData.length > 0 ?
                     <div className='watched_wrapper'>
                         {
-                            watchedData.map(movie => {
+                            (filteredContent.length > 0 ? filteredContent : watchedData ?? []).map(movie => {
                                 return (
                                     <div key={movie.movieId} className='movie_card_container'>
                                         <MovieCard type={movie.type} data={movie} />

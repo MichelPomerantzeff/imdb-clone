@@ -9,6 +9,8 @@ import { db } from '../config/firebase';
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';
+import FilterButtons from '../components/FilterButtons';
+import { useState } from 'react';
 
 function WatchList() {
 
@@ -18,6 +20,8 @@ function WatchList() {
 
     // Costum hooks (fetch data from database)
     const { user, watchlistData, getWatchlistData, getWatchedData } = useGetData();
+
+    const [filteredContent, setFilteredContent] = useState(null);
 
     // Delete movie from watchlist
     const deleteMovie = async (movie) => {
@@ -35,6 +39,20 @@ function WatchList() {
         deleteMovie(movie)
     }
 
+    const getFilteredContent = (filter) => {
+        if (filter === "Movies") {
+            const filteredData = watchlistData.filter(item => item.type === "movie")
+            setFilteredContent(filteredData)
+        } else if (filter === "Tv Shows") {
+            const filteredData = watchlistData.filter(item => item.type === "tv")
+            setFilteredContent(filteredData)
+        } else if (filter === "All") {
+            setFilteredContent([...watchlistData])
+        }
+        watchlistData ? console.log(watchlistData) : ""
+    }
+
+
     return (
         <div className='watchlist_container'>
             <Topbar />
@@ -45,11 +63,13 @@ function WatchList() {
                 {language === "en-US" ? 'WATCHLIST' : 'LISTA DE FAVORITOS'}
             </h1>
 
+            <FilterButtons getFilteredContent={getFilteredContent} />
+
             {
                 watchlistData.length > 0 ?
                     <div className='watchlist_wrapper'>
                         {
-                            watchlistData.map(movie => {
+                            (filteredContent.length > 0 ? filteredContent : watchlistData ?? []).map(movie => {
                                 return (
                                     <div key={movie.movieId} className='movie_card_container'>
                                         <MovieCard type={movie.type} data={movie} />
