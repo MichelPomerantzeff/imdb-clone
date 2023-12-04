@@ -18,6 +18,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { useQuery } from "@tanstack/react-query";
 import { getData } from "../apis/fetchData";
+import LoadingWheel from "./LoadingWheel";
 
 function MovieSlider({ type, query, title, queryKey }) {
 
@@ -44,6 +45,8 @@ function MovieSlider({ type, query, title, queryKey }) {
         }
         getWatchlistData()
     }
+
+    if (!data) return <h1 style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></h1>
 
     return (
         <div className="movie_slider_container">

@@ -6,7 +6,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 8px;
+    padding: 8px 0;
     max-width: 1200px;
     margin: auto;
     gap: 10px;
@@ -18,10 +18,10 @@ nav {
 
 .logo {
     background-color: var(--standout-color);
+    color: #000000;
     display: flex;
     align-items: center;
     border-radius: 5px;
-    font-size: 1rem;
     font-weight: 900;
     padding: 6px;
     cursor: pointer;
@@ -35,7 +35,7 @@ nav {
     display: flex;
     align-items: center;
     font-weight: 500;
-    font-size: .8rem;
+    font-size: .9rem;
 }
 
 .lists {
@@ -52,10 +52,7 @@ nav {
 }
 
 .watchlist:hover,
-.watched:hover,
-.login:hover,
-.loggedin:hover,
-.language:hover {
+.watched:hover{
     background-color: var(--background-hover);
 }
 
@@ -74,84 +71,8 @@ nav {
     padding-right: 3px;
 }
 
-.login,
-.loggedin {
-    display: flex;
-    align-items: center;
-    padding: 7px;
-    border-radius: 5px;
-    color: var(--text-on-dark-bg);
-    cursor: pointer;
-}
-
-.login span,
-.loggedin span {
-    display: flex;
-    align-items: center;
-}
-
-.loggedin {
-    position: relative;
-}
-
 .dd_open {
     transform: rotate(180deg);
-}
-
-.language {
-    position: relative;
-    display: flex;
-    align-items: center;
-    color: var(--text-on-dark-bg);
-    padding: 5px 0 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.language img {
-    width: 19px;
-}
-
-.loggedin_dropdown_box,
-.language_dropdown_box {
-    background: var(--third-bg-color);
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 40px;
-    z-index: 2;
-    overflow: hidden;
-}
-
-.loggedin_dropdown_box div:hover,
-.language_dropdown_box div:hover {
-    background-color: var(--background-hover);
-    cursor: pointer;
-    transition: .1s ease;
-}
-
-.loggedin_dropdown_box {
-    border-radius: 3px;
-    right: 0;
-    width: 100%;
-    min-width: 150px;
-    transition: .2s ease;
-}
-
-.language_dropdown_box {
-    border-radius: 3px;
-    right: 0;
-    transition: .2s ease;
-    width: 240px;
-}
-
-.loggedin_dropdown_box div,
-.language_dropdown_box div {
-    padding: 15px;
-    font-size: .9rem;
-    font-weight: 400;
-    display: flex;
-    justify-content: center;
 }
 
 @media (max-width: 1200px) {
@@ -163,21 +84,5 @@ nav {
 @media (max-width: 1024px) {
     .lists {
         display: none;
-    }
-}
-
-@media (max-width: 680px) {
-
-    .loggedin {
-        padding: 5.7px 5px 5.7px 8px;
-    }
-
-    .loggedin span {
-        display: none;
-    }
-
-    .loggedin_dropdown_box div,
-    .language_dropdown_box div {
-        font-size: .8rem;
     }
 }

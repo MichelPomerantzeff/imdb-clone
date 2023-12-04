@@ -1,0 +1,71 @@
+.loggedin {
+    position: relative;
+}
+
+.loggedin:hover {
+    background-color: var(--background-hover);
+}
+
+.loggedin_dropdown_box {
+    background: var(--third-bg-color);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.loggedin_dropdown_box div:hover {
+    background-color: var(--background-hover);
+    cursor: pointer;
+    transition: .1s ease;
+}
+
+.loggedin_dropdown_box {
+    border-radius: 3px;
+    right: 0;
+    width: 100%;
+    min-width: 150px;
+    transition: .2s ease;
+}
+
+.loggedin_dropdown_box div {
+    padding: 15px;
+    font-size: .9rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+}
+
+.login:hover,
+.loggedin:hover,
+.language:hover {
+    background-color: var(--background-hover);
+}
+
+.login,
+.loggedin {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    border-radius: 5px;
+    color: var(--text-on-dark-bg);
+    cursor: pointer;
+}
+
+
+@media (max-width: 680px) {
+
+    .loggedin {
+        padding: 5.7px 5px 5.7px 8px;
+    }
+
+    .loggedin span {
+        display: none;
+    }
+
+    .loggedin_dropdown_box div {
+        font-size: .8rem;
+    }
+}
