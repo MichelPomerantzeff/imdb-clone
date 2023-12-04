@@ -3,14 +3,16 @@ import { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 
 
-export default function FilterButtons({ getFilteredContent }) {
+export default function FilterButtons({ getFilteredValue }) {
 
-    const [selectedContent, setSelectedContent] = useState('All');
+    const [selectedContent, setSelectedContent] = useState('all');
 
-    const handleFilterContent = e => setSelectedContent(e.target.value);
+    const handleFilterContent = e => {
+        setSelectedContent(e.target.value)
+    }
 
     useEffect(() => {
-        getFilteredContent(selectedContent)
+        getFilteredValue(selectedContent)
     }, [selectedContent])
 
     return (
@@ -21,51 +23,51 @@ export default function FilterButtons({ getFilteredContent }) {
             }}
         >
             <Button
-                value="Movies"
+                value="movie"
                 onClick={handleFilterContent}
                 sx={{
                     border: "solid 1px #fff",
                     py: 1.2, px: 2.5,
-                    background: selectedContent === "Movies" ? "#ffffff25" : "",
+                    background: selectedContent === "movie" ? "#ffffff25" : "",
                     color: "#fff",
-                    fontWeight: selectedContent === "Movies" ? "600" : "",
+                    fontWeight: selectedContent === "movie" ? "600" : "",
                     '&:hover': {
                         border: "solid 1px #fff",
-                        background: selectedContent === "Movies" ? "#ffffff25" : "#ffffff25",
+                        background: selectedContent === "movie" ? "#ffffff25" : "#ffffff25",
                     },
                 }}
             >
                 Movies
             </Button>
             <Button
-                value="All"
+                value="all"
                 onClick={handleFilterContent}
                 sx={{
                     border: "solid 1px #fff",
                     py: 1.2, px: 2.5,
-                    background: selectedContent === "All" ? "#ffffff25" : "",
+                    background: selectedContent === "all" ? "#ffffff25" : "",
                     color: "#fff",
-                    fontWeight: selectedContent === "All" ? "600" : "",
+                    fontWeight: selectedContent === "all" ? "600" : "",
                     '&:hover': {
                         border: "solid 1px #fff",
-                        background: selectedContent === "All" ? "#ffffff25" : "#ffffff25",
+                        background: selectedContent === "all" ? "#ffffff25" : "#ffffff25",
                     },
                 }}
             >
                 All
             </Button>
             <Button
-                value="Tv Shows"
+                value="tv"
                 onClick={handleFilterContent}
                 sx={{
                     border: "solid 1px #fff",
                     py: 1.2, px: 2.5,
-                    background: selectedContent === "Tv Shows" ? "#ffffff25" : "",
+                    background: selectedContent === "tv" ? "#ffffff25" : "",
                     color: "#fff",
-                    fontWeight: selectedContent === "Tv Shows" ? "600" : "",
+                    fontWeight: selectedContent === "tv" ? "600" : "",
                     '&:hover': {
                         border: "solid 1px #fff",
-                        background: selectedContent === "Tv Shows" ? "#ffffff25" : "#ffffff25",
+                        background: selectedContent === "tv" ? "#ffffff25" : "#ffffff25",
                     },
                 }}
             >
@@ -76,5 +78,5 @@ export default function FilterButtons({ getFilteredContent }) {
 }
 
 FilterButtons.propTypes = {
-    getFilteredContent: PropTypes.func,
+    getFilteredValue: PropTypes.func,
 }

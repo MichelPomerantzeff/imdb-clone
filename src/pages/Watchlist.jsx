@@ -10,19 +10,18 @@ import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useSelector } from 'react-redux';
 import useGetData from '../hooks/useGetData';
 import FilterButtons from '../components/FilterButtons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoadingWheel from '../components/LoadingWheel';
 
 function WatchList() {
 
-    // const language = 'en-US'
     const language = useSelector((state) => state.languageToggle.value.language);
     const display = useSelector((state) => state.movieInfo.value.display);
 
     // Costum hooks (fetch data from database)
     const { user, watchlistData, watchlistDataLoading, getWatchlistData, getWatchedData } = useGetData();
 
-    const [filteredContent, setFilteredContent] = useState(null);
+    const [filter, setFilter] = useState("all")
 
     // Delete movie from watchlist
     const deleteMovie = async (movie) => {
@@ -40,18 +39,13 @@ function WatchList() {
         deleteMovie(movie)
     }
 
-    const getFilteredContent = (filter) => {
-        if (filter === "Movies") {
-            const filteredData = watchlistData.filter(item => item.type === "movie")
-            setFilteredContent(filteredData)
-        } else if (filter === "Tv Shows") {
-            const filteredData = watchlistData.filter(item => item.type === "tv")
-            setFilteredContent(filteredData)
-        } else if (filter === "All") {
-            setFilteredContent([...watchlistData])
-        }
-        watchlistData ? console.log(watchlistData) : ""
+    const getFilteredValue = (filter) => {
+        setFilter(filter)
     }
+
+    useEffect(() => {
+        getWatchlistData()
+    }, [filter])
 
     return (
         <div className='watchlist_container'>
@@ -63,7 +57,7 @@ function WatchList() {
                 {language === "en-US" ? 'WATCHLIST' : 'LISTA DE FAVORITOS'}
             </h1>
 
-            <FilterButtons getFilteredContent={getFilteredContent} />
+            <FilterButtons getFilteredValue={getFilteredValue} />
 
             {
 
@@ -72,20 +66,24 @@ function WatchList() {
                     watchlistData.length > 0 ?
                         <div className='watchlist_wrapper'>
                             {
-                                (filteredContent.length > 0 ? filteredContent : watchlistData ?? []).map(movie => {
-                                    return (
-                                        <div key={movie.movieId} className='movie_card_container'>
-                                            <MovieCard type={movie.type} data={movie} />
-                                            <div className='buttons'>
-                                                <button onClick={(() => addToWatched(movie))} className="add_movie">
-                                                    <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
-                                                </button>
-                                                <button onClick={(() => deleteMovie(movie))} className="delete_movie">
-                                                    <span><DeleteRoundedIcon /></span>
-                                                </button>
+                                (watchlistData.length > 0 ? watchlistData : watchlistData ?? []).map(movie => {
+
+                                    if (filter === movie.type || filter === "all") {
+
+                                        return (
+                                            <div key={movie.movieId} className='movie_card_container'>
+                                                <MovieCard type={movie.type} data={movie} />
+                                                <div className='buttons'>
+                                                    <button onClick={(() => addToWatched(movie))} className="add_movie">
+                                                        <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
+                                                    </button>
+                                                    <button onClick={(() => deleteMovie(movie))} className="delete_movie">
+                                                        <span><DeleteRoundedIcon /></span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
+                                        )
+                                    }
                                 })
                             }
                         </div>
