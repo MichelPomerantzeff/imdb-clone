@@ -6,6 +6,8 @@
     border-radius: 5px;
     position: relative;
 }
+.search_bar *{
+}
 
 .search_bar_input_desktop {
     display: flex;
@@ -62,12 +64,15 @@
 
 .search_bar_dropdown_box{
     background: var(--bg-color3);
+    position: absolute;
     display: flex;
     flex-direction: column;
-    position: absolute;
     top: 40px;
     z-index: 4;
-    overflow: hidden;
+    border-radius: 5px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
 }
 
 .searched_movie:hover {
@@ -76,41 +81,26 @@
     transition: .1s ease;
 }
 
-.search_bar_dropdown_box {
-    border-radius: 5px;
-    left: 0;
-    width: 100%;
-    max-height: 90vh;
-    overflow: auto;
-}
-
 .searched_movie {
-    color: var(--text-dark-bg);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    border-bottom: 1px solid var(--text-dark-bg3);
-    transition: .2s ease;
-    height: 100%;
 }
 
 .searched_movie_wrapper {
     display: flex;
-    padding: 10px 0 0 10px;
-    gap: 10px;
-    align-items: center;
+    padding: 10px;
+    gap: 10px;   
 }
 
 
 .searched_movie img {
-    height: 100px;
+    height: 90px;
 }
 
 .searched_movie_elements {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    flex: 1;
+    gap: 3px;
 }
 
 .searched_movie_title {
@@ -128,11 +118,13 @@
 .searched_movie_rating {
     display: flex;
     align-items: center;
+    /* border: 1px solid red; */
 }
 
 .star_icon {
-    transform: scale(.8) translateY(-2px);
     color: var(--main-color);
+    transform: scale(.7) translate(-6px, -2px);
+    margin-right: -3px;
 }
 
 

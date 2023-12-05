@@ -2,30 +2,24 @@ import '../css/SearchBar.css';
 import movieCover from '../images/movieCover.jpg';
 import StarIcon from '@mui/icons-material/Star';
 import SearchIcon from '@mui/icons-material/Search';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import { displayMovieInfo } from '../features/movieInfo';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../config/firebase';
-import useGetData from '../hooks/useGetData';
 import { toggleSearchMode } from '../features/searchBarToggle'
 import { useQuery } from '@tanstack/react-query';
 import { getSearchData } from '../apis/fetchMulti';
 import useDebounce from '../hooks/useDebounce';
+import { Divider } from '@mui/material';
 
 function SearchBar() {
 
+    const IMAGE_BASE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
     const [search, setSearch] = useState('');
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
     const language = useSelector((state) => state.languageToggle.value.language);
     const searchMode = useSelector((state) => state.searchBarToggle.value.searchMode);
-    const { user, watchlistData, getWatchlistData, watchedData } = useGetData();
-    let disabled = false;
-
     const dispatch = useDispatch();
-
     const debouncedSearch = useDebounce(search, 800);
 
     const { data } = useQuery({
@@ -33,18 +27,6 @@ function SearchBar() {
         enabled: search != '',
         queryFn: () => getSearchData("search/multi", language, 1, search),
     })
-
-
-    async function addToWatchlist(data, type) {
-        await setDoc(doc(db, "users", user.email, "watchlist", data.title || data.name), {
-            movieId: data.id,
-            name: data.title || data.name,
-            vote_average: data.vote_average,
-            poster_path: data.poster_path,
-            type: type,
-        });
-        getWatchlistData()
-    }
 
     return (
         <div className="search_bar">
@@ -84,23 +66,11 @@ function SearchBar() {
                         <SearchIcon onClick={() => dispatch(toggleSearchMode({ searchMode: true }))} />
                 }
             </button>
-
             {
                 search && isSearchBarOpen &&
                 <div className="search_bar_dropdown_box">
                     {
                         data?.map((movie, index) => {
-
-                            let movieId = movie.id
-
-                            // Check if movie is on watchlist/watched
-                            const isOnWatchlist = watchlistData.find(movie => {
-                                return movieId === movie.movieId
-                            })
-                            const isOnWatched = watchedData.find(movie => {
-                                return movieId === movie.movieId
-                            })
-                            isOnWatchlist || isOnWatched ? disabled = true : disabled = false
 
                             if (index < 10) {
 
@@ -110,45 +80,28 @@ function SearchBar() {
                                             onClick={() => { dispatch(displayMovieInfo({ data: movie, type: movie.media_type, display: true })); }}
                                             className='searched_movie_wrapper'
                                         >
-                                            <img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : movieCover} alt='' />
+                                            <img src={movie.poster_path ? `${IMAGE_BASE_URL}/${movie.poster_path}` : movieCover} alt='' />
 
                                             <div className="searched_movie_elements">
                                                 <h4 className='searched_movie_title'>{movie.title || movie.name}</h4>
                                                 <span className='searched_movie_date'>{movie.release_date?.slice(0, 4) || movie.first_air_date?.slice(0, 4) || 'N/A'}</span>
                                                 <div className='searched_movie_rating'>
-                                                    <StarIcon className='star_icon' />
-                                                    {movie.vote_average?.toFixed(1) || '--'}
+                                                    {movie.vote_average != 0 ?
+                                                        <>
+                                                            <StarIcon className='star_icon' />
+                                                            {movie.vote_average % 1 !== 0 ? movie.vote_average.toFixed(1) : movie.vote_average}
+                                                        </>
+                                                        :
+                                                        '--'
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div className="buttons">
-                                            <button
-                                                onClick={(() => {
-                                                    if (user) addToWatchlist(movie, movie.media_type)
-                                                    else alert("Sign in and start creating your wathlist")
-                                                })}
-                                                className="add_movie_button"
-                                                disabled={disabled}
-                                                style={{
-                                                    background: `${disabled && '#cccccc1d'}`,
-                                                    color: `${disabled && '#cccccc1d'}`,
-                                                    pointerEvents: `${disabled && 'none'}`,
-                                                    margin: '0 10px 10px 10px'
-                                                }}
-                                            >
-                                                <div><AddRoundedIcon />
-                                                    {
-                                                        language === "en-US" ? 'Watchlist' : 'Assistir'
-                                                    }
-                                                </div>
-                                            </button>
-                                        </div>
-
+                                        <Divider sx={{borderColor: "var(--text-dark-bg4)"}}/>
                                     </div>
                                 )
                             }
-                            return ''
+                            return
                         })
                     }
                 </div>
