@@ -58,7 +58,7 @@ function MovieSlider({ type, query, title, queryKey }) {
             <h1 className="movie_slider_category">{title}</h1>
             <div className="movie_slider_wrapper">
                 <Swiper
-                style={{padding: "0 13px"}}
+                    style={{ padding: "0 13px" }}
                     modules={[Navigation, Pagination]}
                     navigation
                     breakpoints={{
@@ -94,7 +94,7 @@ function MovieSlider({ type, query, title, queryKey }) {
                                             disabled={disabled}
                                             style={{
                                                 background: `${disabled && '#7472721d'}`,
-                                                color: `${disabled && '#cccccc1d'}`,
+                                                color: `${disabled && 'var(--second-color)'}`,
                                                 pointerEvents: `${disabled && 'none'}`,
 
                                             }}
@@ -104,9 +104,11 @@ function MovieSlider({ type, query, title, queryKey }) {
                                                     disabled ?
                                                         <DoneRoundedIcon />
                                                         :
-                                                        <AddRoundedIcon />
+                                                        <>
+                                                            <AddRoundedIcon />
+                                                            {language === "en-US" ? 'Watchlist' : 'Assistir'}
+                                                        </>
                                                 }
-                                                {language === "en-US" ? 'Watchlist' : 'Assistir'}
                                             </div>
                                         </button>
                                     </div>
