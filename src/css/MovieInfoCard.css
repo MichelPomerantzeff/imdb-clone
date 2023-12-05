@@ -107,3 +107,16 @@
 .trailer_button:active {
     background-color: var(--active-add-button-bg);
 }
+
+@media (max-width: 500px) {
+    .movie_info_card_wrapper {
+         max-width: 96vw;
+    }
+
+    .movie_info_card_top{
+        display: flex;
+        gap: 20px;
+        padding: 0 8px;
+        flex-direction: column;
+    }
+}
