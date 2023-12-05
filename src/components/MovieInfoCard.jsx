@@ -120,9 +120,7 @@ function MovieInfoCard() {
 
                 <div
                     className="movie_info_close_button"
-                    onClick={() => {
-                        dispatch(closeMovieInfo({ display: false, scroll: true }));
-                    }}
+                    onClick={() => { dispatch(closeMovieInfo({ display: false, scroll: true })) }}
                 ><ClearRoundedIcon /></div>
 
             </div>

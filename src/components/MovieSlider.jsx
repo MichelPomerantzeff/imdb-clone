@@ -37,14 +37,18 @@ function MovieSlider({ type, query, title, queryKey }) {
 
     // Add Movie to Watchlist
     async function addToWatchlist(data, type) {
-        try {
-            await setDoc(doc(db, "users", user.email, "watchlist", data.title || data.name),
-                { ...data, type, movieId: data.id }
-            );
-        } catch (error) {
-            console.log("Error adding document to watchlist:", error)
+        if (user) {
+            try {
+                await setDoc(doc(db, "users", user.email, "watchlist", data.title || data.name),
+                    { ...data, type, movieId: data.id }
+                );
+            } catch (error) {
+                console.log("Error adding document to watchlist:", error)
+            }
+            getWatchlistData()
+        } else {
+            alert("Sign in and start adding movies to your wathlist")
         }
-        getWatchlistData()
     }
 
     if (!data) return <h1 style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></h1>
@@ -54,6 +58,7 @@ function MovieSlider({ type, query, title, queryKey }) {
             <h1 className="movie_slider_category">{title}</h1>
             <div className="movie_slider_wrapper">
                 <Swiper
+                style={{padding: "0 13px"}}
                     modules={[Navigation, Pagination]}
                     navigation
                     breakpoints={{
@@ -84,13 +89,7 @@ function MovieSlider({ type, query, title, queryKey }) {
 
                                     <div className='buttons'>
                                         <button
-                                            onClick={(() => {
-                                                if (user) {
-                                                    addToWatchlist(movieCardData, type)
-                                                } else {
-                                                    alert("Sign in and start adding movies to your wathlist")
-                                                }
-                                            })}
+                                            onClick={(() => { addToWatchlist(movieCardData, type) })}
                                             className="add_movie_button"
                                             disabled={disabled}
                                             style={{

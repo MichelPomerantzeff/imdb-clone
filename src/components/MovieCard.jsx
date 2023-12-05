@@ -18,17 +18,13 @@ function MovieCard({ type, data }) {
     return (
         <div className="movie_card">
             <div
-                onClick={() => {
-                    dispatch(displayMovieInfo({ data: data, type: type, display: true }));
-                }}
+                onClick={() => { dispatch(displayMovieInfo({ data: data, type: type, display: true })) }}
                 className="movie_card_image">
                 <img src={image || movieCover} alt='' />
             </div>
 
             <p
-                onClick={() => {
-                    dispatch(displayMovieInfo({ data: data, type: type, display: true }));
-                }}
+                onClick={() => { dispatch(displayMovieInfo({ data: data, type: type, display: true })) }}
                 title={title} className='movie_title'>
                 {title}
             </p>
@@ -38,14 +34,14 @@ function MovieCard({ type, data }) {
                 <div className='movie_card_rating'>
                     <StarIcon className='movie_card_star' />
                     <span
-                        // className={rating > 7.9 ? "high_vote" : rating < 6 ? "low_vote" : ""}
-                        >
+                    // className={rating > 7.9 ? "high_vote" : rating < 6 ? "low_vote" : ""}
+                    >
                         {rating}
                     </span>
                 </div>
 
                 <div title='info' className='movie_info_button'>
-                        <InfoOutlinedIcon />
+                    <InfoOutlinedIcon />
                 </div>
             </div>
         </div>
