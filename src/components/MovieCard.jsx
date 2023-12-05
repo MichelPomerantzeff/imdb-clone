@@ -38,16 +38,14 @@ function MovieCard({ type, data }) {
                 <div className='movie_card_rating'>
                     <StarIcon className='movie_card_star' />
                     <span
-                        className={rating > 7.9 ? "high_vote" : rating < 6 ? "low_vote" : ""}>
+                        // className={rating > 7.9 ? "high_vote" : rating < 6 ? "low_vote" : ""}
+                        >
                         {rating}
                     </span>
                 </div>
 
                 <div title='info' className='movie_info_button'>
-                    <div
-                        className='movie_info_background'>
                         <InfoOutlinedIcon />
-                    </div>
                 </div>
             </div>
         </div>

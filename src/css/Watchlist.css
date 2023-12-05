@@ -17,11 +17,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 1rem;
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
 }
 
 .movie_card_container{
-    background-color: var(--second-bg-color);
+    background-color: var(--bg-color2);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }

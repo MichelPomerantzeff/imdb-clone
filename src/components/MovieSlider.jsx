@@ -1,6 +1,7 @@
 import MovieCard from "./MovieCard";
 import '../css/MovieSlider.css'
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import useGetData from "../hooks/useGetData";
@@ -90,16 +91,22 @@ function MovieSlider({ type, query, title, queryKey }) {
                                                     alert("Sign in and start adding movies to your wathlist")
                                                 }
                                             })}
-                                            className="add_movie"
+                                            className="add_movie_button"
                                             disabled={disabled}
                                             style={{
-                                                background: `${disabled && '#cccccc1d'}`,
+                                                background: `${disabled && '#7472721d'}`,
                                                 color: `${disabled && '#cccccc1d'}`,
                                                 pointerEvents: `${disabled && 'none'}`,
 
                                             }}
                                         >
-                                            <div><AddRoundedIcon />
+                                            <div>
+                                                {
+                                                    disabled ?
+                                                        <DoneRoundedIcon />
+                                                        :
+                                                        <AddRoundedIcon />
+                                                }
                                                 {language === "en-US" ? 'Watchlist' : 'Assistir'}
                                             </div>
                                         </button>

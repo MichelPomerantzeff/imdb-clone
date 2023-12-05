@@ -74,7 +74,7 @@ function WatchList() {
                                             <div key={movie.movieId} className='movie_card_container'>
                                                 <MovieCard type={movie.type} data={movie} />
                                                 <div className='buttons'>
-                                                    <button onClick={(() => addToWatched(movie))} className="add_movie">
+                                                    <button onClick={(() => addToWatched(movie))} className="add_movie_button">
                                                         <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
                                                     </button>
                                                     <button onClick={(() => deleteMovie(movie))} className="delete_movie">

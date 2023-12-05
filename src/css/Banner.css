@@ -46,7 +46,7 @@
 
 .close_button {
     box-sizing: border-box;
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
     padding: 5px;
     border-radius: 50%;
     transform: scale(2);
@@ -79,8 +79,8 @@
 
 
 .poster_slide:hover .banner_play_btn {
-    color: var(--standout-color);
-    border-color: var(--standout-color);
+    color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .poster_slide img {
@@ -106,7 +106,7 @@ div.swiper-button-next {
 
 div.swiper-button-prev:hover,
 div.swiper-button-next:hover {
-    color: var(--standout-color);
+    color: var(--main-color);
 }
 
 .poster_details {
@@ -160,14 +160,14 @@ div.swiper-button-next:hover {
 }
 
 .up_next_title {
-    color: var(--standout-color);
+    color: var(--main-color);
     padding: 5px 0 15px 0;
     font-size: 1.3rem;
     font-weight: 600;
 }
 
 .up_next_content {
-    background: linear-gradient(to top, var(--bg-color), var(--second-bg-color));
+    background: linear-gradient(to top, var(--bg-color), var(--bg-color2));
 }
 
 .up_next_card {
@@ -221,8 +221,8 @@ div.swiper-button-next:hover {
 }
 
 .up_next_card:hover .play_btn_active {
-    color: var(--standout-color);
-    border-color: var(--standout-color);
+    color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .play_btn_disabled {
@@ -232,14 +232,14 @@ div.swiper-button-next:hover {
 }
 
 .up_next_card_details h1 {
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
     font-size: 1rem;
     font-weight: 400;
 }
 
 .up_next_card_date {
     font-size: .8rem;
-    color: var(--secondary-text-color);
+    color: var(--text-dark-bg2);
 }
 
 @media (max-width: 1200px) {

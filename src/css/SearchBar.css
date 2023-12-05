@@ -26,12 +26,12 @@
     font-weight: 500;
     width: 100%;
     padding: 8px 5px;
-    background-color: var(--second-bg-color);
+    background-color: var(--bg-color2);
     color: #ffffff;
 }
 
 .search_bar_input_desktop:focus {
-    border: solid 2px var(--standout-color);
+    border: solid 2px var(--main-color);
     padding: 5px 8px;
 }
 
@@ -42,7 +42,7 @@
     font-size: 1rem;
     position: absolute;
     right: 5px;
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
     cursor: pointer;
     display: none;
 }
@@ -54,14 +54,14 @@
     font-size: 1rem;
     position: absolute;
     right: 5px;
-    color: var(--third-text-color);
+    color: var(--text-dark-bg3);
     cursor: pointer;
     display: flex;
 }
 
 
 .search_bar_dropdown_box{
-    background: var(--third-bg-color);
+    background: var(--bg-color3);
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -71,7 +71,7 @@
 }
 
 .searched_movie:hover {
-    background-color: var(--background-hover);
+    background-color: var(--hover-bg);
     cursor: pointer;
     transition: .1s ease;
 }
@@ -85,11 +85,11 @@
 }
 
 .searched_movie {
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-bottom: 1px solid var(--third-text-color);
+    border-bottom: 1px solid var(--text-dark-bg3);
     transition: .2s ease;
     height: 100%;
 }
@@ -121,7 +121,7 @@
 
 .searched_movie_date,
 .searched_movie_rating {
-    color: var(--third-text-color);
+    color: var(--text-dark-bg3);
     font-size: .9rem;
 }
 
@@ -132,7 +132,7 @@
 
 .star_icon {
     transform: scale(.8) translateY(-2px);
-    color: var(--standout-color);
+    color: var(--main-color);
 }
 
 

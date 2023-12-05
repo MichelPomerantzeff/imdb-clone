@@ -128,7 +128,7 @@ function SearchBar() {
                                                     if (user) addToWatchlist(movie, movie.media_type)
                                                     else alert("Sign in and start creating your wathlist")
                                                 })}
-                                                className="add_movie"
+                                                className="add_movie_button"
                                                 disabled={disabled}
                                                 style={{
                                                     background: `${disabled && '#cccccc1d'}`,

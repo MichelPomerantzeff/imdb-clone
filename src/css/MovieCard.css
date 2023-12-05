@@ -1,6 +1,6 @@
 .movie_card {
     width: 100%;
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -23,7 +23,7 @@
 .movie_card_image img:hover {
     transform: scale(1.2);
     filter: blur(1.2px);
-    transition: .3s ease ;
+    transition: .3s ease;
 }
 
 .movie_title {
@@ -35,80 +35,71 @@
     line-height: 20px;
 }
 
+.movie_title:hover {
+    text-decoration: underline;
+}
+
 .movie_card_details {
     display: flex;
     align-items: center;
+    padding-left: 5px;
 }
 
 .movie_card_rating {
     display: flex;
     align-items: center;
     flex: 1;
-
 }
 
 .movie_card_star {
     transform: scale(.8);
-    color: var(--standout-color);
-    margin-bottom: 3px;
-    padding: 0 3px;
+    color: var(--main-color);
+    margin-bottom: 2px;
 }
 
-.movie_card_vote {
-    color: var(--secondary-text-color);
+.movie_card_rating {
+    color: var(--text-dark-bg2);
+    font-size: 1.1rem;
 }
 
-.high_vote {
+/* .high_vote {
     color: limegreen;
 }
 
 .low_vote {
     color: red;
-}
+} */
 
 .movie_info_button {
-    flex: 1;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-}
-
-.movie_info_background {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    cursor: pointer;
     border-radius: 50%;
     padding: 5px;
-    margin-right: 5px;
+    cursor: pointer;
 }
 
-.movie_info_background:hover {
-    background-color: var(--background-hover);
+.movie_info_button:hover {
+    background-color: var(--hover-bg);
 }
 
-.movie_title:hover {
-    text-decoration: underline;
-}
-
-.buttons{
-    /* background: #fff; */
+.buttons {
     display: flex;
     align-items: center;
     padding: 8px;
     gap: 8px;
-    width: calc(100% - 16px);
 }
-.buttons button{
+
+.buttons button {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.buttons .add_movie {
+.add_movie_button {
     flex: 1;
-    background-color: var(--standout-color);
-    color: #000;
+    background-color: var(--add-button-bg);
+    color: var(--second-color);
     border: none;
     outline: none;
     padding: 4px;
@@ -118,23 +109,27 @@
     border-radius: 3px;
 }
 
-.buttons .add_movie:hover {
-    background-color: var(--background-hover);
-    background-color: #000;
-    color: var(--standout-color);
+.add_movie_button:hover {
+    background-color: var(--hover-add-button-bg);
     transition: .2s ease;
 }
 
-.buttons .add_movie div {
+.add_movie_button:active {
+    background-color: var(--active-add-button-bg);
+}
+
+.add_movie_button div {
     display: flex;
     align-items: center;
+    font-size: .9rem;
+    font-weight: 600;
 }
 
 
-.buttons .delete_movie {
+.delete_movie {
     border: none;
     outline: none;
-    background-color: #ff00008f;
+    background-color: var(--delete-button-bg);
     color: #ffffffd3;
     border-radius: 3px;
     cursor: pointer;
@@ -142,13 +137,19 @@
     padding: 4px;
 }
 
-.buttons .delete_movie:hover {
-    background-color: #ff00004b;
+.delete_movie:hover {
+    background-color: var(--hover-delete-button-bg);
     color: #ffffff;
     transition: .2s ease;
 }
 
-.buttons .delete_movie span{
+.delete_movie:active {
+    background-color: var(--active-delete-button-bg);
+    color: #ffffff;
+    transition: .2s ease;
+}
+
+.delete_movie span {
     display: flex;
     align-items: center;
 }

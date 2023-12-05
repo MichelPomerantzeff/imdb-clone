@@ -3,11 +3,11 @@
 }
 
 .loggedin:hover {
-    background-color: var(--background-hover);
+    background-color: var(--hover-bg);
 }
 
 .loggedin_dropdown_box {
-    background: var(--third-bg-color);
+    background: var(--bg-color3);
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -17,8 +17,7 @@
 }
 
 .loggedin_dropdown_box div:hover {
-    background-color: var(--background-hover);
-    cursor: pointer;
+    background-color: var(--hover-bg2);
     transition: .1s ease;
 }
 
@@ -41,7 +40,7 @@
 .login:hover,
 .loggedin:hover,
 .language:hover {
-    background-color: var(--background-hover);
+    background-color: var(--hover-bg);
 }
 
 .login,
@@ -50,8 +49,17 @@
     align-items: center;
     padding: 7px;
     border-radius: 5px;
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
     cursor: pointer;
+}
+
+.delete_account {
+    color: #c62828;
+    font-weight: 900;
+}
+
+.delete_account:hover {
+    background: var(--hover-delete-button-bg);
 }
 
 

@@ -11,11 +11,11 @@
 
 .movie_info_card_wrapper {
     position: relative;
-    background-color: var(--third-bg-color);
+    background-color: var(--bg-color3);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
     padding: 20px;
     gap: 20px;
     max-width: 500px;
@@ -24,6 +24,7 @@
 .movie_info_card_top{
     display: flex;
     gap: 20px;
+    padding: 0 8px;
 }
 
 .movie_info_card_poster {
@@ -37,29 +38,38 @@
 .movie_info_card_details {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;   
+    justify-content: space-evenly;
+}
+
+.movie_info_card_details h1{
+    font-size: 1.5rem;
 }
 
 .movie_info_card_details div{
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: .9rem;
-    /* background: #000; */
+    font-size: .95rem;
+    color: var(--text-dark-bg2);
+    font-weight: 600;
 }
 
 .movie_info_card_star {
     transform: scale(.8);
-    color: var(--standout-color);
+    color: var(--main-color);
 }
 
 .movie_info_card_overview{
     font-size: .9rem;
+    font-weight: 500;
+    padding: 0 8px;
+    line-height: 18px;
+    letter-spacing: .25px;
 }
 
-/* .movie_info_card_row{} */
-
-
+.out-of-ten{
+    color: var(--text-dark-bg3);
+    font-weight: 500;
+}
 
 .movie_info_close_button{
     position: absolute;
@@ -75,4 +85,25 @@
 
 .movie_info_close_button:hover{
     background-color: #fffefe13;
+}
+
+.trailer_button {
+    flex: .3;
+    background-color: var(--add-button-bg);
+    color: var(--second-color);
+    border: none;
+    outline: none;
+    padding: 4px;
+    cursor: pointer;
+    transition: .2s ease;
+    border-radius: 3px;
+}
+
+.trailer_button:hover {
+    background-color: var(--hover-add-button-bg);
+    transition: .2s ease;
+}
+
+.trailer_button:active {
+    background-color: var(--active-add-button-bg);
 }

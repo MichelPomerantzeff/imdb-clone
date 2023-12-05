@@ -1,10 +1,10 @@
 footer {
     padding: 20px;
-    color: var(--secondary-text-color);
+    color: var(--text-dark-bg2);
     font-weight: 300;
     text-align: center;
     font-size: .8rem;
-    border-top: solid 1px var(--secondary-text-color);
+    border-top: solid 1px var(--text-dark-bg2);
 }
 
 footer a {

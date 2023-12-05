@@ -12,7 +12,7 @@
 }
 
 .login_logo{
-    background-color: var(--standout-color);
+    background-color: var(--main-color);
     display: flex;
     align-items: center;
     border-radius: 5px;

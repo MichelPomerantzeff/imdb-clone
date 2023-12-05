@@ -10,37 +10,46 @@
 :root {
 
     /* LIGHT MODE */
-    /* --standout-color: #F5C518;
+    /* --main-color: #F5C518;
 
     --bg-color: #ffffff;
-    --second-bg-color: #e6e6e6;
-    --third-bg-color: #d9d9d9;
+    --bg-color2: #e6e6e6;
+    --bg-color3: #d9d9d9;
     
-    --background-hover: #cccccc;
-    --secondary-background-hover: #bfbfbf;
+    --hover-bg: #cccccc;
+    --hover-bg2: #bfbfbf;
     --third-background-hover: #b2b2b2;
 
     --arrow-background: #ececec38;
     
-    --text-on-dark-bg: #000000;
-    --secondary-text-color: #262626;
-    --third-text-color: #0d0d0d; */
+    --text-dark-bg: #000000;
+    --text-dark-bg2: #262626;
+    --text-dark-bg3: #0d0d0d; */
 
 
     /* DARK MODE */
-    --standout-color: #F5C518;
+    --main-color: #F5C518;
+    --second-color: #5799ef;
 
     --bg-color: #000000;
-    --second-bg-color: #121212;
-    --third-bg-color: #1f1f1f;
+    --bg-color2: #121212;
+    --bg-color3: #1f1f1f;
 
-    --background-hover: #333333;
-    --secondary-background-hover: #4d4d4d;
-    --third-background-hover: #595959;
+    --hover-bg: #252525;
+    --hover-bg2: #313131;
+    --hover-bg3: #595959;
+
+    --add-button-bg: #313131;
+    --hover-add-button-bg: #343940;
+    --active-add-button-bg: #364458;
+
+    --delete-button-bg: #313131;
+    --hover-delete-button-bg: #583636;
+    --active-delete-button-bg: #962929;
 
     --arrow-background: #12121273;
 
-    --text-on-dark-bg: #fff;
-    --secondary-text-color: #c0bebe;
-    --third-text-color: gray;
+    --text-dark-bg: #fff;
+    --text-dark-bg2: #bcbcbc;
+    --text-dark-bg3: gray;
 }

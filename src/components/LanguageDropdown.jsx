@@ -29,7 +29,7 @@ export default function LanguageDropdown() {
       {
         isLanguageOpen &&
 
-        <div className="language_dropdown_box">
+        <div className="dropdown_box">
           <div onClick={() => { dispatch(setLanguage({ language: "en-US" })); }}>
             English (United Kingdom)
           </div>

@@ -1,5 +1,6 @@
 import movieCover from '../images/movieCover.jpg'
 import '../css/MovieInfoCard.css'
+import '../css/MovieSlider.css'
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +10,10 @@ import useDisableScroll from '../hooks/useDisableScroll';
 import { useQuery } from '@tanstack/react-query';
 import { getDetails } from '../apis/fetchDetails';
 import useEventListener from '../hooks/useEventListener';
+import { Divider } from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
+
 
 function MovieInfoCard() {
 
@@ -63,12 +68,13 @@ function MovieInfoCard() {
                     </div>
                     <div className="movie_info_card_details">
 
-                        <h2>
+                        <h1>
                             {title}
-                        </h2>
+                        </h1>
 
                         <div >
-                            <span>{releaseDate} |</span>
+                            {releaseDate}
+                            <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "2px 6px" }} orientation="vertical" variant="middle" flexItem />
                             <span className='movie_info_card_runtime'>{runtime ? `${hour} ${min}` : 'N/A'}</span>
                         </div>
 
@@ -79,7 +85,7 @@ function MovieInfoCard() {
                                         <span className=''>{genre.name}</span>
                                         {
                                             index < data?.genres.length - 1 &&
-                                            <span>|</span>
+                                            <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "2px 6px" }} orientation="vertical" variant="middle" flexItem />
                                         }
                                     </div>
                                 ))
@@ -89,6 +95,7 @@ function MovieInfoCard() {
                         <div className=''>
                             <StarIcon className='movie_info_card_star' />
                             {rating}
+                            <span className='out-of-ten'>/10</span>
                         </div>
 
                     </div>
@@ -96,6 +103,19 @@ function MovieInfoCard() {
 
                 <div className='movie_info_card_bottom'>
                     <p className='movie_info_card_overview'>{plot}</p>
+                </div>
+
+                <div className='buttons'>
+                    <button className="add_movie_button">
+                        <div>
+                            <AddRoundedIcon />
+                            {language === "en-US" ? 'Watchlist' : 'Assistir'}
+                        </div>
+                    </button>
+                    <button className="trailer_button">
+                            <VideocamOutlinedIcon />
+                    </button>
+
                 </div>
 
                 <div

@@ -1,5 +1,5 @@
 .movie_slider_container {
-    color: var(--standout-color);
+    color: var(--main-color);
     max-width: 1200px;
     margin: 80px auto;
 }
@@ -10,7 +10,7 @@
 }
 
 .slider_movie{
-    background-color: var(--second-bg-color);
+    background-color: var(--bg-color2);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     display: flex;

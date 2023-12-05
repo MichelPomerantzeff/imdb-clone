@@ -1,5 +1,5 @@
 nav {
-    background-color: var(--second-bg-color);
+    background-color: var(--bg-color2);
 }
 
 .topbar_container {
@@ -17,7 +17,7 @@ nav {
 }
 
 .logo {
-    background-color: var(--standout-color);
+    background-color: var(--main-color);
     color: #000000;
     display: flex;
     align-items: center;
@@ -40,7 +40,7 @@ nav {
 
 .lists {
     display: flex;
-    color: var(--text-on-dark-bg);
+    color: var(--text-dark-bg);
 }
 
 .watchlist,
@@ -53,11 +53,11 @@ nav {
 
 .watchlist:hover,
 .watched:hover{
-    background-color: var(--background-hover);
+    background-color: var(--hover-bg);
 }
 
 .whatchlist_quantity {
-    background-color: var(--standout-color);
+    background-color: var(--main-color);
     color: #000000;
     display: flex;
     justify-content: center;
