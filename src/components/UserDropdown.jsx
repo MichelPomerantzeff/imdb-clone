@@ -9,9 +9,17 @@ import { auth } from '../config/firebase';
 import { useState } from "react";
 import { useRef } from 'react';
 import useEventListener from '../hooks/useEventListener';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 export default function UserDropdown() {
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   const navigate = useNavigate();
   const language = useSelector((state) => state.languageToggle.value.language);
@@ -34,6 +42,16 @@ export default function UserDropdown() {
     !userAccountRef.current?.contains(e.target) && setIsUserAccountOpen(false)
   }
   useEventListener("click", isOutside)
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -66,10 +84,9 @@ export default function UserDropdown() {
                 >
                   {language === "en-US" ? 'Sign out' : 'Sair'}
                 </div>
-                <div >
-                  <button style={{ color: "red" }}>
-                    {language === "en-US" ? 'Delete Account' : 'Excluir conta'}
-                  </button>
+
+                <div onClick={handleClickOpen} className='delete_account'>
+                  {language === "en-US" ? 'DELETE ACCOUNT' : 'EXCLUIR CONTA'}
                 </div>
               </div>
             }
@@ -79,6 +96,33 @@ export default function UserDropdown() {
             <span>{language === "en-US" ? 'Sign in' : 'Entrar'}</span>
           </div>
       }
+
+      <ThemeProvider theme={darkTheme}>
+
+        <CssBaseline />
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>
+            {"Delete account"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete your account? 
+              If you delete your account, you will lose your profile and and all your data.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose} autoFocus>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </ThemeProvider>
     </>
   );
 }
