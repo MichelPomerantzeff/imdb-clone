@@ -4,14 +4,18 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
+import { useNavigate } from 'react-router-dom';
 
 function Footer() {
+
+    const navigate = useNavigate();
+
     return (
         <footer>
             <div className="footer_wrapper">
                 <div className="col">
                     <div className="footer_logo_col">
-                        <div className="logo">
+                        <div onClick={() => navigate("/")} className="logo">
                             <span>Movie App</span>
                             <LiveTvRoundedIcon className='footer_tv_icon' />
                         </div>

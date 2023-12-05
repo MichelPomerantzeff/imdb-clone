@@ -112,7 +112,7 @@ export default function UserDropdown() {
           <DialogContent>
             <DialogContentText>
               Are you sure you want to delete your account? 
-              If you delete your account, you will lose your profile and and all your data.
+              If you delete your account, you will lose your profile and all your data.
             </DialogContentText>
           </DialogContent>
           <DialogActions>

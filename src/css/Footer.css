@@ -3,10 +3,6 @@ footer {
     border-top: 1px solid var(--bg-color3);
 }
 
-footer * {
-    /* border: 1px solid red; */
-}
-
 .footer_wrapper {
     display: flex;
     justify-content: space-between;

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from "../config/firebase"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useSelector } from 'react-redux';
+import Footer from '../components/Footer';
 
 function Login() {
 
@@ -78,7 +79,7 @@ function Login() {
                 </form>
             </div>
 
-            <footer>&copy; 2022 by Michel Pomerantzeff</footer>
+            <Footer/>
 
         </div>
     );
