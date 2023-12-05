@@ -1,6 +1,6 @@
 import '../css/LanguageDropdown.css';
-import uk from "../icons/uk.png";
-import brazil from "../icons/brazil.png";
+import uk from "../../public/icons/uk.png";
+import brazil from "../../public/icons/brazil.png";
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
