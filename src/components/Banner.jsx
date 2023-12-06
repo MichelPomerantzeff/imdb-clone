@@ -1,5 +1,5 @@
 import '../css/Banner.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
@@ -14,13 +14,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import PropTypes from "prop-types";
-import YouTube from 'react-youtube';
 import { Divider } from '@mui/material';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import useEventListener from '../hooks/useEventListener';
 import LoadingWheel from './LoadingWheel';
+import ErrorAlert from './ErrorAlert';
+import YoutubePlayer from './YoutubePlayer';
 
-function Banner({ data, trailer, selectMovie }) {
+function Banner({ data, isLoading, isError, trailer, selectMovie }) {
 
     const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w1280/'
     const UP_NEXT_BASE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face/'
@@ -28,7 +27,7 @@ function Banner({ data, trailer, selectMovie }) {
     const [currPoster, setCurrPoster] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     let upNextArray = [1, 2, 3];
-    let closeTimeout;
+    const swiperRef = useRef(null);
 
     const handleSlideChange = (swiper) => {
         setCurrPoster(swiper.realIndex);
@@ -39,139 +38,117 @@ function Banner({ data, trailer, selectMovie }) {
         setIsPlaying(true);
     }
 
-    const handleVideoEnd = () => {
-        closeTimeout = setTimeout(() => {
-            closeTrailer();
-        }, 5000)
-    }
-
-    const handleVideoPlay = () => {
-        clearTimeout(closeTimeout);
-    }
-
-    const closeTrailer = () => {
-        setIsPlaying(false)
-    }
-
-    const handleKeyEvent = e => {
-        if (e.key === "Escape") {
-            closeTrailer()
+    const handleMouseOver = () => {
+        if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.autoplay.stop();
         }
-    }
+    };
+    
+    const handleMouseOut = () => {
+        if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.autoplay.start();
+        }
+    };
 
-    useEventListener("keydown", handleKeyEvent)
-
-    // TODO: Apply styling here
-    if (!data) return <h1 style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></h1>
+    if (isLoading) return <LoadingWheel />
 
     return (
         <div className="banner_container">
-            <div className="banner_wrapper">
-                < div className="poster_carousel" >
-
-                    {isPlaying ?
-                        <div className="trailer_container">
-                            <YouTube
-                                className={'trailer_wrapper'}
-                                videoId={trailer.key}
-                                onPlay={handleVideoPlay}
-                                onEnd={handleVideoEnd}
-                                opts={{
-                                    width: "100%",
-                                    height: "100%",
-                                    playerVars: {
-                                        autoplay: 1,
-                                        controls: 1,
-                                        fs: 1,
-                                        cc_load_policy: 0,
-                                    }
-                                }}
+            {!isError ?
+                <div className="banner_wrapper">
+                    <div className="poster_carousel"
+                        onMouseOver={handleMouseOver}
+                        onMouseOut={handleMouseOut}
+                    >
+                        {isPlaying ?
+                            <YoutubePlayer
+                                trailerKey={trailer.key}
+                                setIsPlaying={setIsPlaying}
                             />
-                            <div className="close_trailer">
-                                <CloseRoundedIcon onClick={closeTrailer} className='close_button' />
-                            </div>
-                        </div>
-                        :
-                        <Swiper
-                            slidesPerView={1}
-                            navigation={true}
-                            autoplay={{
-                                delay: 5000,
-                                disableOnInteraction: true,
-                            }}
-                            speed={300}
-                            loop={true}
-                            modules={[Autoplay, Pagination, Navigation]}
-                            onSlideChange={handleSlideChange}
-                        >
-                            {data.map((movie, index) => {
+                            :
+                            <Swiper
+                                ref={swiperRef}
+                                slidesPerView={1}
+                                navigation={true}
+                                autoplay={{
+                                    delay: 4000,
+                                    disableOnInteraction: true,
+                                }}
+                                speed={500}
+                                loop={true}
+                                modules={[Autoplay, Pagination, Navigation]}
+                                onSlideChange={handleSlideChange}
+                            >
+                                {data.map((movie, index) => {
+                                    return (
+                                        <SwiperSlide
+                                            key={index}
+                                            className='poster_slide'
+                                            onClick={() => handlePlay(movie)}
+                                        >
+                                            <div className="big_image">
+                                                <img src={POSTER_BASE_URL + movie.backdrop_path} alt="IMAGE" />
+                                            </div>
+                                            <div className="poster_details">
+                                                <div className="poster_deitals_shadow"></div>
+                                                <div className="small_image">
+                                                    <img src={POSTER_BASE_URL + movie.poster_path} alt="IMAGE" />
+                                                </div>
+                                                <div className="poster_movie_description_wrapper">
+                                                    <div className="banner_play_btn">
+                                                        <PlayArrowRoundedIcon className='play_icon' />
+                                                    </div>
+                                                    <div className="poster_movie_description">
+                                                        <h1>{movie.title}</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div className="gradient_bg"></div>
+                                        </SwiperSlide>
+                                    )
+                                })}
+                            </Swiper>
+                        }
+                    </ div>
+                    <div className="up_next">
+                        <span className='up_next_title'>
+                            {
+                                language === "en-US" ? 'Up next' : 'A seguir'
+                            }
+                        </span>
+                        <div className="up_next_content">
+                            {upNextArray.map((index) => {
+                                let card = currPoster + index;
+                                card == data?.length ? card = 0 : card == data?.length + 1 ? card = 1 : card == data?.length + 2 ? card = 2 : card;
                                 return (
-                                    <SwiperSlide
-                                        key={index}
-                                        className='poster_slide'
-                                        onClick={() => handlePlay(movie)}
-                                    >
-                                        <div className="big_image">
-                                            <img src={POSTER_BASE_URL + movie.backdrop_path} alt="IMAGE" />
-                                        </div>
-                                        <div className="poster_details">
-                                            <div className="poster_deitals_shadow"></div>
-                                            <div className="small_image">
-                                                <img src={POSTER_BASE_URL + movie.poster_path} alt="IMAGE" />
+                                    <div key={index}>
+                                        <div onClick={() => handlePlay(data && data[card])} className="up_next_card">
+                                            <div className="up_next_poster">
+                                                {
+                                                    data?.length > 0 &&
+                                                    <img src={`${UP_NEXT_BASE_URL}${data && data[card]?.poster_path}`} alt="" />
+                                                }
                                             </div>
-                                            <div className="poster_movie_description_wrapper">
-                                                <div className="banner_play_btn">
-                                                    <PlayArrowRoundedIcon className='play_icon' />
+                                            <div className="up_next_card_details">
+                                                <div className={`up_next_play_btn ${isPlaying ? "play_btn_disabled" : "play_btn_active"}`}>
+                                                    <PlayArrowRoundedIcon />
                                                 </div>
-                                                <div className="poster_movie_description">
-                                                    <h1>{movie.title}</h1>
-                                                </div>
+                                                <h1 className="up_next_card_title">{data && data[card]?.title}</h1>
+                                                <span className="up_next_card_date">{data && data[card]?.release_date}</span>
                                             </div>
                                         </div>
-
-
-                                        <div className="gradient_bg"></div>
-                                    </SwiperSlide>
+                                        {index < 3 && <Divider sx={{ background: "#313131" }} />}
+                                    </div>
                                 )
                             })}
-                        </Swiper>
-                    }
-
-                </ div>
-                <div className="up_next">
-                    <span className='up_next_title'>
-                        {
-                            language === "en-US" ? 'Up next' : 'A seguir'
-                        }
-                    </span>
-                    <div className="up_next_content">
-                        {upNextArray.map((index) => {
-                            let card = currPoster + index;
-                            card == data.length ? card = 0 : card == data.length + 1 ? card = 1 : card == data.length + 2 ? card = 2 : card;
-                            return (
-                                <div key={index}>
-                                    <div onClick={() => handlePlay(data[card])} className="up_next_card">
-                                        <div className="up_next_poster">
-                                            {
-                                                data.length > 0 &&
-                                                <img src={`${UP_NEXT_BASE_URL}${data[card]?.poster_path}`} alt="" />
-                                            }
-                                        </div>
-                                        <div className="up_next_card_details">
-                                            <div className={`up_next_play_btn ${isPlaying ? "play_btn_disabled" : "play_btn_active"}`}>
-                                                <PlayArrowRoundedIcon />
-                                            </div>
-                                            <h1 className="up_next_card_title">{data[card]?.title}</h1>
-                                            <span className="up_next_card_date">{data[card]?.release_date}</span>
-                                        </div>
-                                    </div>
-                                    {index < 3 && <Divider sx={{ background: "#313131" }} />}
-                                </div>
-                            )
-                        })}
+                        </div>
                     </div>
                 </div>
-            </div>
+                :
+                <ErrorAlert />
+            }
         </div >
     );
 }
@@ -180,6 +157,8 @@ export default Banner;
 
 Banner.propTypes = {
     data: PropTypes.array,
+    isLoading: PropTypes.bool,
+    isError: PropTypes.bool,
     trailer: PropTypes.object,
-    selectMovie: PropTypes.func
+    selectMovie: PropTypes.func,
 }

@@ -13,12 +13,11 @@ import useEventListener from '../hooks/useEventListener';
 import { Divider } from '@mui/material';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import YouTube from 'react-youtube';
 import useGetData from '../hooks/useGetData';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import YoutubePlayer from './YoutubePlayer';
 
 
 function MovieInfoCard() {
@@ -56,7 +55,6 @@ function MovieInfoCard() {
 
     const [isTraleirOpen, setIsTrailerOpen] = useState(false);
     const [videoKey, setVideoKey] = useState(null);
-    let closeTimeout;
     let disabled = false
 
     const handleClickEvent = e => {
@@ -97,20 +95,6 @@ function MovieInfoCard() {
         console.log(videoKey)
     }
 
-    const handleVideoPlay = () => {
-        clearTimeout(closeTimeout);
-    }
-
-    const handleVideoEnd = () => {
-        closeTimeout = setTimeout(() => {
-            closeTrailer();
-        }, 5000)
-    }
-
-    const closeTrailer = () => {
-        setIsTrailerOpen(false)
-    }
-
     // Add Movie to Watchlist
     async function addToWatchlist(data, type) {
         if (user) {
@@ -139,27 +123,11 @@ function MovieInfoCard() {
 
             {isTraleirOpen ?
 
-                <div className="trailer_container">
-                    <YouTube
-                        className={'trailer_wrapper'}
-                        videoId={videoKey}
-                        onPlay={handleVideoPlay}
-                        onEnd={handleVideoEnd}
-                        opts={{
-                            width: "100%",
-                            height: "100%",
-                            playerVars: {
-                                autoplay: 1,
-                                controls: 1,
-                                fs: 1,
-                                cc_load_policy: 0,
-                            }
-                        }}
-                    />
-                    <div className="close_trailer">
-                        <CloseRoundedIcon onClick={closeTrailer} className='close_button' />
-                    </div>
-                </div>
+                <YoutubePlayer
+                    trailerKey={videoKey}
+                    setIsPlaying={setIsTrailerOpen}
+                />
+
                 :
                 <div className="movie_info_card_wrapper">
 
