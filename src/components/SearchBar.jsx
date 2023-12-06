@@ -89,7 +89,7 @@ function SearchBar() {
                                                     {movie.vote_average != 0 ?
                                                         <>
                                                             <StarIcon className='star_icon' />
-                                                            {movie.vote_average % 1 !== 0 ? movie.vote_average.toFixed(1) : movie.vote_average}
+                                                            {movie.vote_average % 1 !== 0 ? movie.vote_average?.toFixed(1) : movie.vote_average}
                                                         </>
                                                         :
                                                         '--'

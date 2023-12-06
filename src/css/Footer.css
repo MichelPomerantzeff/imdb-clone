@@ -94,10 +94,10 @@ footer {
 
 @media (max-width: 680px) {
 
-    
-.footer_logo_col,
-.footer_links_col,
-.footer_social_col {
-    padding: 0 20px;
-}
+
+    .footer_logo_col,
+    .footer_links_col,
+    .footer_social_col {
+        padding: 0 20px;
+    }
 }

@@ -1,0 +1,30 @@
+.error_container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+}
+
+
+@media (max-width: 1200px) {
+
+    .error_container {
+        max-width: 90vw;
+        margin: auto;
+        padding: 100px 0;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 680px) {
+
+    .error_container {
+        max-width: 90vw;
+        margin: auto;
+        padding: 50px 0;
+        display: flex;
+        justify-content: center;
+    }
+}

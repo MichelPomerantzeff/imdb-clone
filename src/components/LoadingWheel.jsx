@@ -13,9 +13,11 @@ export default function LoadingWheel() {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <Box sx={{ display: 'flex' }}>
-                <CircularProgress />
-            </Box>
+            <div style={{ display: "flex", justifyContent: "center", padding: "100px" }}>
+                <Box sx={{ display: 'flex' }}>
+                    <CircularProgress />
+                </Box>
+            </div>
         </ThemeProvider>
     );
 }

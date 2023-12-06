@@ -16,10 +16,6 @@ function Home() {
     const display = useSelector((state) => state.movieInfo.value.display);
     const [movieId, setMovieId] = useState(null);
 
-    const selectMovie = (data) => {
-        setMovieId(data.id);
-    }
-
     const dataQuery = useQuery({
         queryKey: ["movies", language],
         queryFn: () => getData("movie", "upcoming", language, 1),
@@ -31,21 +27,24 @@ function Home() {
         queryFn: () => getDetails("movie", movieId, language),
     })
 
-    // Your logic for finding and setting the trailer
+    const selectMovie = (data) => setMovieId(data.id);
+
+    // Logic for finding and setting the trailer
     const videos = detailsQuery.data?.videos.results || [];
     const trailer = videos.find(video => video.name.includes("Trailer")) || videos.find(video => video.name.includes("Teaser")) || {};
-
-    // TODO: Add style here
-    if (dataQuery.isError || detailsQuery.isError) {
-        return <div>Error fetching data</div>;
-    }
 
     return (
         <div className='home_container'>
             <Topbar />
             {display ? <MovieInfoCard /> : null}
             <div className="home_wrapper">
-                <Banner data={dataQuery.data} trailer={trailer} selectMovie={selectMovie} />
+                <Banner
+                    data={dataQuery.data}
+                    isLoading={dataQuery.isLoading}
+                    isError={dataQuery.isError}
+                    trailer={trailer}
+                    selectMovie={selectMovie}
+                />
 
                 <MovieSlider
                     title={language === "en-US" ? "Popular Movies" : 'Filmes Populares'}
