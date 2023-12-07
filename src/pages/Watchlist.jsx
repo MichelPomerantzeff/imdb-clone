@@ -66,7 +66,7 @@ function WatchList() {
                     watchlistData.length > 0 ?
                         <div className='watchlist_wrapper'>
                             {
-                                (watchlistData.length > 0 ? watchlistData : watchlistData ?? []).map(movie => {
+                                (watchlistData.length > 0 && watchlistData).map(movie => {
 
                                     if (filter === movie.type || filter === "all") {
 

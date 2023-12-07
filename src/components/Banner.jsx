@@ -72,7 +72,6 @@ function Banner({ data, isLoading, isError, trailer, selectMovie }) {
                                 navigation={true}
                                 autoplay={{
                                     delay: 4000,
-                                    disableOnInteraction: true,
                                 }}
                                 speed={500}
                                 loop={true}

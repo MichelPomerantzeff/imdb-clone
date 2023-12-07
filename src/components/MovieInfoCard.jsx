@@ -112,8 +112,8 @@ function MovieInfoCard() {
     }
 
     // Check if movie is on watchlist/watched
-    const isOnWatchlist = watchlistData.find(movie => movieInfo.data.id === movie.movieId)
-    const isOnWatched = watchedData.find(movie => movieInfo.data.id === movie.movieId)
+    const isOnWatchlist = watchlistData.find(movie => (movieInfo.data.id === movie.movieId || movieInfo.data.movieId === movie.movieId))
+    const isOnWatched = watchedData.find(movie => (movieInfo.data.id === movie.movieId || movieInfo.data.movieId === movie.movieId))
 
     isOnWatchlist || isOnWatched ? disabled = true : disabled = false
 
@@ -143,7 +143,7 @@ function MovieInfoCard() {
 
                             <div >
                                 {releaseDate}
-                                <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "2px 6px" }} orientation="vertical" variant="middle" flexItem />
+                                <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "4px 6px" }} orientation="vertical" variant="middle" flexItem />
                                 <span className='movie_info_card_runtime'>{runtime ? `${hour} ${min}` : 'N/A'}</span>
                             </div>
 
@@ -154,7 +154,7 @@ function MovieInfoCard() {
                                             <span className=''>{genre.name}</span>
                                             {
                                                 index < data?.genres.length - 1 &&
-                                                <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "2px 6px" }} orientation="vertical" variant="middle" flexItem />
+                                                <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "4px 6px" }} orientation="vertical" variant="middle" flexItem />
                                             }
                                         </div>
                                     ))

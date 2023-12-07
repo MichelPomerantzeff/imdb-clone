@@ -21,6 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getData } from "../apis/fetchData";
 import LoadingWheel from "./LoadingWheel";
 import ErrorAlert from "./ErrorAlert";
+import { useEffect } from "react";
 
 function MovieSlider({ type, query, title, queryKey }) {
 
@@ -51,6 +52,10 @@ function MovieSlider({ type, query, title, queryKey }) {
             alert("Sign in and start adding movies to your wathlist")
         }
     }
+
+    useEffect(() => {
+        getWatchlistData();
+    }, [watchlistData])
 
     if (isLoading) return <LoadingWheel />
 
@@ -87,7 +92,6 @@ function MovieSlider({ type, query, title, queryKey }) {
                                             key={index}
                                             className='slider_movie'
                                         >
-
                                             <MovieCard type={type} data={movieCardData} />
 
                                             <div className='buttons'>
@@ -126,7 +130,6 @@ function MovieSlider({ type, query, title, queryKey }) {
                 </div >
                 :
                 <ErrorAlert />
-
             }
         </>
     );
