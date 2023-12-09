@@ -1,5 +1,5 @@
 import '../css/SearchBar.css';
-import movieCover from '../images/movieCover.jpg';
+import spare_poster from '../images/spare_poster.jpeg';
 import StarIcon from '@mui/icons-material/Star';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
@@ -80,7 +80,7 @@ function SearchBar() {
                                             onClick={() => { dispatch(displayMovieInfo({ data: movie, type: movie.media_type, display: true })); }}
                                             className='searched_movie_wrapper'
                                         >
-                                            <img src={movie.poster_path ? `${IMAGE_BASE_URL}/${movie.poster_path}` : movieCover} alt='' />
+                                            <img src={movie.poster_path ? `${IMAGE_BASE_URL}/${movie.poster_path}` : spare_poster} alt='' />
 
                                             <div className="searched_movie_elements">
                                                 <h4 className='searched_movie_title'>{movie.title || movie.name}</h4>

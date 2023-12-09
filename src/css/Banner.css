@@ -75,6 +75,7 @@
     display: flex;
     position: relative;
     padding-bottom: 55px;
+    max-height: 459px;
 }
 
 

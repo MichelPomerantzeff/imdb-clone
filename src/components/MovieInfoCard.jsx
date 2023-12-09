@@ -1,4 +1,4 @@
-import movieCover from '../images/movieCover.jpg'
+import spare_poster from '../images/spare_poster.jpeg'
 import '../css/MovieInfoCard.css'
 import '../css/MovieSlider.css'
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
@@ -37,18 +37,17 @@ function MovieInfoCard() {
         queryFn: () => getDetails(movieInfo.type, movieId, language),
     })
 
-    const image = `${IMAGE_BASE_URL}/${data?.poster_path}`;
     const title = data?.title || data?.name;
     const releaseDate = data?.first_air_date?.slice(0, 4) || data?.release_date?.slice(0, 4);
     const runtime = data?.runtime || (data?.episode_run_time ? data?.episode_run_time[0] : '');
     const genres = data?.genres;
-    const rating = data?.vote_average.toFixed(1);
+    const rating = data?.vote_average?.toFixed(1);
     const plot = data?.overview;
     const hour = Math.floor(runtime / 60) > 0 ? `${Math.floor(runtime / 60)}h` : '';
     const min = Math.floor(runtime % 60) > 0 ? `${Math.floor(runtime % 60)}min` : '';
 
     // Logic for finding and setting the trailer, teaser and clip
-    const videos = data?.videos.results || [];
+    const videos = data?.videos?.results || [];
     const trailer = videos.find(video => video.name.includes("Official Trailer")) || videos.find(video => video.type.includes("Trailer"));
     const teaser = videos.find(video => video.type.includes("Teaser"));
     const clip = videos.find(video => video.type.includes("Clip"));
@@ -133,7 +132,7 @@ function MovieInfoCard() {
 
                     <div className='movie_info_card_top'>
                         <div className="movie_info_card_poster">
-                            <img src={image || movieCover} alt='' />
+                            <img src={data?.poster_path != undefined ? `${IMAGE_BASE_URL}/${data?.poster_path}` : spare_poster} alt='' />
                         </div>
                         <div className="movie_info_card_details">
 
@@ -142,8 +141,12 @@ function MovieInfoCard() {
                             </h1>
 
                             <div >
-                                {releaseDate}
-                                <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "4px 6px" }} orientation="vertical" variant="middle" flexItem />
+                                {releaseDate &&
+                                    <>
+                                        {releaseDate}
+                                        <Divider sx={{ border: "solid 1px var(--text-dark-bg2)", margin: "4px 6px" }} orientation="vertical" variant="middle" flexItem />
+                                    </>
+                                }
                                 <span className='movie_info_card_runtime'>{runtime ? `${hour} ${min}` : 'N/A'}</span>
                             </div>
 
@@ -161,11 +164,14 @@ function MovieInfoCard() {
                                 }
                             </div>
 
-                            <div className=''>
-                                <StarIcon className='movie_info_card_star' />
-                                {rating}
-                                <span className='out-of-ten'>/10</span>
-                            </div>
+                            {
+                                rating &&
+                                <div className=''>
+                                    <StarIcon className='movie_info_card_star' />
+                                    {rating}
+                                    <span className='out-of-ten'>/10</span>
+                                </div>
+                            }
 
                         </div>
                     </div>

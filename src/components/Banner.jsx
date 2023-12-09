@@ -1,4 +1,6 @@
 import '../css/Banner.css';
+import spare_poster from '../images/spare_poster.jpeg';
+import spare_backdrop from '../images/spare_backdrop.jpeg';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
@@ -21,8 +23,8 @@ import YoutubePlayer from './YoutubePlayer';
 
 function Banner({ data, isLoading, isError, trailer, selectMovie }) {
 
-    const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w1280/'
-    const UP_NEXT_BASE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face/'
+    const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w1280'
+    const UP_NEXT_BASE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
     const language = useSelector((state) => state.languageToggle.value.language);
     const [currPoster, setCurrPoster] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -43,7 +45,7 @@ function Banner({ data, isLoading, isError, trailer, selectMovie }) {
             swiperRef.current.swiper.autoplay.stop();
         }
     };
-    
+
     const handleMouseOut = () => {
         if (swiperRef.current && swiperRef.current.swiper) {
             swiperRef.current.swiper.autoplay.start();
@@ -86,12 +88,12 @@ function Banner({ data, isLoading, isError, trailer, selectMovie }) {
                                             onClick={() => handlePlay(movie)}
                                         >
                                             <div className="big_image">
-                                                <img src={POSTER_BASE_URL + movie.backdrop_path} alt="IMAGE" />
+                                                <img src={movie.backdrop_path ? `${POSTER_BASE_URL}/${movie.backdrop_path}` : spare_backdrop} alt="IMAGE" />
                                             </div>
                                             <div className="poster_details">
                                                 <div className="poster_deitals_shadow"></div>
                                                 <div className="small_image">
-                                                    <img src={POSTER_BASE_URL + movie.poster_path} alt="IMAGE" />
+                                                    <img src={movie.poster_path ? `${POSTER_BASE_URL}/${movie.poster_path}` : spare_poster} alt="IMAGE" />
                                                 </div>
                                                 <div className="poster_movie_description_wrapper">
                                                     <div className="banner_play_btn">

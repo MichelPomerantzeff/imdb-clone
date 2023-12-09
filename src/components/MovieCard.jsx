@@ -1,4 +1,4 @@
-import movieCover from "../images/movieCover.jpg"
+import spare_poster from "../images/spare_poster.jpeg"
 import '../css/MovieCard.css'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import StarIcon from '@mui/icons-material/Star';
@@ -23,7 +23,7 @@ function MovieCard({ type, data }) {
             <div
                 onClick={showMovieInfo}
                 className="movie_card_image">
-                <img src={image || movieCover} alt='' />
+                <img src={image || spare_poster} alt='' />
             </div>
 
             <p
