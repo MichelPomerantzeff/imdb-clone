@@ -10,7 +10,6 @@ function MovieCard({ type, data }) {
 
     const IMAGE_BASE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face';
     const dispatch = useDispatch();
-    const image = `${IMAGE_BASE_URL}/${data.poster_path}`;
     const rating = data.vote_average?.toFixed(1);
     const title = data.name || data.title;
 
@@ -23,7 +22,7 @@ function MovieCard({ type, data }) {
             <div
                 onClick={showMovieInfo}
                 className="movie_card_image">
-                <img src={image || spare_poster} alt='' />
+                <img src={data.poster_path ? `${IMAGE_BASE_URL}/${data.poster_path}` : spare_poster} alt='' />
             </div>
 
             <p
@@ -35,8 +34,14 @@ function MovieCard({ type, data }) {
             <div className='movie_card_details'>
 
                 <div className='movie_card_rating'>
-                    <StarIcon className='movie_card_star' />
-                    <span> {rating} </span>
+                    {rating ?
+                        <>
+                            <StarIcon className='movie_card_star' />
+                            <span> {rating} </span>
+                        </>
+                        :
+                        <span>N/A</span>
+                    }
                 </div>
 
                 <div title='info' className='movie_info_button'>
