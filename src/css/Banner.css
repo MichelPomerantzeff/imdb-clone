@@ -90,7 +90,7 @@
 
 .poster_carousel .swiper-button-prev,
 .poster_carousel .swiper-button-next {
-    border: 1px solid #fff;
+    border: 2px solid #fff;
     color: #fff;
     background: var(--arrow-background);
     border-radius: 8px;

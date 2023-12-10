@@ -57,18 +57,9 @@
     margin-bottom: 2px;
 }
 
-.movie_card_rating {
+.movie_card_rating span{
     color: var(--text-dark-bg2);
-    font-size: 1.1rem;
 }
-
-/* .high_vote {
-    color: limegreen;
-}
-
-.low_vote {
-    color: red;
-} */
 
 .movie_info_button {
     display: flex;
