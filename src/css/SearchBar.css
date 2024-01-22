@@ -6,8 +6,6 @@
     border-radius: 5px;
     position: relative;
 }
-.search_bar *{
-}
 
 .search_bar_input_desktop {
     display: flex;
@@ -18,7 +16,7 @@
     font-size: .8rem;
     font-weight: 400;
     width: 100%;
-    padding: 7px 10px;
+    padding: 8.5px 10px;
 }
 
 .search_bar_input_mobile {
@@ -34,7 +32,7 @@
 
 .search_bar_input_desktop:focus {
     border: solid 2px var(--main-color);
-    padding: 5px 8px;
+    padding: 6.5px 8px;
 }
 
 .search_button_on {

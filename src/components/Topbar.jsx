@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserDropdown from './UserDropdown';
 import LanguageDropdown from './LanguageDropdown';
+import { Divider } from '@mui/material';
 
 
 function Topbar() {
@@ -33,6 +34,8 @@ function Topbar() {
                 <div className="topbar_center_section">
                     <SearchBar />
                 </div>
+
+                <Divider sx={{ border: "solid 1px var(--text-dark-bg4)", margin: "4px 6px" }} orientation="vertical" variant="middle" flexItem />
 
                 {
                     !searchMode &&

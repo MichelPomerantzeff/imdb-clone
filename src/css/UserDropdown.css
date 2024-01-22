@@ -12,7 +12,7 @@
     flex-direction: column;
     position: absolute;
     top: 40px;
-    z-index: 2;
+    z-index: 4;
     overflow: hidden;
 }
 
@@ -39,20 +39,20 @@
     gap: 5px;
 }
 
-.login:hover,
-.loggedin:hover,
-.language:hover {
-    background-color: var(--hover-bg);
-}
-
 .login,
 .loggedin {
     display: flex;
     align-items: center;
-    padding: 7px;
+    padding: 5px 7px;
     border-radius: 5px;
     color: var(--text-dark-bg);
     cursor: pointer;
+}
+
+.login:hover,
+.loggedin:hover,
+.language:hover {
+    background-color: var(--hover-bg);
 }
 
 .delete_account {
