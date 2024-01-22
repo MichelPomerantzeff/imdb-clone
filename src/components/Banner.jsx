@@ -125,7 +125,7 @@ function Banner({ data, isLoading, isError, trailer, selectMovie }) {
                                 card == data?.length ? card = 0 : card == data?.length + 1 ? card = 1 : card == data?.length + 2 ? card = 2 : card;
                                 return (
                                     <div key={index}>
-                                        <div onClick={() => handlePlay(data && data[card])} className="up_next_card">
+                                        <div onClick={() => handlePlay(data && data[card])} className={` ${isPlaying && "play_btn_disabled"} up_next_card`}>
                                             <div className="up_next_poster">
                                                 {
                                                     data?.length > 0 &&
