@@ -49,6 +49,7 @@ function WatchList() {
 
     return (
         <div className='watchlist_container'>
+            <title>{`User's Watchlist`}</title>
             <Topbar />
 
             {display ? <MovieInfoCard /> : null}

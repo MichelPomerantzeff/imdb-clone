@@ -33,6 +33,7 @@ function Login() {
 
     return (
         <div className='login_container'>
+            <title>Login Page</title>
 
             <div className="login_wrapper">
 

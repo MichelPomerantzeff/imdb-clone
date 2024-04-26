@@ -36,6 +36,7 @@ function Register() {
 
     return (
         <div className='login_container'>
+            <title>Registration page</title>
 
             <div className="login_wrapper">
 

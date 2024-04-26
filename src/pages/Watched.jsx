@@ -49,6 +49,7 @@ function Watched() {
 
     return (
         <div className='watched_container'>
+            <title>{`User's Watched list`}</title>
             <Topbar />
 
             {display ? <MovieInfoCard /> : null}

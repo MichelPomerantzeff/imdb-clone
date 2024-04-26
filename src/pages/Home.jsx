@@ -35,6 +35,7 @@ function Home() {
 
     return (
         <div className='home_container'>
+            <title>Popular and top rated movies and tv shows</title>
             <Topbar />
             {display ? <MovieInfoCard /> : null}
             <div className="home_wrapper">
