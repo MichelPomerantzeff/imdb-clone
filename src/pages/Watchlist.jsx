@@ -62,7 +62,7 @@ function WatchList() {
 
             {
 
-                watchlistDataLoading ? <h1 style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></h1> :
+                watchlistDataLoading ? <div style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></div> :
 
                     watchlistData.length > 0 ?
                         <div className='watchlist_wrapper'>

@@ -62,7 +62,7 @@ function Watched() {
 
             {
 
-                watchedDataLoading ? <h1 style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></h1> :
+                watchedDataLoading ? <div style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></div> :
 
                     watchedData.length > 0 ?
                         <div className='watched_wrapper'>
