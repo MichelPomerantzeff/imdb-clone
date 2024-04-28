@@ -88,19 +88,19 @@ function Banner({ data, isLoading, isError, trailer, selectMovie }) {
                                             onClick={() => handlePlay(movie)}
                                         >
                                             <div className="big_image">
-                                                <img src={movie.backdrop_path ? `${POSTER_BASE_URL}/${movie.backdrop_path}` : spare_backdrop} alt="IMAGE" />
+                                                <img width="100%" height="100%" src={movie.backdrop_path ? `${POSTER_BASE_URL}/${movie.backdrop_path}` : spare_backdrop} alt="IMAGE" />
                                             </div>
                                             <div className="poster_details">
                                                 <div className="poster_deitals_shadow"></div>
                                                 <div className="small_image">
-                                                    <img src={movie.poster_path ? `${POSTER_BASE_URL}/${movie.poster_path}` : spare_poster} alt="IMAGE" />
+                                                    <img width="100%" height="100%" src={movie.poster_path ? `${POSTER_BASE_URL}/${movie.poster_path}` : spare_poster} alt="IMAGE" />
                                                 </div>
                                                 <div className="poster_movie_description_wrapper">
                                                     <div className="banner_play_btn">
                                                         <PlayArrowRoundedIcon className='play_icon' />
                                                     </div>
                                                     <div className="poster_movie_description">
-                                                        <h1>{movie.title}</h1>
+                                                        <h4>{movie.title}</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,14 +129,14 @@ function Banner({ data, isLoading, isError, trailer, selectMovie }) {
                                             <div className="up_next_poster">
                                                 {
                                                     data?.length > 0 &&
-                                                    <img src={`${UP_NEXT_BASE_URL}${data && data[card]?.poster_path}`} alt="" />
+                                                    <img width="100%" height="100%" src={`${UP_NEXT_BASE_URL}${data && data[card]?.poster_path}`} alt="" />
                                                 }
                                             </div>
                                             <div className="up_next_card_details">
                                                 <div className={`up_next_play_btn ${isPlaying ? "play_btn_disabled" : "play_btn_active"}`}>
                                                     <PlayArrowRoundedIcon />
                                                 </div>
-                                                <h1 className="up_next_card_title">{data && data[card]?.title}</h1>
+                                                <h4 className="up_next_card_title">{data && data[card]?.title}</h4>
                                                 <span className="up_next_card_date">{data && data[card]?.release_date}</span>
                                             </div>
                                         </div>

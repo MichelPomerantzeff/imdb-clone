@@ -3,34 +3,38 @@ import Watchlist from "./pages/Watchlist";
 import Watched from "./pages/Watched";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import NotFound from "./pages/NotFound";
 import './App.css'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { HashRouter as Router, Routes, Route } from "react-router-dom"
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />,
+        errorElement: <NotFound />,
+    },
+    {
+        path: "/watchlist",
+        element: <Watchlist />,
+    },
+    {
+        path: "/watched",
+        element: <Watched />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/register",
+        element: <Register />,
+    },
+]);
 
 function App() {
-  return (
-      <Router>
-            <Routes>
-                <Route path='/' element={<Home/>}/>
-            </Routes>
-
-            <Routes>
-                <Route path='/watchlist' element={<Watchlist/>}/>
-            </Routes>
-
-            <Routes>
-                <Route path='/watched' element={<Watched/>}/>
-            </Routes>
-            
-            <Routes>
-                <Route path='/login' element={<Login/>}/>
-            </Routes>
-            
-            <Routes>
-                <Route path='/register' element={<Register/>}/>
-            </Routes>
-        </Router>
-  );
+    return (
+        <RouterProvider router={router} />
+    );
 }
 
 export default App;

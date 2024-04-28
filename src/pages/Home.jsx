@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import { getData } from '../apis/fetchData';
 import { getDetails } from '../apis/fetchDetails';
+import { Helmet } from 'react-helmet-async';
 
 function Home() {
 
@@ -34,47 +35,53 @@ function Home() {
     const trailer = videos.find(video => video.name.includes("Trailer")) || videos.find(video => video.name.includes("Teaser")) || {};
 
     return (
-        <div className='home_container'>
-            <title>Popular and top rated movies and tv shows</title>
-            <Topbar />
-            {display ? <MovieInfoCard /> : null}
-            <div className="home_wrapper">
-                <Banner
-                    data={dataQuery.data}
-                    isLoading={dataQuery.isLoading}
-                    isError={dataQuery.isError}
-                    trailer={trailer}
-                    selectMovie={selectMovie}
-                />
+        <>
+            <Helmet>
+                <title>Home - IMDB Clone</title>
+                <meta name="description" content="Find the latest and most popular movies and TV shows released worldwide." />
+                <link rel="canonical" href="/" />
+            </Helmet>
+            <div className='home_container'>
+                <Topbar />
+                {display ? <MovieInfoCard /> : null}
+                <div className="home_wrapper">
+                    <Banner
+                        data={dataQuery.data}
+                        isLoading={dataQuery.isLoading}
+                        isError={dataQuery.isError}
+                        trailer={trailer}
+                        selectMovie={selectMovie}
+                    />
 
-                <MovieSlider
-                    title={language === "en-US" ? "Popular Movies" : 'Filmes Populares'}
-                    type={'movie'}
-                    query={'popular'}
-                    queryKey={"popularMovies"}
-                />
-                <MovieSlider
-                    title={language === "en-US" ? "Popular TV Shows" : 'Series Populares'}
-                    type={'tv'}
-                    query={'popular'}
-                    queryKey={"popularTvShows"}
-                />
-                <MovieSlider
-                    title={language === "en-US" ? "Top Rated TV Shows" : 'Series Mais Bem Votadas'}
-                    type={'tv'}
-                    query={'top_rated'}
-                    queryKey={"topRatedTvShows"}
-                />
-                <MovieSlider
-                    title={language === "en-US" ? "Top Rated Movies" : 'Filmes Mais Bem Votadas'}
-                    type={'movie'}
-                    query={'top_rated'}
-                    queryKey={"topRatedMovies"}
-                />
+                    <MovieSlider
+                        title={language === "en-US" ? "Popular Movies" : 'Filmes Populares'}
+                        type={'movie'}
+                        query={'popular'}
+                        queryKey={"popularMovies"}
+                    />
+                    <MovieSlider
+                        title={language === "en-US" ? "Popular TV Shows" : 'Series Populares'}
+                        type={'tv'}
+                        query={'popular'}
+                        queryKey={"popularTvShows"}
+                    />
+                    <MovieSlider
+                        title={language === "en-US" ? "Top Rated TV Shows" : 'Series Mais Bem Votadas'}
+                        type={'tv'}
+                        query={'top_rated'}
+                        queryKey={"topRatedTvShows"}
+                    />
+                    <MovieSlider
+                        title={language === "en-US" ? "Top Rated Movies" : 'Filmes Mais Bem Votadas'}
+                        type={'movie'}
+                        query={'top_rated'}
+                        queryKey={"topRatedMovies"}
+                    />
 
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </>
     );
 }
 

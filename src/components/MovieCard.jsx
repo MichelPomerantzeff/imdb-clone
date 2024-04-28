@@ -22,7 +22,7 @@ function MovieCard({ type, data }) {
             <div
                 onClick={showMovieInfo}
                 className="movie_card_image">
-                <img src={data.poster_path ? `${IMAGE_BASE_URL}/${data.poster_path}` : spare_poster} alt='' />
+                <img width="100%" height="100%" src={data.poster_path ? `${IMAGE_BASE_URL}/${data.poster_path}` : spare_poster} alt='' />
             </div>
 
             <p

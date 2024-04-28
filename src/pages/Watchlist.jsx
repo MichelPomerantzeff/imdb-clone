@@ -12,6 +12,7 @@ import useGetData from '../hooks/useGetData';
 import FilterButtons from '../components/FilterButtons';
 import { useEffect, useState } from 'react';
 import LoadingWheel from '../components/LoadingWheel';
+import { Helmet } from 'react-helmet-async';
 
 function WatchList() {
 
@@ -48,51 +49,58 @@ function WatchList() {
     }, [filter])
 
     return (
-        <div className='watchlist_container'>
+        <>
+            <Helmet>
             <title>{`User's Watchlist`}</title>
-            <Topbar />
+                <meta name="description" content="Your watchlist of movies and TV shows on Movie App"/>
+                <link rel="canonical" href="/watchlist" />
+            </Helmet>
 
-            {display ? <MovieInfoCard /> : null}
+            <div className='watchlist_container'>
+                <Topbar />
 
-            <h1 className='header'>
-                {language === "en-US" ? 'WATCHLIST' : 'LISTA DE FAVORITOS'}
-            </h1>
+                {display ? <MovieInfoCard /> : null}
 
-            <FilterButtons getFilteredValue={getFilteredValue} />
+                <h1 className='header'>
+                    {language === "en-US" ? 'WATCHLIST' : 'LISTA DE FAVORITOS'}
+                </h1>
 
-            {
+                <FilterButtons getFilteredValue={getFilteredValue} />
 
-                watchlistDataLoading ? <div style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></div> :
+                {
 
-                    watchlistData.length > 0 ?
-                        <div className='watchlist_wrapper'>
-                            {
-                                (watchlistData.length > 0 && watchlistData).map(movie => {
+                    watchlistDataLoading ? <div style={{ display: "flex", justifyContent: "center", padding: "100px" }}><LoadingWheel /></div> :
 
-                                    if (filter === movie.type || filter === "all") {
+                        watchlistData.length > 0 ?
+                            <div className='watchlist_wrapper'>
+                                {
+                                    (watchlistData.length > 0 && watchlistData).map(movie => {
 
-                                        return (
-                                            <div key={movie.movieId} className='movie_card_container'>
-                                                <MovieCard type={movie.type} data={movie} />
-                                                <div className='buttons'>
-                                                    <button onClick={(() => addToWatched(movie))} className="add_movie_button">
-                                                        <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
-                                                    </button>
-                                                    <button onClick={(() => deleteMovie(movie))} className="delete_movie">
-                                                        <span><DeleteRoundedIcon /></span>
-                                                    </button>
+                                        if (filter === movie.type || filter === "all") {
+
+                                            return (
+                                                <div key={movie.movieId} className='movie_card_container'>
+                                                    <MovieCard type={movie.type} data={movie} />
+                                                    <div className='buttons'>
+                                                        <button onClick={(() => addToWatched(movie))} className="add_movie_button">
+                                                            <div><RedoRoundedIcon /> {language === "en-US" ? 'Watched' : 'Assistido'}</div>
+                                                        </button>
+                                                        <button onClick={(() => deleteMovie(movie))} className="delete_movie">
+                                                            <span><DeleteRoundedIcon /></span>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    }
-                                })
-                            }
-                        </div>
-                        :
-                        <div className='empty_list'>{language === "en-US" ? 'This list is empty' : 'Lista vazia'}</div>
-            }
-            <Footer />
-        </div>
+                                            )
+                                        }
+                                    })
+                                }
+                            </div>
+                            :
+                            <div className='empty_list'>{language === "en-US" ? 'This list is empty' : 'Lista vazia'}</div>
+                }
+                <Footer />
+            </div>
+        </>
     );
 }
 

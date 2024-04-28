@@ -11,6 +11,7 @@ import watchedLengthReducer from './features/watchedLength'
 import languageToggleReducer from './features/languageToggle'
 import searchBarToggleReducer from './features/searchBarToggle'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider } from 'react-helmet-async';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient()
@@ -30,7 +31,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
         {/* <ReactQueryDevtools /> */}
       </Provider>
     </QueryClientProvider>

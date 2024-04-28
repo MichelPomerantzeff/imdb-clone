@@ -23,8 +23,8 @@ export default function LanguageDropdown() {
 
   return (
     <div onClick={() => setIsLanguageOpen(prev => !prev)} ref={languageRef} className="language">
-      {language === "pt-BR" && <img src={brazil} alt="" />}
-      {language === "en-US" && <img src={uk} alt="" />}
+      {language === "pt-BR" && <img className="big_image" src={brazil} alt="" width="500" height="300" />}
+      {language === "en-US" && <img className="big_image" src={uk} alt="" width="100%" height="100%" />}
       <ArrowDropDownRoundedIcon className={`${isLanguageOpen ? "dd_open" : ""}`} />
       {
         isLanguageOpen &&

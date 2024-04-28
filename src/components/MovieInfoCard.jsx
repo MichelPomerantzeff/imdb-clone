@@ -136,9 +136,9 @@ function MovieInfoCard() {
                         </div>
                         <div className="movie_info_card_details">
 
-                            <h1>
+                            <h4>
                                 {title}
-                            </h1>
+                            </h4>
 
                             <div >
                                 {releaseDate &&

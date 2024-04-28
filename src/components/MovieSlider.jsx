@@ -63,7 +63,7 @@ function MovieSlider({ type, query, title, queryKey }) {
         <>
             {!isError ?
                 <div className="movie_slider_container">
-                    <h1 className="movie_slider_category">{title}</h1>
+                    <h2 className="movie_slider_category">{title}</h2>
                     <div className="movie_slider_wrapper">
                         <Swiper
                             style={{ padding: "0 13px" }}
