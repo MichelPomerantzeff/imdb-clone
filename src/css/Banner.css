@@ -3,7 +3,7 @@
 }
 
 .banner_wrapper {
-    max-width: 1200px;
+    width: clamp(80px, 95vw, 1200px);
     margin: 8px auto;
     display: flex;
     gap: 10px;
@@ -245,10 +245,6 @@
 
 @media (max-width: 1200px) {
 
-    .banner_wrapper {
-        max-width: 90vw;
-    }
-
     .small_image {
         width: 130px;
     }
@@ -273,10 +269,6 @@
 }
 
 @media (max-width: 680px) {
-
-    .banner_wrapper {
-        max-width: 95vw;
-    }
 
     .poster_carousel .swiper-button-prev,
     .poster_carousel .swiper-button-next {
